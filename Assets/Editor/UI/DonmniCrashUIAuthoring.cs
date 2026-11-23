@@ -340,10 +340,16 @@ namespace DonmniCrash.EditorTools
             var eyebrow=Label("EyebrowLabel",layout,"DOMINÓ ELEMENTAL",16,UIThemeRole.Accent);eyebrow.alignment=TextAlignmentOptions.Center;
             var title=Label("GameTitleLabel",layout,"DonmniCrash",48,UIThemeRole.Text,true);title.alignment=TextAlignmentOptions.Center;Size(title,72);
             var sub=Label("SubtitleLabel",layout,"Elige cómo quieres jugar",21,UIThemeRole.SecondaryText);sub.alignment=TextAlignmentOptions.Center;Size(sub,38);
-            var icons=Row("ElementsPanel",layout,56);icons.GetComponent<HorizontalLayoutGroup>().childAlignment=TextAnchor.MiddleCenter;
-            for(int i=0;i<elements.Length;i++)Icon(elements[i]+"Icon",icons,symbols[elements[i]],38);
             Button("OnlineButton",layout,"Jugar online",true);Button("OfflineButton",layout,"Jugar offline");
-            var options=Row("OptionsPanel",layout);Button("CustomizationButton",options,"Personalizar");Button("SettingsButton",options,"Ajustes");
+            var options=Row("OptionsPanel",layout);
+            var optionsGroup=options.GetComponent<HorizontalLayoutGroup>();
+            optionsGroup.childAlignment=TextAnchor.MiddleCenter;
+            optionsGroup.childForceExpandHeight=false;
+            foreach(var label in new[]{("CustomizationButton","Personalizar"),("SettingsButton","Ajustes")})
+            {
+                var button=Button(label.Item1,options,label.Item2,false,180);
+                button.GetComponent<LayoutElement>().minWidth=120;
+            }
             var status=Label("ConnectionStatusLabel",layout,"Sin conexión",16,UIThemeRole.SecondaryText);status.alignment=TextAlignmentOptions.Center;
             var customize=Screen(shell,"CustomizationScreen","Tu perfil","Personaliza cómo te verán los demás jugadores.",false);
             var profile=Card("ProfilePanel",customize,"Nombre de jugador");Input("PlayerNameInputField",profile,"Tu nombre","Jugador");
@@ -442,8 +448,7 @@ namespace DonmniCrash.EditorTools
         }
         static void Board()
         {
-            string texturePath=UI+"/Sprites/WoodenTableTile.jpg";
-            if(!File.Exists(texturePath)) {File.Copy("Assets/Sprites/WoodenTable.jpg",texturePath);AssetDatabase.ImportAsset(texturePath);}
+            string texturePath="Assets/Sprites/WoodenTable.jpg";
             var importer=(TextureImporter)AssetImporter.GetAtPath(texturePath);importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;
             importer.spritePixelsPerUnit=100;importer.wrapMode=TextureWrapMode.Repeat;importer.mipmapEnabled=false;importer.SaveAndReimport();
             var root=Node("BoardRoot");var canvas=root.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=0;
