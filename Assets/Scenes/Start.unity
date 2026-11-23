@@ -5900,7 +5900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6521006194509129433, guid: da02641d2a1cfe16cafdac0b2a064d9f, type: 3}
       propertyPath: m_text
-      value: Guardar ajustes
+      value: Listo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -414,7 +414,7 @@ namespace DonmniCrash.EditorTools
             var style=Card("AppearancePanel",customize,"Emblema");var emblemRow=Row("EmblemOptionsPanel",style,68);
             for(int i=0;i<5;i++){var b=Button(elements[i]+"EmblemButton",emblemRow,"");var icon=Icon("ElementIcon",b.transform,symbols[elements[i]],40);Stretch(icon.rectTransform,14,6,14,6);}
             Button("SaveProfileButton",customize,"Guardar perfil",true);
-            var settings=Screen(shell,"SettingsScreen","Ajustes","Configura el sonido, el idioma y la apariencia.",false);Settings(settings);Button("SaveSettingsButton",settings,"Guardar ajustes",true);
+            var settings=Screen(shell,"SettingsScreen","Ajustes","Configura el sonido, el idioma y la apariencia.",false);Settings(settings);Button("SaveSettingsButton",settings,"Listo",true);
             CommonOverlays(shell);Save("Start");
         }
         static RectTransform Room(Transform parent,string name,string roomName,string detail,string status)

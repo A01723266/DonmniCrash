@@ -125,7 +125,11 @@ namespace DonmniCrash.EditorTools
                 // Solo se traduce el placeholder de un campo editable.
                 var campo = texto.GetComponentInParent<TMP_InputField>(true);
                 if (campo && campo.textComponent==texto) continue;
-                string clave = TextoIdioma.ClaveOriginal(texto.text);
+                // «Listo» también indica disponibilidad en el lobby. El cierre de Ajustes tiene su propia clave.
+                var boton = texto.GetComponentInParent<Button>(true);
+                string clave = boton && boton.name == "SaveSettingsButton"
+                    ? "save.settings"
+                    : TextoIdioma.ClaveOriginal(texto.text);
                 if (clave != null) Etiqueta(texto).clave = clave;
             }
             // Conserva los valores personalizados (nombre de botón, clave, textos y sprites)

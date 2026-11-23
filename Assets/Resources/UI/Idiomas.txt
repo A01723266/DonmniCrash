@@ -62,7 +62,7 @@ profile.placeholder	Tu nombre	Your name
 emblem	Emblema	Emblem
 save.profile	Guardar perfil	Apply profile
 settings.hint	Configura el sonido, el idioma y la apariencia.	Adjust sound, language and appearance.
-save.settings	Guardar ajustes	Apply settings
+save.settings	Listo	Done
 back	Volver	Back
 master	Volumen general	Master volume
 music	Música	Music

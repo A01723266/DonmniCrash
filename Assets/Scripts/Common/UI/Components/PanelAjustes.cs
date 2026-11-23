@@ -34,7 +34,11 @@ namespace DonmniCrash.UI
         }
 
         void OnEnable() { AspectoSesion.Cambio += Refrescar; Refrescar(); }
-        void OnDisable() { AspectoSesion.Cambio -= Refrescar; }
+        void OnDisable()
+        {
+            AspectoSesion.Cambio -= Refrescar;
+            if (AudioJuego.Actual) AudioJuego.Actual.ConfirmarCambios();
+        }
         void CambiarIdioma() => AspectoSesion.Elegir(AspectoSesion.Paleta, AspectoSesion.Losa, !AspectoSesion.Ingles);
         void Mezclar(float valor) => AudioJuego.Actual.Mezclar(general.value, musica.value, efectos.value);
 
@@ -45,6 +49,7 @@ namespace DonmniCrash.UI
             for (int i = 0; i < marcasPaleta.Length; i++) marcasPaleta[i].SetActive(i == AspectoSesion.Paleta);
             for (int i = 0; i < marcasLosa.Length; i++) marcasLosa[i].SetActive(i == AspectoSesion.Losa);
             var audio = AudioJuego.Actual;
+            // Restaurar el panel usa notificaciones silenciosas para conservar el guardado automático.
             general.SetValueWithoutNotify(audio.General);
             musica.SetValueWithoutNotify(audio.Musica);
             efectos.SetValueWithoutNotify(audio.Efectos);

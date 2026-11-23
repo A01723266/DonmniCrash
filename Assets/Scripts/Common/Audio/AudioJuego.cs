@@ -7,9 +7,14 @@ namespace DonmniCrash.UI
     {
         public AudioSource musica, efectos;
         public static AudioJuego Actual { get; private set; }
-        public float General { get; private set; } = .8f;
-        public float Musica { get; private set; } = .55f;
-        public float Efectos { get; private set; } = .75f;
+        public float General { get; private set; }
+        public float Musica { get; private set; }
+        public float Efectos { get; private set; }
+
+        // Un arrastre puede producir decenas de cambios. El plazo usa tiempo real también en pausa.
+        const float DemoraGuardado = .4f;
+        bool pendiente;
+        float guardarDesde;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Preparar()
@@ -22,12 +27,21 @@ namespace DonmniCrash.UI
             if (Actual && Actual != this) { Destroy(gameObject); return; }
             Actual = this;
             DontDestroyOnLoad(gameObject);
-            Mezclar(General, Musica, Efectos);
+            Aplicar(Preferencias.General, Preferencias.Musica, Preferencias.Efectos);
             if (musica.clip) musica.Play();
         }
 
         /// <summary>El volumen general multiplica ambos canales aunque aún no tengan clip.</summary>
         public void Mezclar(float general, float pista, float sonidos)
+        {
+            Aplicar(general, pista, sonidos);
+            Preferencias.ActualizarVolumen(General, Musica, Efectos);
+            pendiente = true;
+            guardarDesde = Time.unscaledTime + DemoraGuardado;
+        }
+
+        // Restaurar desde PlayerPrefs usa esta misma mezcla sin iniciar otra escritura.
+        void Aplicar(float general, float pista, float sonidos)
         {
             General = Mathf.Clamp01(general);
             Musica = Mathf.Clamp01(pista);
@@ -35,5 +49,22 @@ namespace DonmniCrash.UI
             musica.volume = General * Musica;
             efectos.volume = General * Efectos;
         }
+
+        void Update()
+        {
+            if (pendiente && Time.unscaledTime >= guardarDesde) ConfirmarCambios();
+        }
+
+        /// <summary>Al cerrar Ajustes o abandonar la aplicación se guarda el último valor del gesto.</summary>
+        public void ConfirmarCambios()
+        {
+            if (!pendiente) return;
+            Preferencias.ConfirmarVolumen();
+            pendiente = false;
+        }
+
+        void OnApplicationPause(bool pausa) { if (pausa) ConfirmarCambios(); }
+        void OnApplicationFocus(bool tieneFoco) { if (!tieneFoco) ConfirmarCambios(); }
+        void OnApplicationQuit() => ConfirmarCambios();
     }
 }
