@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdd8aa764b58fec482cbae5051fc964, type: 3}
+  m_Name: ForestParchment
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.UITheme
+  displayName: Bosque y pergamino
+  background: {r: 0.09019608, g: 0.14509805, b: 0.12156863, a: 1}
+  panel: {r: 0.16078432, g: 0.23921569, b: 0.19607843, a: 1}
+  elevated: {r: 0.21990196, g: 0.29009804, b: 0.24460785, a: 1}
+  text: {r: 0.9490196, g: 0.91764706, b: 0.84313726, a: 1}
+  secondaryText: {r: 0.7361961, g: 0.7344706, b: 0.6684314, a: 1}
+  accent: {r: 0.827451, g: 0.7372549, b: 0.5372549, a: 1}
+  onAccent: {r: 0.09019608, g: 0.1254902, b: 0.16078432, a: 1}
+  border: {r: 0.34996077, g: 0.4020392, b: 0.35137254, a: 1}
+  focus: {r: 0.827451, g: 0.7372549, b: 0.5372549, a: 1}
+  highlighted: {r: 0.85333335, g: 0.7766667, b: 0.6066667, a: 1}
+  pressed: {r: 0.67850983, g: 0.60454905, b: 0.44054905, a: 1}
+  disabled: {r: 0.27113727, g: 0.3341961, b: 0.28666666, a: 1}

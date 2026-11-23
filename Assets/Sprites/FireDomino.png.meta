@@ -1,0 +1,1118 @@
+fileFormatVersion: 2
+guid: debf6db5200defca293ccfa761c08054
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7694092907509313572
+    second: FireDomino_0
+  - first:
+      213: 1113466321986585616
+    second: FireDomino_1
+  - first:
+      213: 6980139418661527605
+    second: FireDomino_2
+  - first:
+      213: 6287851250502471479
+    second: FireDomino_3
+  - first:
+      213: 1683834961763271443
+    second: FireDomino_4
+  - first:
+      213: 6119292763735346849
+    second: FireDomino_5
+  - first:
+      213: -3815686801410766115
+    second: FireDomino_6
+  - first:
+      213: -7050270951913886032
+    second: FireDomino_7
+  - first:
+      213: -3253362438131553464
+    second: FireDomino_8
+  - first:
+      213: 6221048191815947839
+    second: FireDomino_9
+  - first:
+      213: -2446101786395633680
+    second: FireDomino_10
+  - first:
+      213: -3912707072965946652
+    second: FireDomino_11
+  - first:
+      213: 5620616746451499952
+    second: FireDomino_12
+  - first:
+      213: -6665320853861976356
+    second: FireDomino_13
+  - first:
+      213: -884438131113193974
+    second: FireDomino_14
+  - first:
+      213: 834332028861037038
+    second: FireDomino_15
+  - first:
+      213: -3294551614767987592
+    second: FireDomino_16
+  - first:
+      213: 4518314951253241547
+    second: FireDomino_17
+  - first:
+      213: 1089731300801114139
+    second: FireDomino_18
+  - first:
+      213: 1733991463972713967
+    second: FireDomino_19
+  - first:
+      213: -5691711620041233588
+    second: FireDomino_20
+  - first:
+      213: 1321206642848466335
+    second: FireDomino_21
+  - first:
+      213: -6741229558442170003
+    second: FireDomino_22
+  - first:
+      213: 1445891235450570294
+    second: FireDomino_23
+  - first:
+      213: 5712862793985050558
+    second: FireDomino_24
+  - first:
+      213: -1314410370530213033
+    second: FireDomino_25
+  - first:
+      213: 1986134266899894999
+    second: FireDomino_26
+  - first:
+      213: -4543031709439811406
+    second: FireDomino_27
+  - first:
+      213: 779997702344532569
+    second: FireDomino_28
+  - first:
+      213: 3023484129585005056
+    second: FireDomino_29
+  - first:
+      213: -6869363199562397740
+    second: FireDomino_30
+  - first:
+      213: 6730058496534510182
+    second: FireDomino_31
+  - first:
+      213: -5552235535049149984
+    second: FireDomino_32
+  - first:
+      213: -1348415609137154735
+    second: FireDomino_33
+  - first:
+      213: 4353190736975333689
+    second: FireDomino_34
+  - first:
+      213: 1997812888200718449
+    second: FireDomino_35
+  - first:
+      213: -4436116329513830358
+    second: FireDomino_36
+  - first:
+      213: -7324758783805958584
+    second: FireDomino_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireDomino_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 991
+        height: 856
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 420f1fcfbb8e6ca60800000000000000
+      internalID: 7694092907509313572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_1
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 19
+        width: 733
+        height: 848
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0140f5f68b3d37f00800000000000000
+      internalID: 1113466321986585616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_2
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 854
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 530a504a1df6ed060800000000000000
+      internalID: 6980139418661527605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_3
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 838
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f02bad56fe24750800000000000000
+      internalID: 6287851250502471479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_4
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 824
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3138844f9fe2e5710800000000000000
+      internalID: 1683834961763271443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_5
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 717
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae4013e8581ce450800000000000000
+      internalID: 6119292763735346849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_6
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 664
+        width: 48
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddac3cb0215fb0bc0800000000000000
+      internalID: -3815686801410766115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_7
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 614
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0beeae45ce7682e90800000000000000
+      internalID: -7050270951913886032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_8
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 571
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84be19d791cb9d2d0800000000000000
+      internalID: -3253362438131553464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_9
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 489
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3696c3be5a955650800000000000000
+      internalID: 6221048191815947839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_10
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 440
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f79071a263bd0ed0800000000000000
+      internalID: -2446101786395633680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_11
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 442
+        width: 29
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e2d4b5c5a543b9c0800000000000000
+      internalID: -3912707072965946652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_12
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 371
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb7adec621700e40800000000000000
+      internalID: 5620616746451499952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_13
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 374
+        width: 11
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd6bd8f6ff50083a0800000000000000
+      internalID: -6665320853861976356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_14
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 296
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0e0039a438d9b3f0800000000000000
+      internalID: -884438131113193974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_15
+      rect:
+        serializedVersion: 2
+        x: 1724
+        y: 295
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee93efc4f84249b00800000000000000
+      internalID: 834332028861037038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_16
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 273
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 874809bf2c66742d0800000000000000
+      internalID: -3294551614767987592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_17
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 245
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce29c4528744be30800000000000000
+      internalID: 4518314951253241547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_18
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 215
+        width: 24
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b10ffdc28d08f1f00800000000000000
+      internalID: 1089731300801114139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_19
+      rect:
+        serializedVersion: 2
+        x: 1713
+        y: 247
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe537a5ac00601810800000000000000
+      internalID: 1733991463972713967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_20
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 225
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4baa73007af201b0800000000000000
+      internalID: -5691711620041233588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_21
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 225
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f958edd017ed55210800000000000000
+      internalID: 1321206642848466335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_22
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 231
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69e0b3ee675272a0800000000000000
+      internalID: -6741229558442170003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_23
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 219
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 636c1e00b66d01410800000000000000
+      internalID: 1445891235450570294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_24
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 213
+        width: 20
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb7460e617a284f40800000000000000
+      internalID: 5712862793985050558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_25
+      rect:
+        serializedVersion: 2
+        x: 1707
+        y: 211
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75305776bb642cde0800000000000000
+      internalID: -1314410370530213033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_26
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 186
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d29cceb79a209b10800000000000000
+      internalID: 1986134266899894999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_27
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 190
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b02183fab8e3f0c0800000000000000
+      internalID: -4543031709439811406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_28
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 165
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 952edd517cb13da00800000000000000
+      internalID: 779997702344532569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_29
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 47
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00202f7fbc295f920800000000000000
+      internalID: 3023484129585005056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_30
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 35
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d741f0c09e1ba0a0800000000000000
+      internalID: -6869363199562397740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_31
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 31
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66af9839b88f56d50800000000000000
+      internalID: 6730058496534510182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_32
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 34
+        width: 11
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e13818a23f72f2b0800000000000000
+      internalID: -5552235535049149984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_33
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 47
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 155b9cfc527794de0800000000000000
+      internalID: -1348415609137154735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_34
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 30
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9398fec39e3a96c30800000000000000
+      internalID: 4353190736975333689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_35
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 25
+        width: 28
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 178a6e8ac38a9bb10800000000000000
+      internalID: 1997812888200718449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_36
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 19
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a28b40da3bfbf62c0800000000000000
+      internalID: -4436116329513830358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDomino_37
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 17
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 846d2d1c1ba395a90800000000000000
+      internalID: -7324758783805958584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FireDomino_0: 7694092907509313572
+      FireDomino_1: 1113466321986585616
+      FireDomino_10: -2446101786395633680
+      FireDomino_11: -3912707072965946652
+      FireDomino_12: 5620616746451499952
+      FireDomino_13: -6665320853861976356
+      FireDomino_14: -884438131113193974
+      FireDomino_15: 834332028861037038
+      FireDomino_16: -3294551614767987592
+      FireDomino_17: 4518314951253241547
+      FireDomino_18: 1089731300801114139
+      FireDomino_19: 1733991463972713967
+      FireDomino_2: 6980139418661527605
+      FireDomino_20: -5691711620041233588
+      FireDomino_21: 1321206642848466335
+      FireDomino_22: -6741229558442170003
+      FireDomino_23: 1445891235450570294
+      FireDomino_24: 5712862793985050558
+      FireDomino_25: -1314410370530213033
+      FireDomino_26: 1986134266899894999
+      FireDomino_27: -4543031709439811406
+      FireDomino_28: 779997702344532569
+      FireDomino_29: 3023484129585005056
+      FireDomino_3: 6287851250502471479
+      FireDomino_30: -6869363199562397740
+      FireDomino_31: 6730058496534510182
+      FireDomino_32: -5552235535049149984
+      FireDomino_33: -1348415609137154735
+      FireDomino_34: 4353190736975333689
+      FireDomino_35: 1997812888200718449
+      FireDomino_36: -4436116329513830358
+      FireDomino_37: -7324758783805958584
+      FireDomino_4: 1683834961763271443
+      FireDomino_5: 6119292763735346849
+      FireDomino_6: -3815686801410766115
+      FireDomino_7: -7050270951913886032
+      FireDomino_8: -3253362438131553464
+      FireDomino_9: 6221048191815947839
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdd8aa764b58fec482cbae5051fc964, type: 3}
+  m_Name: BlueCopper
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.UITheme
+  displayName: Azul y cobre
+  background: {r: 0.078431375, g: 0.12941177, b: 0.19215687, a: 1}
+  panel: {r: 0.14117648, g: 0.21960784, b: 0.30588236, a: 1}
+  elevated: {r: 0.20117648, g: 0.27431372, b: 0.35500002, a: 1}
+  text: {r: 0.9411765, g: 0.9490196, b: 0.9607843, a: 1}
+  secondaryText: {r: 0.72517645, g: 0.7520784, b: 0.78396076, a: 1}
+  accent: {r: 0.84313726, g: 0.60784316, b: 0.46666667, a: 1}
+  onAccent: {r: 0.09019608, g: 0.1254902, b: 0.16078432, a: 1}
+  border: {r: 0.33317646, g: 0.39466667, b: 0.46305883, a: 1}
+  focus: {r: 0.84313726, g: 0.60784316, b: 0.46666667, a: 1}
+  highlighted: {r: 0.8666667, g: 0.6666667, b: 0.5466667, a: 1}
+  pressed: {r: 0.6913726, g: 0.49843138, b: 0.38266668, a: 1}
+  disabled: {r: 0.25317648, g: 0.3217255, b: 0.39756864, a: 1}
