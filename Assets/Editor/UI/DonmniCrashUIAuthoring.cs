@@ -15,10 +15,10 @@ using Object = UnityEngine.Object;
 
 namespace DonmniCrash.EditorTools
 {
-    public static class DonmniCrashUIAuthoring
+    public static partial class DonmniCrashUIAuthoring
     {
         const string UI = "Assets/UI";
-        const string Prefabs = "Assets/Prefabs/UI";
+        const string Prefabs = "Assets/Resources/Prefabs/UI";
         static TMP_FontAsset regular, medium, semibold;
         static UITheme theme;
         static readonly List<UITheme> themes = new List<UITheme>();
@@ -37,12 +37,13 @@ namespace DonmniCrash.EditorTools
             CreateThemes();
             regular = Font("Regular"); medium = Font("Medium"); semibold = Font("SemiBold");
             CreateRoundedSprite();
-            slab = Sprites("Assets/Kenney/UI/kenney_rune-pack/PNG/Grey/Slab/runeGrey_slab_036.png").First();
+            slab = Sprites("Assets/Kenney/UI/kenney_rune-pack/PNG/Grey/Slab (outline)/runeGrey_slabOutline_036.png").First();
             foreach (var element in elements)
             {
                 elemental[element] = Sprites("Assets/Sprites/" + element + "Domino.png").OrderByDescending(x => x.rect.width * x.rect.height).Take(2).OrderBy(x => x.rect.x).ToArray();
                 symbols[element] = Sprites("Assets/Sprites/" + element + ".png").OrderByDescending(x => x.rect.width * x.rect.height).FirstOrDefault();
             }
+            PrepararServicios();
             CreateLibrary();
             StartScene(); RoomsScene(); OfflineSettingsScene();
             MatchScene("OnlineMatch", false, false);
@@ -160,7 +161,7 @@ namespace DonmniCrash.EditorTools
         }
         static Button Button(string name,Transform parent,string text,bool primary=false,float width=-1)
         {
-            string path=Prefabs+"/Controls/PrimaryButton.prefab";
+            string path=Prefabs+(primary?"/Controls/PrimaryButton.prefab":"/Controls/SecondaryButton.prefab");
             if(!library && AssetDatabase.LoadAssetAtPath<GameObject>(path))
             {
                 var go=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(path),parent);go.name=name;
@@ -169,7 +170,7 @@ namespace DonmniCrash.EditorTools
                 Size(button,52,width,width<0?1:0);return button;
             }
             var image=Panel(name,parent,primary?UIThemeRole.Accent:UIThemeRole.Elevated);var b=image.gameObject.AddComponent<Button>();b.targetGraphic=image;
-            b.navigation=new Navigation{mode=Navigation.Mode.Automatic};Bind(image,primary?UIThemeRole.Accent:UIThemeRole.Elevated,true);Size(b,52,width,width<0?1:0);
+            b.navigation=new Navigation{mode=Navigation.Mode.None};Bind(image,primary?UIThemeRole.Accent:UIThemeRole.Elevated,true);Size(b,52,width,width<0?1:0);
             var t=Label("TextLabel",image.transform,text,21,primary?UIThemeRole.OnAccent:UIThemeRole.Text,true);Stretch(t.rectTransform,16,6,16,6);t.alignment=TextAlignmentOptions.Center;
             return b;
         }
@@ -202,6 +203,15 @@ namespace DonmniCrash.EditorTools
         }
         static TMP_InputField Input(string name,Transform parent,string placeholder,string value="")
         {
+            if (!library)
+            {
+                var obj = Instancia("Controls/TextInputField",parent);
+                obj.name = name;
+                var field = obj.GetComponent<TMP_InputField>();
+                field.SetTextWithoutNotify(value);
+                ((TMP_Text)field.placeholder).text = placeholder;
+                return field;
+            }
             var p=Panel(name,parent,UIThemeRole.Elevated);Size(p,54);
             var input=p.gameObject.AddComponent<TMP_InputField>();input.targetGraphic=p;Bind(p,UIThemeRole.Elevated,true);
             var area=Node("TextArea",p.transform);Stretch(area,16,6,16,6);area.gameObject.AddComponent<RectMask2D>();
@@ -212,6 +222,14 @@ namespace DonmniCrash.EditorTools
         }
         static void Selector(Transform parent,string name,string label,string value)
         {
+            if (!library)
+            {
+                var obj = Instancia("Controls/ValueSelector",parent);
+                obj.name = name;
+                Hijo<TextMeshProUGUI>(obj,"FieldLabel").text = label;
+                Hijo<TextMeshProUGUI>(obj,"ValueLabel").text = value;
+                return;
+            }
             var r=Row(name,parent,52);var l=Label("FieldLabel",r,label,20);Size(l,-1,-1,1);
             Button("PreviousButton",r,"−",false,48);var v=Label("ValueLabel",r,value,20);Size(v,-1,140);v.alignment=TextAlignmentOptions.Center;Button("NextButton",r,"+",false,48);
         }
@@ -260,10 +278,25 @@ namespace DonmniCrash.EditorTools
             var responsive=r.gameObject.AddComponent<UIResponsiveGrid>();responsive.maximumColumns=columns;responsive.cellHeight=height;responsive.minimumCellWidth=columns==5?160:320;
             r.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;return r;
         }
-        static void Save(string name) {EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(),"Assets/Scenes/"+name+".unity");}
+        static void Save(string name) {ConectarEscena(name);EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(),"Assets/Scenes/"+name+".unity");}
         static void SavePrefab(GameObject go,string path) => PrefabUtility.SaveAsPrefabAsset(go,Prefabs+"/"+path+".prefab");
         static RectTransform Dialog(Transform parent,string name,string title,string description,bool active=false,float maxWidth=560)
         {
+            if (!library)
+            {
+                var obj = Instancia("Overlays/ModalDialog",parent);
+                obj.name = name;
+                Hijo<TextMeshProUGUI>(obj,"TitleLabel").text = title;
+                Hijo<TextMeshProUGUI>(obj,"DescriptionLabel").text = description;
+                Hijo<UIWidthConstraint>(obj,"WindowPanel").maximumWidth = maxWidth;
+                // El llamador coloca las acciones específicas de esta ventana.
+                Hijo<Button>(obj,"CancelButton").gameObject.SetActive(false);
+                Hijo<Button>(obj,"ConfirmButton").gameObject.SetActive(false);
+                Hijo<Button>(obj,"CancelButton").name = "TemplateCancel";
+                Hijo<Button>(obj,"ConfirmButton").name = "TemplateConfirm";
+                obj.SetActive(active);
+                return (RectTransform)Hijo<Transform>(obj,"Content");
+            }
             var root=Node(name,parent);Stretch(root);
             var dim=root.gameObject.AddComponent<Image>();dim.color=new Color(0,0,0,.72f);
             var panel=Panel("WindowPanel",root);Place(panel.rectTransform,new Vector2(.5f,.12f),new Vector2(.5f,.88f),new Vector2(-280,0),new Vector2(280,0));
@@ -275,6 +308,13 @@ namespace DonmniCrash.EditorTools
         }
         static void CommonOverlays(Shell shell)
         {
+            if (!library)
+            {
+                foreach (string nombre in new[]{"MessageDialog","ConfirmationDialog","LoadingOverlay","ToastPanel","ElementHelpDialog","OrientationOverlay"})
+                    Instancia("Overlays/"+nombre,shell.overlays);
+                Instancia("Overlays/TransitionOverlay",shell.canvas.transform);
+                return;
+            }
             var message=Dialog(shell.overlays,"MessageDialog","Aviso","Aquí aparecerán los mensajes de la partida.");Button("AcceptButton",message,"Aceptar",true);
             var confirm=Dialog(shell.overlays,"ConfirmationDialog","¿Quieres continuar?","Puedes cancelar para permanecer en esta pantalla.");
             var actions=Row("ActionsPanel",confirm);Button("CancelButton",actions,"Cancelar");Button("ConfirmButton",actions,"Confirmar",true);
@@ -296,19 +336,36 @@ namespace DonmniCrash.EditorTools
         }
         static void Settings(Transform parent,bool compact=false)
         {
+            if (!library) { Instancia("Panels/SettingsPanel",parent); return; }
             var audio=Card("AudioPanel",parent,"Audio");SliderRow(audio,"MasterVolumeRow","Volumen general",.8f);SliderRow(audio,"MusicVolumeRow","Música",.55f);SliderRow(audio,"EffectsVolumeRow","Efectos",.75f);
             var language=Card("LanguagePanel",parent,"Idioma");Selector(language,"LanguageSelector","Idioma del juego","Español");
             var appearance=Card("AppearancePanel",parent,"Apariencia");Label("ThemeHintLabel",appearance,"Tema de la interfaz",18,UIThemeRole.SecondaryText);
             var grid=Grid("ThemeGrid",appearance,124,compact?2:5);
             for(int i=0;i<themes.Count;i++)
             {
+                if (i > 0)
+                {
+                    var obj = Instancia("Controls/ThemeSwatchButton",grid);
+                    obj.name = "Theme"+(i+1)+"Button";
+                    var muestras = Hijo<Transform>(obj,"ColorPreview");
+                    var tonos = new[]{themes[i].background,themes[i].panel,themes[i].accent,themes[i].text};
+                    for (int j=0;j<tonos.Length;j++) muestras.GetChild(j).GetComponent<Image>().color = tonos[j];
+                    Hijo<TextMeshProUGUI>(obj,"ThemeNameLabel").text = themes[i].displayName;
+                    Hijo<Transform>(obj,"SelectedLabel").gameObject.SetActive(false);
+                    foreach (var componente in obj.GetComponentsInChildren<Component>(true))
+                    {
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(componente);
+                        if (componente is Transform) PrefabUtility.RecordPrefabInstancePropertyModifications(componente.gameObject);
+                    }
+                    continue;
+                }
                 var swatch=Panel("Theme"+(i+1)+"Button",grid,UIThemeRole.Elevated);var b=swatch.gameObject.AddComponent<Button>();b.targetGraphic=swatch;Bind(swatch,UIThemeRole.Elevated,true);
                 var colors=Node("ColorPreview",swatch.transform);Place(colors,new Vector2(0,.48f),new Vector2(1,1),new Vector2(12,0),new Vector2(-12,-12));Horizontal(colors,0);
                 foreach(var color in new[]{themes[i].background,themes[i].panel,themes[i].accent,themes[i].text})
                 {var p=Panel("ColorSwatch",colors);Object.DestroyImmediate(p.GetComponent<UIThemeBinding>());p.color=color;p.raycastTarget=false;Size(p,-1,-1,1);}
                 var title=Label("ThemeNameLabel",swatch.transform,themes[i].displayName,17);Place(title.rectTransform,Vector2.zero,new Vector2(1,.46f),new Vector2(12,6),new Vector2(-12,0));title.alignment=TextAlignmentOptions.Center;
-                if(i==0){var selected=Label("SelectedLabel",swatch.transform,"●",16,UIThemeRole.Accent);Place(selected.rectTransform,new Vector2(1,1),Vector2.one,new Vector2(-20,-20),new Vector2(0,0));}
-                if(library && i==0) SavePrefab(swatch.gameObject,"Controls/ThemeSwatchButton");
+                {var selected=Label("SelectedLabel",swatch.transform,"●",16,UIThemeRole.Accent);Place(selected.rectTransform,new Vector2(1,1),Vector2.one,new Vector2(-20,-20),new Vector2(0,0));selected.gameObject.SetActive(i==0);}
+                if(library && i==0) PrefabUtility.SaveAsPrefabAssetAndConnect(swatch.gameObject,Prefabs+"/Controls/ThemeSwatchButton.prefab",InteractionMode.AutomatedAction);
             }
         }
         static void CreateLibrary()
@@ -322,7 +379,7 @@ namespace DonmniCrash.EditorTools
             var tile=Tile(root,0,1);SavePrefab(tile.gameObject,"Gameplay/DominoTileView");
             var player=Player(root,"PlayerCard","Jugador",false);SavePrefab(player.gameObject,"Gameplay/PlayerCard");
             var room=Room(root,"RoomRow","Sala de ejemplo","Pública · 2 / 6","En espera");SavePrefab(room.gameObject,"Panels/RoomRow");
-            var settings=Node("SettingsPanel",root);Vertical(settings);Settings(settings);SavePrefab(settings.gameObject,"Panels/SettingsPanel");
+            var settings=Node("SettingsPanel",root);Vertical(settings);Settings(settings);CompletarAjustes(settings);SavePrefab(settings.gameObject,"Panels/SettingsPanel");
             var modal=Dialog(root,"ModalDialog","Título","Descripción");Button("CancelButton",modal,"Cancelar");Button("ConfirmButton",modal,"Confirmar",true);
             SavePrefab(modal.parent.parent.parent.parent.gameObject,"Overlays/ModalDialog");
             var overlayRoot=Node("OverlayLibrary",root);var dummyCanvas=Node("CanvasLibrary",root);
@@ -362,6 +419,14 @@ namespace DonmniCrash.EditorTools
         }
         static RectTransform Room(Transform parent,string name,string roomName,string detail,string status)
         {
+            if (!library)
+            {
+                var fila=Instancia("Panels/RoomRow",parent);fila.name=name;
+                Hijo<TextMeshProUGUI>(fila,"RoomNameLabel").text=roomName;
+                Hijo<TextMeshProUGUI>(fila,"RoomDetailsLabel").text=detail;
+                Hijo<TextMeshProUGUI>(fila,"RoomStatusLabel").text=status;
+                return (RectTransform)fila.transform;
+            }
             var panel=Panel(name,parent,UIThemeRole.Elevated);Size(panel,84);var row=Horizontal(panel.transform,16);row.padding=new RectOffset(18,18,12,12);
             var labels=Node("RoomInfoPanel",panel.transform);Size(labels,-1,-1,1);Vertical(labels,0,2);
             Label("RoomNameLabel",labels,roomName,22,UIThemeRole.Text,true);Label("RoomDetailsLabel",labels,detail,17,UIThemeRole.SecondaryText);
@@ -439,6 +504,14 @@ namespace DonmniCrash.EditorTools
         }
         static RectTransform Player(Transform parent,string name,string displayName,bool activeTurn)
         {
+            if (!library)
+            {
+                var card=Instancia("Gameplay/PlayerCard",parent);card.name=name;
+                Hijo<TextMeshProUGUI>(card,"PlayerNameLabel").text=displayName;
+                card.transform.Find("TurnIndicator").gameObject.SetActive(activeTurn);
+                Bind(card.GetComponent<Image>(),activeTurn?UIThemeRole.Elevated:UIThemeRole.Panel);
+                return (RectTransform)card.transform;
+            }
             var p=Panel(name,parent,activeTurn?UIThemeRole.Elevated:UIThemeRole.Panel);Size(p,86,164);
             var v=Vertical(p.transform,12,3);
             Label("PlayerNameLabel",p.transform,displayName,20,UIThemeRole.Text,true);

@@ -1,0 +1,245 @@
+player	Jugador	Player
+sample.table	Mesa elemental	Elemental table
+ready.button	Estoy listo	Ready
+unready	Quitar listo	Not ready
+preview.ready	Listo en la vista previa	Ready in preview
+preview.lobby	Sala de muestra	Preview room
+room.capacity	Hasta {0} jugadores	Up to {0} players
+practice.players	Jugadores: {0}	Players: {0}
+practice.level	Dificultad: {0}	Difficulty: {0}
+practice.rules	Vida: {0} · Mano: {1} · Segundos: {2} · Efectos: {3}	Health: {0} · Hand: {1} · Seconds: {2} · Effects: {3}
+preview.game	La jugada estará disponible cuando se integre la partida.	This action will be available when gameplay is added.
+preview.accept	Solicitud de muestra aceptada.	Sample request accepted.
+preview.reject	Solicitud de muestra rechazada.	Sample request declined.
+step.title.0	1. Conoce tus fichas	1. Meet your tiles
+step.body.0	La espada representa el ataque. El escudo representa la defensa.	The sword shows the attack. The shield shows the defense.
+step.title.1	2. Tu mano	2. Your hand
+step.body.1	Desliza la mano y toca una ficha para seleccionarla.	Scroll through your hand and tap a tile to select it.
+step.title.2	3. La mesa	3. The table
+step.body.2	Observa las fichas colocadas y el indicador del ataque actual.	Look at the placed tiles and the current attack indicator.
+step.title.3	4. Los elementos	4. The elements
+step.body.3	Abre Elementos para consultar los símbolos de ataque y defensa.	Open Elements to look up the attack and defense symbols.
+step.title.4	5. Menú de mesa	5. Table menu
+step.body.4	Desde Pausa puedes cambiar los ajustes o salir de la mesa.	Open Pause to change settings or leave the table.
+preview	Vista previa	Preview
+preview.hint	Elige una vista de muestra.	Choose a sample view.
+host	Anfitrión	Host
+guest	Invitado	Guest
+guest2	Invitado 2	Guest 2
+guest1	Invitado 1	Guest 1
+request	Solicitud de acceso	Admission request
+empty	Lista vacía	Empty list
+loading	Buscando salas…	Searching for rooms…
+error	Error de búsqueda	Search error
+table	Mesa	Table
+results	Resultados	Results
+target	Selección de objetivo	Target selection
+observer	Espectador	Spectator
+disconnect	Desconexión	Disconnected
+host.left	Cambio de anfitrión	Host change
+banner	Aviso de conexión	Connection banner
+bot.state	Estado del bot	Bot status
+tile.style	Aspecto de fichas	Tile style
+grey	Gris	Grey
+blue	Azul	Blue
+black	Negra	Black
+easy	Fácil	Easy
+hard	Difícil	Hard
+off	Desactivados	Off
+private	Privada	Private
+on	Activados	On
+brand	DOMINÓ ELEMENTAL	ELEMENTAL DOMINOES
+menu.hint	Elige cómo quieres jugar	Choose how to play
+play.online	Jugar online	Play online
+play.offline	Jugar offline	Play offline
+customize	Personalizar	Customize
+settings	Ajustes	Settings
+offline	Sin conexión	Offline
+profile	Tu perfil	Your profile
+profile.hint	Personaliza cómo te verán los demás jugadores.	Choose how other players will see you.
+profile.name	Nombre de jugador	Player name
+profile.placeholder	Tu nombre	Your name
+emblem	Emblema	Emblem
+save.profile	Guardar perfil	Apply profile
+settings.hint	Configura el sonido, el idioma y la apariencia.	Adjust sound, language and appearance.
+save.settings	Guardar ajustes	Apply settings
+back	Volver	Back
+master	Volumen general	Master volume
+music	Música	Music
+effects	Efectos	Effects
+language	Idioma	Language
+game.language	Idioma del juego	Game language
+appearance	Apariencia	Appearance
+theme	Tema de la interfaz	Interface theme
+slate	Pizarra y dorado	Slate and gold
+petrol	Petróleo y marfil	Teal and ivory
+copper	Azul y cobre	Blue and copper
+plum	Ciruela y plata	Plum and silver
+forest	Bosque y pergamino	Forest and parchment
+notice	Aviso	Notice
+message	Aquí aparecerán los mensajes de la partida.	Match messages appear here.
+accept	Aceptar	Accept
+confirm.question	¿Quieres continuar?	Would you like to continue?
+confirm.hint	Puedes cancelar para permanecer en esta pantalla.	Cancel to stay on this screen.
+cancel	Cancelar	Cancel
+confirm	Confirmar	Confirm
+wait	Un momento…	One moment…
+preparing	Preparando la siguiente pantalla.	Preparing the next screen.
+loading.screen	Cargando…	Loading…
+changes	Cambios preparados	Changes ready
+elements.title	Los cinco elementos	The five elements
+elements.hint	Cada ficha tiene un ataque y una defensa.	Each tile has an attack and a defense.
+earth	Tierra	Earth
+water	Agua	Water
+wind	Viento	Wind
+fire	Fuego	Fire
+plant	Planta	Plant
+ok	Entendido	Got it
+rotate	Gira tu dispositivo\npara jugar en horizontal	Rotate your device\nto play in landscape
+rooms	Salas online	Online rooms
+rooms.hint	Busca una mesa o crea una partida con tus amigos.	Find a table or create a room with friends.
+create	Crear sala	Create room
+join.private	Sala privada	Private room
+refresh	Actualizar	Refresh
+search	Buscar sala…	Search rooms…
+available	Salas disponibles	Available rooms
+room.quiet	Partida tranquila	Quiet game
+room.duel	Duelo de elementos	Element duel
+public	Pública	Public
+public2	Pública · 2 / 6	Public · 2 / 6
+public4	Pública · 4 / 6	Public · 4 / 6
+public.full	Pública · 2 / 2	Public · 2 / 2
+waiting	En espera	Waiting
+playing	En partida	In game
+enter	Entrar	Join
+no.rooms	No hay salas disponibles	No rooms available
+create.first	Crea una sala para comenzar.	Create a room to get started.
+wait.short	Espera un momento.	Please wait.
+load.fail	No se pudieron cargar las salas	Could not load rooms
+retry	Intenta actualizar la lista.	Try refreshing the list.
+create.hint	Prepara los detalles de tu mesa.	Choose your table settings.
+room.info	Datos de la sala	Room details
+name.room	Nombre de la sala	Room name
+visibility	Visibilidad	Visibility
+join.hint	Introduce el código que compartió el anfitrión.	Enter the code shared by the host.
+invite	Código de invitación	Invitation code
+code	Código de sala	Room code
+request.send	Solicitar acceso	Request access
+requested	Solicitud enviada	Request sent
+request.hint	El anfitrión recibirá tu solicitud de acceso.	The host will see your request.
+request.wait	Esperando aprobación…	Awaiting approval…
+request.cancel	Cancelar solicitud	Cancel request
+lobby	Sala de espera	Lobby
+lobby.hint	Todos los jugadores deben estar listos para comenzar.	Everyone should be ready before starting.
+room.code	Código: — — — — — —	Code: — — — — — —
+room.settings	Hasta 6 jugadores · Configuración de la sala	Up to 6 players · Room settings
+room.players	Jugadores · 3 / 6	Players · 3 / 6
+host.ready	Anfitrión · Listo	Host · Ready
+ready	Listo	Ready
+getting.ready	Preparándose	Getting ready
+count.ready	2 de 3 jugadores listos	2 of 3 players ready
+edit.room	Editar sala	Edit room
+start.match	Comenzar partida	Start match
+leave.room	Salir de la sala	Leave room
+request.text	Un jugador quiere entrar a tu sala.	A player wants to join your room.
+reject	Rechazar	Decline
+leave.room.question	¿Salir de la sala?	Leave the room?
+leave.room.hint	Dejarás tu lugar en esta mesa.	You will leave your seat at this table.
+stay	Quedarme	Stay
+exit	Salir	Leave
+config	Configuración de partida	Match settings
+total.players	Jugadores (incluyéndote)	Players (including you)
+max.players	Máximo de jugadores	Player limit
+difficulty	Dificultad	Difficulty
+hand.size	Fichas iniciales	Starting hand
+turn.time	Tiempo por turno	Turn duration
+health.start	Vida inicial	Starting health
+effects.element	Efectos de elementos	Element effects
+practice.hint	Practica a tu ritmo y conoce tus elementos.	Practice at your own pace and learn the elements.
+learn	Aprender a jugar	Learn to play
+tutorial.hint	Descubre la mesa, los ataques y las defensas paso a paso.	Explore the table, attacks and defenses step by step.
+tutorial.open	Abrir tutorial	Open tutorial
+bots	Partida contra bots	Game against bots
+bots.hint	Prepara una mesa y practica tus decisiones sin conexión.	Set up a table and practice your moves offline.
+configure	Configurar partida	Set up match
+against.bots	Contra bots	Against bots
+choose.practice	Elige cómo quieres practicar.	Choose how to practice.
+continue	Continuar	Continue
+all.ready	Todo listo	All set
+summary.hint	Consulta tu configuración antes de comenzar.	Review your settings before you start.
+your.match	Tu partida	Your match
+one.bot	Tú + 1 bot	You + 1 bot
+level.normal	Dificultad: Normal	Difficulty: Normal
+rules.summary	Vida, fichas y tiempo: según configuración	Health, tiles and time: as configured
+edit	Editar	Edit
+begin	Comenzar	Start
+you	Tú	You
+stats	Vida —  ·  Fichas —	Health —  ·  Tiles —
+learn.now	Aprende a jugar	Learn to play
+turn	Tu turno	Your turn
+clock	Tiempo  — : —	Time  — : —
+elements	Elementos	Elements
+pause	Pausa	Pause
+attack	Ataque actual	Current attack
+reserve	Reserva  —	Stock  —
+hand	Tu mano	Your hand
+play.tile	Colocar ficha	Play tile
+draw.tile	Tomar ficha	Draw tile
+pass	Pasar turno	Pass turn
+observing	Estás observando la partida	You are spectating
+observing.hint	Sigue los turnos y las fichas de la mesa.	Follow the turns and the tiles on the table.
+thinking	El bot está pensando…	The bot is thinking…
+paused	Partida en pausa	Game paused
+match.menu	Menú de partida	Match menu
+resume.hint	Retoma la partida cuando estés listo.	Resume when you are ready.
+online.pause	La partida online continúa mientras consultas el menú.	Online play continues while you use the menu.
+help.elements	Ayuda de elementos	Element guide
+leave.match	Salir de la partida	Leave match
+settings.short	Sonido, idioma y apariencia.	Sound, language and appearance.
+close	Cerrar	Close
+end	Fin de la partida	Match over
+end.hint	Resultados de la mesa.	Table results.
+winner	Jugador ganador	Winner
+again	Jugar de nuevo	Play again
+to.room	Volver a la sala	Return to lobby
+change.config	Cambiar configuración	Change settings
+main.menu	Menú principal	Main menu
+choose.target	Elige un objetivo	Choose a target
+target.hint	Selecciona a un jugador de la mesa.	Select a player at the table.
+leave.question	¿Salir de la partida?	Leave the match?
+leave.hint	Confirma que quieres abandonar esta mesa.	Confirm that you want to leave this table.
+keep.playing	Seguir jugando	Keep playing
+lost	Se perdió la conexión	Connection lost
+recovering	Intentando recuperar la conexión con la sala…	Trying to reconnect to the room…
+to.rooms	Volver a salas	Return to rooms
+reconnect	Reconectando…	Reconnecting…
+host.gone	El anfitrión salió	The host left
+host.wait	Espera mientras se actualiza la sala.	Please wait while the room updates.
+previous	Anterior	Previous
+next	Siguiente	Next
+welcome	Bienvenido a DonmniCrash	Welcome to DonmniCrash
+welcome.hint	Aprende a reconocer tus fichas y a leer la mesa.	Learn to recognize your tiles and read the table.
+later	Más tarde	Later
+attack.defense	Ataque y defensa	Attack and defense
+help.tile	Cada ficha tiene dos símbolos: una espada para atacar y un escudo para defender.	Each tile has two symbols: a sword for attack and a shield for defense.
+complete	¡Tutorial completado!	Tutorial complete!
+complete.hint	Ya conoces los elementos de la mesa. Puedes seguir practicando contra bots.	You have explored the table. Continue practicing against bots.
+play.bots	Jugar contra bots	Play against bots
+repeat	Repetir tutorial	Repeat tutorial
+exit.tutorial	¿Salir del tutorial?	Leave the tutorial?
+exit.tutorial.hint	Puedes volver a empezar desde el menú offline.	You can start again from the offline menu.
+continue.tutorial	Continuar tutorial	Continue tutorial
+visual	Recorrido visual	Interface preview
+regular	Normal	Normal
+room.sample	Sala de ejemplo	Sample room
+type	Escribe aquí	Type here
+title	Título	Title
+desc	Descripción	Description
+player.2	Jugador 2	Player 2
+player.3	Jugador 3	Player 3
+player.4	Jugador 4	Player 4
+player.5	Jugador 5	Player 5
+player.6	Jugador 6	Player 6
+
+preview.common	Este es un aviso de muestra.	This is a sample message.
+preview.toast	Aviso breve	Short notice
