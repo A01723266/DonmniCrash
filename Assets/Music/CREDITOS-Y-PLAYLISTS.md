@@ -1,16 +1,8 @@
-# Música para DonmniCrash
+# Music credits and playlists
 
-Selección por escena: jazz instrumental para menús, jazz con más ritmo para partidas y piano tranquilo para tutorial. Las agrupaciones son propuestas basadas en los datos del compositor; pendiente de escuchar y elegir.
+Kevin MacLeod (incompetech.com). All twenty tracks are used unedited under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See the [composer’s credit instructions](https://incompetech.com/music/royalty-free/faq.html).
 
-Todas las obras son de Kevin MacLeod y se ofrecen bajo [Creative Commons Atribución 4.0](https://creativecommons.org/licenses/by/4.0/), que permite el uso comercial con atribución. El compositor pide créditos accesibles: [preguntas frecuentes](https://incompetech.com/music/royalty-free/faq.html). Si se modifica una pista, indicar los cambios. No se han editado los audios.
-
-Para cada pista usada, incluir este crédito con su título:
-
-“TÍTULO” Kevin MacLeod (incompetech.com)  
-Licensed under Creative Commons: By Attribution 4.0 License  
-https://creativecommons.org/licenses/by/4.0/
-
-## Menu inicial
+## Start
 
 - [Vibing Over Venus](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN2300005) — `Vibing Over Venus.mp3`
 - [Backed Vibes (clean)](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100479) — `Backed Vibes Clean.mp3`
@@ -18,7 +10,7 @@ https://creativecommons.org/licenses/by/4.0/
 - [George Street Shuffle](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300035) — `George Street Shuffle.mp3`
 - [Night in Venice](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900056) — `Night in Venice.mp3`
 
-## Menus online y offline
+## Matches
 
 - [Groove Grove](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1200054) — `Groove Grove.mp3`
 - [Study And Relax](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900030) — `Study And Relax.mp3`
@@ -26,7 +18,7 @@ https://creativecommons.org/licenses/by/4.0/
 - [Past Sadness](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900007) — `Past Sadness.mp3`
 - [Space Jazz](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN2100030) — `Space Jazz.mp3`
 
-## Partidas online y offline
+## Room and practice menus
 
 - [Shades of Spring](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100080) — `Shades of Spring.mp3`
 - [Opportunity Walks](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100123) — `Opportunity Walks.mp3`

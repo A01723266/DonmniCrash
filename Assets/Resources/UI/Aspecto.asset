@@ -11,14 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4918d5c308f4b02c2b327c3a2bd8de9b, type: 3}
   m_Name: Aspecto
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.AspectoSesion
-  paletas:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.SessionAppearance
+  palettes:
   - {fileID: 11400000, guid: 1837cbd34ce1ad4eb8f46c00a7a41b25, type: 2}
   - {fileID: 11400000, guid: 2a35a88bfd873ac4fab158067c9f45ca, type: 2}
   - {fileID: 11400000, guid: 22c62d30ec4673b37b60195adc34fe26, type: 2}
   - {fileID: 11400000, guid: 3497bf3418a530769adc3ed95651739a, type: 2}
   - {fileID: 11400000, guid: 0c8f34c54a6c4623f9a062bb63fe7bb4, type: 2}
-  losas:
+  slabs:
   - {fileID: -3145391585552779930, guid: d1b5adeca557e8f8a9c2f2ff5c96d076, type: 3}
   - {fileID: -8790535780569379228, guid: 7ae9dbea1b058abfa9c3cc2ac204068b, type: 3}
   - {fileID: -1535588160412969163, guid: d5f3c8d33199ea6aeb98efc2158fb153, type: 3}

@@ -244,8 +244,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: preview.toast
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: preview.toast
 --- !u!1 &55721279
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,8 +737,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: help.elements
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: help.elements
 --- !u!1001 &177321020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -884,8 +884,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: confirm
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: confirm
 --- !u!114 &177321027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,8 +897,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: cancel
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: cancel
 --- !u!114 &177321028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,8 +910,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: confirm.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: confirm.hint
 --- !u!114 &177321029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,8 +923,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: confirm.question
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: confirm.question
 --- !u!1 &236997566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,8 +1100,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: confirm
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: confirm
 --- !u!1001 &305212964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1227,8 +1227,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: tutorial.open
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: tutorial.open
 --- !u!114 &316716805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,8 +1290,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.element.3
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.element.3
 --- !u!1001 &380904826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1437,8 +1437,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &380904832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,8 +1450,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: total.players
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: total.players
 --- !u!114 &380904833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,14 +1463,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 2
   - 3
   - 4
   - 5
   - 6
-  indice: 2
+  index: 2
 --- !u!1 &433162461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,8 +1522,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: rules.summary
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: rules.summary
 --- !u!114 &433162464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1785,8 +1785,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: close
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: close
 --- !u!1001 &456917940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1932,8 +1932,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &456917946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1945,8 +1945,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: hand.size
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: hand.size
 --- !u!114 &456917947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,8 +1958,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 2
   - 3
   - 4
@@ -1967,7 +1967,7 @@ MonoBehaviour:
   - 6
   - 7
   - 8
-  indice: 3
+  index: 3
 --- !u!1001 &469493640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2145,8 +2145,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.element.2
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.element.2
 --- !u!114 &469493651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2158,8 +2158,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.element.1
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.element.1
 --- !u!114 &469493652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,8 +2171,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.element.0
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.element.0
 --- !u!114 &469493653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2184,8 +2184,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: elements.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: elements.hint
 --- !u!114 &469493654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,8 +2197,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: elements.title
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: elements.title
 --- !u!1001 &480672551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2391,8 +2391,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: confirm
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: confirm
 --- !u!114 &480672559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2404,8 +2404,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: cancel
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: cancel
 --- !u!114 &480672560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2417,8 +2417,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: preview.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: preview.hint
 --- !u!114 &480672561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2430,8 +2430,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: preview
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: preview
 --- !u!1 &514930152
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,8 +2595,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: begin
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: begin
 --- !u!1 &570399192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,8 +2648,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: tutorial.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: tutorial.hint
 --- !u!114 &570399195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2925,8 +2925,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: configure
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: configure
 --- !u!114 &675092473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2938,8 +2938,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: ok
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: ok
 --- !u!1 &694711394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,8 +2991,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: choose.practice
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: choose.practice
 --- !u!114 &694711397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3262,8 +3262,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: back
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: back
 --- !u!1 &729743402
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,8 +3391,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: practice.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: practice.hint
 --- !u!114 &752946947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3688,8 +3688,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: regular
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: regular
 --- !u!114 &794229845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3701,8 +3701,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: difficulty
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: difficulty
 --- !u!114 &794229846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3714,12 +3714,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - "F\xE1cil"
   - Normal
   - "Dif\xEDcil"
-  indice: 1
+  index: 1
 --- !u!1 &815728547
 GameObject:
   m_ObjectHideFlags: 0
@@ -4001,8 +4001,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: against.bots
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: against.bots
 --- !u!114 &930962061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4284,8 +4284,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &937547598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4297,8 +4297,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: health.start
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: health.start
 --- !u!114 &937547599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4310,8 +4310,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 1
   - 2
   - 3
@@ -4322,7 +4322,7 @@ MonoBehaviour:
   - 8
   - 9
   - 10
-  indice: 2
+  index: 2
 --- !u!1 &970353130
 GameObject:
   m_ObjectHideFlags: 0
@@ -4374,8 +4374,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: play.offline
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: play.offline
 --- !u!114 &970353133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4637,8 +4637,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: notice
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: notice
 --- !u!1 &1033043731
 GameObject:
   m_ObjectHideFlags: 0
@@ -4843,8 +4843,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: preview
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: preview
 --- !u!1 &1041918284
 GameObject:
   m_ObjectHideFlags: 0
@@ -4896,8 +4896,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: learn
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: learn
 --- !u!114 &1041918287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5169,8 +5169,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: continue
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: continue
 --- !u!1 &1069224642
 GameObject:
   m_ObjectHideFlags: 0
@@ -5272,8 +5272,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: config
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: config
 --- !u!114 &1144595772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5597,8 +5597,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: bots
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: bots
 --- !u!114 &1184106599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5868,8 +5868,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: back
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: back
 --- !u!1 &1228912079
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,8 +6057,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &1246741044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6070,8 +6070,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.cfg.reverse
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.cfg.reverse
 --- !u!114 &1246741045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6083,8 +6083,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 0
   - 1
   - 2
@@ -6094,7 +6094,7 @@ MonoBehaviour:
   - 6
   - 7
   - 8
-  indice: 1
+  index: 1
 --- !u!1 &1295985990
 GameObject:
   m_ObjectHideFlags: 0
@@ -6349,8 +6349,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: accept
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: accept
 --- !u!114 &1318241607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6362,8 +6362,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: message
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: message
 --- !u!114 &1318241608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6375,8 +6375,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: notice
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: notice
 --- !u!1001 &1325619809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6498,8 +6498,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: rotate
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: rotate
 --- !u!1 &1382343081
 GameObject:
   m_ObjectHideFlags: 0
@@ -6531,7 +6531,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6d168d1f63405be19c81ab6c3300558, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.MenuPractica
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.PracticeMenu
 --- !u!114 &1382343083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6856,8 +6856,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: one.bot
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: one.bot
 --- !u!114 &1491602031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7200,8 +7200,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.element.4
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.element.4
 --- !u!1001 &1603550717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7339,8 +7339,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: loading.screen
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: loading.screen
 --- !u!114 &1603550723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7352,8 +7352,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: preparing
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: preparing
 --- !u!114 &1603550724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7365,8 +7365,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: wait
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: wait
 --- !u!1001 &1616278550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7492,8 +7492,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: loading.screen
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: loading.screen
 --- !u!1001 &1618959970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7619,8 +7619,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: edit
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: edit
 --- !u!1 &1649391285
 GameObject:
   m_ObjectHideFlags: 0
@@ -7672,8 +7672,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: bots.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: bots.hint
 --- !u!114 &1649391288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7943,8 +7943,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: back
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: back
 --- !u!1 &1733875041
 GameObject:
   m_ObjectHideFlags: 0
@@ -7996,8 +7996,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: your.match
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: your.match
 --- !u!114 &1733875044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8315,8 +8315,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: level.normal
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: level.normal
 --- !u!114 &1817009130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8504,8 +8504,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: all.ready
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: all.ready
 --- !u!114 &1819596018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8787,8 +8787,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &1821452717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8800,8 +8800,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.cfg.pass
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.cfg.pass
 --- !u!114 &1821452718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8813,8 +8813,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 0
   - 1
   - 2
@@ -8824,7 +8824,7 @@ MonoBehaviour:
   - 6
   - 7
   - 8
-  indice: 1
+  index: 1
 --- !u!1 &1827479143
 GameObject:
   m_ObjectHideFlags: 0
@@ -8967,8 +8967,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: summary.hint
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: summary.hint
 --- !u!114 &1849137491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9305,8 +9305,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: changes
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: changes
 --- !u!1 &1926905399
 GameObject:
   m_ObjectHideFlags: 0
@@ -9760,8 +9760,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &1988621665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9773,8 +9773,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: game.cfg.swap
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: game.cfg.swap
 --- !u!114 &1988621666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9786,8 +9786,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 0
   - 1
   - 2
@@ -9797,7 +9797,7 @@ MonoBehaviour:
   - 6
   - 7
   - 8
-  indice: 1
+  index: 1
 --- !u!114 &1989443058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10736,8 +10736,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: 
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: 
 --- !u!114 &2114306504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10749,8 +10749,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3aec6968dfd381f9aca7cb6ebc329eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.TextoIdioma
-  clave: turn.time
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.LocalizedText
+  key: turn.time
 --- !u!114 &2114306505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10762,8 +10762,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6c21a0bfb8533f549311c90e99a9962, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OpcionesMuestra
-  opciones:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.OptionSelector
+  options:
   - 1
   - 2
   - 3
@@ -10774,7 +10774,7 @@ MonoBehaviour:
   - 8
   - 9
   - 10
-  indice: 4
+  index: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

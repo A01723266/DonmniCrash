@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614b97912d9f9da38ada6ded1b24a8a3, type: 3}
   m_Name: CatalogoMusica
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.CatalogoMusica
-  inicio:
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.MusicCatalog
+  startTracks:
   - {fileID: 8300000, guid: 9a0aa8321bf80367fa794358a062b6d4, type: 3}
   - {fileID: 8300000, guid: 6e8429b32250d29c78a7588eb2a4accf, type: 3}
   - {fileID: 8300000, guid: c28f6b55da3e314faa8e78733e762b99, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4fa30922a01cd9d03a9d1f288cc51180, type: 3}
   - {fileID: 8300000, guid: 4a085fba141938843b365b441b080c6c, type: 3}
   - {fileID: 8300000, guid: d68c731c3904a6596b30f2a7ac1c828b, type: 3}
-  partidas:
+  matchTracks:
   - {fileID: 8300000, guid: 6a528398f243a43479326905933e5782, type: 3}
   - {fileID: 8300000, guid: 486e82062ed41d274b65eb3915305541, type: 3}
   - {fileID: 8300000, guid: 99bde633b4e382bccaed64aae7f05b61, type: 3}

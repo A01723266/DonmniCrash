@@ -305,3 +305,34 @@ lesson.title.7	Cambiar una mano menor	Swap a smaller hand
 lesson.body.7	Combina un escudo válido con Intercambio y elige Bot 1. Coloca y confirma tres dorsos de su mano.	Combine a valid shield with Swap and choose Bot 1. Play and confirm three tiles from their hidden hand.
 lesson.title.8	Completar tu mano	Refill your hand
 lesson.body.8	Tras recibir un intercambio te faltan dos fichas. Toca y confirma dos dorsos antes de defender.	After a swap you are two tiles short. Tap and confirm two face-down tiles before defending.
+credit.title	Créditos	Credits
+credit.design	Diseño del juego	Game design
+credit.technology	Tecnología	Technology
+credit.graphics	Gráficos	Graphics
+credit.font	Tipografía	Typography
+credit.effects	Efectos de sonido	Sound effects
+credit.music	Música	Music
+credit.ai	Asistencia de IA	AI assistance
+credit.designer	Idea, jugabilidad y estructura · Miguel Angel Avila H.	Concept, gameplay and structure · Miguel Angel Avila H.
+credit.art	La mesa de madera y los elementos se crearon con asistencia de IA.	The wooden table and elemental artwork were created with AI assistance.
+credit.statement	Este proyecto fue realizado con asistencia de IA. La idea del juego, su jugabilidad y su estructura fueron concebidas y diseñadas por Miguel Angel Avila H. sin asistencia de IA.	This project was developed with AI assistance. Miguel Angel Avila H. independently conceived and designed the game concept, gameplay and structure without AI assistance.
+net.connection	No se pudo mantener la conexión. Puedes reintentar desde la lista de salas.	Connection unavailable. Retry from the room browser.
+net.joinfailed	No se pudo entrar. Comprueba el código y si quedan plazas.	Could not join. Check the code and available seats.
+net.closed	El anfitrión cerró la sala.	The host closed the room.
+net.denied	No se admitió tu solicitud.	Your application was not accepted.
+net.lost	Se perdió el respaldo de la ronda. La sala permanece abierta.	The round backup was lost. The room is still open.
+net.capacity	El límite debe incluir a todos los admitidos.	Capacity must include everyone already admitted.
+net.applicant	{0} solicita entrar en la sala.	{0} would like to join the room.
+net.code	Introduce los seis caracteres del código.	Enter the six-character room code.
+net.waiting	En espera	Waiting
+net.playing	En partida	In progress
+net.join	Entrar	Join
+net.host	Anfitrión	Host
+net.ready	Listo para jugar	Ready to play
+net.readiness	Listos: {0} de {1}	Ready: {0} of {1}
+net.countdown	Comienza en {0} s	Starting in {0} s
+net.title	Escribe un nombre para la sala.	Enter a room name.
+net.close	Cerrar sala	Close room
+net.closehint	Todos volverán al navegador de salas.	Everyone will return to the room browser.
+net.winner	Gana {0}	{0} wins
+net.loading	Preparando mesa…	Preparing table…

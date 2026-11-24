@@ -45,9 +45,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86d77f3ea26ef1be494e2609f33295e8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.AudioJuego
-  musica: {fileID: 3559544419613773894}
-  efectos: {fileID: 7695645325826063847}
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.GameAudio
+  clickClip: {fileID: 8300000, guid: 6988310f0a6f977fca69c384ed9c19b5, type: 3}
+  turnClip: {fileID: 8300000, guid: 813cc6a15c458da88824f33bfbcfad6a, type: 3}
+  resultClip: {fileID: 8300000, guid: 48526f61d7d809515950ef2630efe4e3, type: 3}
+  music: {fileID: 3559544419613773894}
+  effects: {fileID: 7695645325826063847}
 --- !u!1 &6480029042125065075
 GameObject:
   m_ObjectHideFlags: 0

@@ -1281,30 +1281,30 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6322ef9e8661da53b18f8b550601b0b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.PanelAjustes
+  m_EditorClassIdentifier: Assembly-CSharp::DonmniCrash.UI.SettingsPanel
   general: {fileID: 1004619277479515451}
-  musica: {fileID: 921837876990472006}
-  efectos: {fileID: 3652511808227538533}
-  anterior: {fileID: 7259861319320580632}
-  siguiente: {fileID: 5148280260165078805}
-  idioma: {fileID: 48959896579599166}
-  paletas:
+  music: {fileID: 921837876990472006}
+  effects: {fileID: 3652511808227538533}
+  previous: {fileID: 7259861319320580632}
+  next: {fileID: 5148280260165078805}
+  language: {fileID: 48959896579599166}
+  palettes:
   - {fileID: 7845760651912105805}
   - {fileID: 567627581046990890}
   - {fileID: 3247524352610061795}
   - {fileID: 3117806412475979787}
   - {fileID: 452924549548570750}
-  losas:
+  slabs:
   - {fileID: 4599608198798536299}
   - {fileID: 459887799765393154}
   - {fileID: 8118428971383685300}
-  marcasPaleta:
+  paletteMarkers:
   - {fileID: 7965409298947543931}
   - {fileID: 399679587261150236}
   - {fileID: 3421304160436949461}
   - {fileID: 2967802169249039421}
   - {fileID: 297923992353547336}
-  marcasLosa:
+  slabMarkers:
   - {fileID: 8680620094282675016}
   - {fileID: 4879033791572049415}
   - {fileID: 8020145515955142915}

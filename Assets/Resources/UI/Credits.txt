@@ -1,0 +1,36 @@
+design	credit.designer	
+technology	Unity	https://unity.com/
+technology	Photon PUN 2 · Exit Games	https://assetstore.unity.com/packages/tools/network/pun-2-free-119922
+graphics	credit.art	
+graphics	Kenney · UI Pack · CC0	https://kenney.nl/assets/ui-pack
+graphics	Kenney · Board Game Info · CC0	https://kenney.nl/assets/board-game-info
+graphics	Kenney · Rune Pack · CC0	https://kenney.nl/assets/rune-pack
+graphics	Kenney · Board Game Pack · CC0	https://kenney.nl/assets/boardgame-pack
+effects	Kenney · Interface Sounds · CC0	https://kenney.nl/assets/interface-sounds
+effects	Kenney · UI Audio · CC0	https://kenney.nl/assets/ui-audio
+effects	Kenney · Casino Audio · CC0	https://kenney.nl/assets/casino-audio
+font	Fredoka · The Fredoka Project Authors	https://fonts.google.com/specimen/Fredoka
+font	SIL Open Font License 1.1	https://openfontlicense.org/open-font-license-official-text/
+music	Kevin MacLeod · incompetech.com	https://incompetech.com/
+music	Creative Commons Attribution 4.0	https://creativecommons.org/licenses/by/4.0/
+music	Vibing Over Venus	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN2300005
+music	Backed Vibes (clean)	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100479
+music	Long Stroll	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100174
+music	George Street Shuffle	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300035
+music	Night in Venice	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900056
+music	Groove Grove	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1200054
+music	Study And Relax	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900030
+music	Ultralounge	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1500017
+music	Past Sadness	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900007
+music	Space Jazz	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN2100030
+music	Shades of Spring	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100080
+music	Opportunity Walks	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100123
+music	Hard Boiled	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1700076
+music	Mining by Moonlight	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1200089
+music	Bass Vibes	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100462
+music	Moonstone	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100145
+music	Friday Morning	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100224
+music	Reminiscing	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100097
+music	Continue Life	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100282
+music	White	https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100010
+ai	credit.statement	
