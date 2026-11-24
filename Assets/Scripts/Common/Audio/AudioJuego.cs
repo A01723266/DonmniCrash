@@ -28,7 +28,7 @@ namespace DonmniCrash.UI
             Actual = this;
             DontDestroyOnLoad(gameObject);
             Aplicar(Preferencias.General, Preferencias.Musica, Preferencias.Efectos);
-            if (musica.clip) musica.Play();
+            PrepararMusica();
         }
 
         /// <summary>El volumen general multiplica ambos canales aunque aún no tengan clip.</summary>
@@ -53,6 +53,14 @@ namespace DonmniCrash.UI
         void Update()
         {
             if (pendiente && Time.unscaledTime >= guardarDesde) ConfirmarCambios();
+            ActualizarMusica();
+        }
+
+        void OnDestroy()
+        {
+            if (Actual != this) return;
+            LiberarMusica();
+            Actual = null;
         }
 
         /// <summary>Al cerrar Ajustes o abandonar la aplicación se guarda el último valor del gesto.</summary>
