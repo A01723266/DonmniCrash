@@ -15,6 +15,7 @@ namespace DonmniCrash.UI
         Transform pantallas, capas, transicion;
         readonly Stack<GameObject> modales = new Stack<GameObject>();
         bool cargando;
+        protected bool Interrumpida => cargando || modales.Count > 0;
         static string siguientePanel;
         protected string Pantalla { get; private set; }
         protected abstract string Inicial { get; }

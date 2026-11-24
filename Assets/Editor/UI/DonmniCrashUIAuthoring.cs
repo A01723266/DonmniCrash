@@ -30,23 +30,38 @@ namespace DonmniCrash.EditorTools
         static bool library;
 
         [MenuItem("DonmniCrash/Author visual UI scenes")]
-        public static void Build()
+        public static void Build() => Construir(false);
+
+        // La fase local solo guarda las tres escenas de práctica.
+        public static void FaseTres() => Construir(true);
+
+        static void Construir(bool soloPractica)
         {
             foreach (string dir in new[] { UI, UI + "/Fonts", UI + "/Themes", UI + "/Sprites", Prefabs, Prefabs + "/Controls", Prefabs + "/Panels", Prefabs + "/Gameplay", Prefabs + "/Overlays" }) Directory.CreateDirectory(dir);
             AssetDatabase.Refresh();
-            CreateThemes();
+            if (soloPractica)
+            {
+                themes.Clear();
+                themes.AddRange(AssetDatabase.LoadAssetAtPath<AspectoSesion>("Assets/Resources/UI/Aspecto.asset").paletas);
+                theme = themes[0];
+                rounded = AssetDatabase.LoadAssetAtPath<Sprite>(UI+"/Sprites/RoundedPanel.png");
+            }
+            else { CreateThemes(); CreateRoundedSprite(); }
             regular = Font("Regular"); medium = Font("Medium"); semibold = Font("SemiBold");
-            CreateRoundedSprite();
             slab = Sprites("Assets/Kenney/UI/kenney_rune-pack/PNG/Grey/Slab (outline)/runeGrey_slabOutline_036.png").First();
             foreach (var element in elements)
             {
                 elemental[element] = Sprites("Assets/Sprites/" + element + "Domino.png").OrderByDescending(x => x.rect.width * x.rect.height).Take(2).OrderBy(x => x.rect.x).ToArray();
                 symbols[element] = Sprites("Assets/Sprites/" + element + ".png").OrderByDescending(x => x.rect.width * x.rect.height).FirstOrDefault();
             }
-            PrepararServicios();
-            CreateLibrary();
-            StartScene(); RoomsScene(); OfflineSettingsScene();
-            MatchScene("OnlineMatch", false, false);
+            if (!soloPractica)
+            {
+                PrepararServicios();
+                CreateLibrary();
+                StartScene(); RoomsScene();
+                MatchScene("OnlineMatch", false, false);
+            }
+            OfflineSettingsScene();
             MatchScene("OfflineMatch", true, false);
             MatchScene("Tutorial", true, true);
             AssetDatabase.SaveAssets();
@@ -469,7 +484,13 @@ namespace DonmniCrash.EditorTools
             Selector(card,"StartingHandSelector","Fichas iniciales","—");
             Selector(card,"TurnTimeSelector","Tiempo por turno","—");
             Selector(card,"StartingHealthSelector","Vida inicial","—");
-            Selector(card,"EffectsSelector","Efectos de elementos","Activados");
+            if (bots)
+            {
+                Selector(card,"ReverseSelector","Reversas por set","1");
+                Selector(card,"PassSelector","Pases por set","1");
+                Selector(card,"SwapSelector","Intercambios por set","1");
+            }
+            else Selector(card,"EffectsSelector","Efectos de elementos","Activados");
         }
         static void OfflineSettingsScene()
         {
@@ -481,7 +502,7 @@ namespace DonmniCrash.EditorTools
             Size(Label("DescriptionLabel",bots,"Prepara una mesa y practica tus decisiones sin conexión.",21,UIThemeRole.SecondaryText),90);Button("BotConfigurationButton",bots,"Configurar partida");
             var config=Screen(shell,"BotConfigurationScreen","Contra bots","Elige cómo quieres practicar.",false);MatchConfiguration(config,true);Button("ContinueButton",config,"Continuar",true);
             var summary=Screen(shell,"ConfigurationSummaryScreen","Todo listo","Consulta tu configuración antes de comenzar.",false);
-            var details=Card("SummaryPanel",summary,"Tu partida");Label("PlayersLabel",details,"Tú + 1 bot",24);Label("DifficultyLabel",details,"Dificultad: Normal",22);Label("RulesLabel",details,"Vida, fichas y tiempo: según configuración",19,UIThemeRole.SecondaryText);
+            var details=Card("SummaryPanel",summary,"Tu partida");Label("PlayersLabel",details,"Tú + 1 bot",24);Label("DifficultyLabel",details,"Dificultad: Normal",22);Size(Label("RulesLabel",details,"Vida, fichas y tiempo: según configuración",19,UIThemeRole.SecondaryText),64);
             var actions=Row("ActionsPanel",summary);Button("EditConfigurationButton",actions,"Editar");Button("StartMatchButton",actions,"Comenzar",true);
             CommonOverlays(shell);Save("OfflineSetting");
         }
@@ -540,7 +561,14 @@ namespace DonmniCrash.EditorTools
             var timer=Label("TurnTimerLabel",bar,"Tiempo  — : —",18);Size(timer,-1,150);
             Button("ElementHelpButton",bar,"Elementos",false,130);Button("PauseButton",bar,"Pausa",false,90);
             var players=Scroll("PlayersScrollView",top.transform,true);Stretch((RectTransform)players.parent.parent,12,10,12,58);
-            for(int i=0;i<6;i++)Player(players,"Player"+(i+1)+"Card",i==0?"Tú":(offline?"Bot ":"Jugador ")+(i+1),i==0);
+            for(int i=0;i<6;i++)
+            {
+                var card=Player(players,"Player"+(i+1)+"Card",i==0?"Tú":(offline?"Bot ":"Jugador ")+(i+1),i==0);
+                if (!offline) continue;
+                var icon = Icon("SeatEmblem",card,symbols["Earth"],22);
+                icon.GetComponent<LayoutElement>().ignoreLayout = true;
+                Place(icon.rectTransform,Vector2.one,Vector2.one,new Vector2(-30,-30),new Vector2(-6,-6));
+            }
             var status=Panel("BoardStatusPanel",screen);Place(status.rectTransform,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(-280,-216),new Vector2(280,-176));
             var line=Horizontal(status.transform,18);line.padding=new RectOffset(16,16,2,2);
             var attack=Label("CurrentAttackLabel",status.transform,"Ataque actual",17);Size(attack,-1,-1,1);Icon("CurrentAttackIcon",status.transform,elemental["Fire"][0],30);
@@ -548,7 +576,7 @@ namespace DonmniCrash.EditorTools
             var bottom=Panel("HandHUDPanel",screen);Place(bottom.rectTransform,Vector2.zero,new Vector2(1,0),new Vector2(16,12),new Vector2(-16,212));
             var handTitle=Label("HandTitleLabel",bottom.transform,"Tu mano",20,UIThemeRole.Text,true);Place(handTitle.rectTransform,new Vector2(0,1),Vector2.one,new Vector2(18,-35),new Vector2(-210,-6));
             var hand=Scroll("HandScrollView",bottom.transform,true);Stretch((RectTransform)hand.parent.parent,10,12,218,42);
-            for(int i=0;i<6;i++){var tile=Tile(hand,i%5,(i+2)%5,i==1);tile.name="HandDomino"+(i+1);}
+            for(int i=0;i<(offline ? 0 : 6);i++){var tile=Tile(hand,i%5,(i+2)%5,i==1);tile.name="HandDomino"+(i+1);}
             var controls=Node("ActionControlsPanel",bottom.transform);Place(controls,new Vector2(1,0),Vector2.one,new Vector2(-202,16),new Vector2(-16,-16));Vertical(controls,0,8);
             Button("PlayTileButton",controls,"Colocar ficha",true);Button("DrawTileButton",controls,"Tomar ficha");Button("PassTurnButton",controls,"Pasar turno");
             var spectator=Panel("SpectatorPanel",screen);Place(spectator.rectTransform,Vector2.zero,new Vector2(1,0),new Vector2(16,12),new Vector2(-16,170));Vertical(spectator.transform,24,12);
@@ -559,6 +587,17 @@ namespace DonmniCrash.EditorTools
                 var label=Label("BotStatusLabel",bot.transform,"El bot está pensando…",19);Stretch(label.rectTransform,14,6,14,6);label.alignment=TextAlignmentOptions.Center;bot.gameObject.SetActive(false);
             }
             MatchDialogs(shell,offline);
+            if (offline)
+            {
+                GameObject.Find("BoardRoot").transform.Find("PlacedTilesPreview").gameObject.SetActive(false);
+                var historia = Scroll("HistoryScroll",screen,true);
+                historia.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight = false;
+                Place((RectTransform)historia.parent.parent,Vector2.zero,Vector2.one,
+                    new Vector2(tutorial ? 8 : 18,tutorial ? 282 : 218),new Vector2(-18,-224));
+                if (tutorial)
+                    Place((RectTransform)historia.parent.parent,Vector2.zero,new Vector2(.45f,1),
+                        new Vector2(8,282),new Vector2(-8,-224));
+            }
             if(tutorial)TutorialPanels(shell,screen);
             CommonOverlays(shell);Save(name);
         }
@@ -584,14 +623,14 @@ namespace DonmniCrash.EditorTools
         }
         static void TutorialPanels(Shell shell,RectTransform screen)
         {
-            var step=Panel("TutorialStepPanel",screen);Place(step.rectTransform,new Vector2(.5f,.5f),new Vector2(.5f,.5f),new Vector2(-290,-45),new Vector2(290,125));
-            var constraint=step.gameObject.AddComponent<UIWidthConstraint>();constraint.maximumWidth=580;constraint.horizontalMargin=24;
+            var step=Panel("TutorialStepPanel",screen);Place(step.rectTransform,new Vector2(.45f,0),Vector2.one,new Vector2(4,282),new Vector2(-16,-224));
+
             Vertical(step.transform,18,8);Label("StepTitleLabel",step.transform,"1. Conoce tus fichas",25,UIThemeRole.Text,true);
-            var explanation=Label("StepDescriptionLabel",step.transform,"La espada representa el ataque. El escudo representa la defensa.",20,UIThemeRole.SecondaryText);Size(explanation,64);
+            var explanation=Label("StepDescriptionLabel",step.transform,"La espada representa el ataque. El escudo representa la defensa.",20,UIThemeRole.SecondaryText);Size(explanation,84);
             var progress=Node("TutorialProgressPanel",step.transform);Size(progress,20);Horizontal(progress,8);
-            for(int i=0;i<5;i++){var dot=Panel("Step"+(i+1)+"Indicator",progress,i==0?UIThemeRole.Accent:UIThemeRole.Border);Size(dot,5,-1,1);}
-            var controls=Panel("TutorialControlsPanel",screen);Place(controls.rectTransform,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(-260,222),new Vector2(260,278));
-            var row=Horizontal(controls.transform,10);row.padding=new RectOffset(4,4,2,2);Button("PreviousStepButton",controls.transform,"Anterior");Button("NextStepButton",controls.transform,"Siguiente",true);Button("SkipTutorialButton",controls.transform,"Salir");
+            for(int i=0;i<9;i++){var dot=Panel("Step"+(i+1)+"Indicator",progress,i==0?UIThemeRole.Accent:UIThemeRole.Border);Size(dot,5,-1,1);}
+            var controls=Panel("TutorialControlsPanel",screen);Place(controls.rectTransform,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(-320,220),new Vector2(320,276));
+            var row=Horizontal(controls.transform,10);row.padding=new RectOffset(4,4,2,2);Button("PreviousStepButton",controls.transform,"Anterior");Button("RetryStepButton",controls.transform,"Repetir");Button("NextStepButton",controls.transform,"Siguiente",true);Button("SkipTutorialButton",controls.transform,"Salir");
             var highlight=Panel("TutorialHighlightOverlay",shell.overlays,UIThemeRole.Focus);Place(highlight.rectTransform,Vector2.zero,new Vector2(1,0),new Vector2(20,20),new Vector2(-230,205));
             highlight.color=new Color(theme.accent.r,theme.accent.g,theme.accent.b,.18f);highlight.raycastTarget=false;highlight.GetComponent<UIThemeBinding>().opacity=.18f;highlight.gameObject.SetActive(false);
             var welcome=Dialog(shell.overlays,"TutorialWelcomeDialog","Bienvenido a DonmniCrash","Aprende a reconocer tus fichas y a leer la mesa.");Button("BeginTutorialButton",welcome,"Comenzar",true);Button("SkipTutorialButton",welcome,"Más tarde");

@@ -8,6 +8,7 @@ namespace DonmniCrash.UI
     {
         protected override string Inicial => "MatchScreen";
         protected abstract void SalirMesa();
+        protected virtual bool MesaInteractiva => false;
         protected virtual void Repetir() => Ir(gameObject.scene.name);
         protected virtual void RegresarResultado() => SalirMesa();
 
@@ -25,6 +26,7 @@ namespace DonmniCrash.UI
             Enlazar("LeaveMatchDialog","LeaveButton",SalirMesa);
             Enlazar("ResultsDialog","RematchButton",Repetir);
             Enlazar("ResultsDialog","ReturnButton",RegresarResultado);
+            if (MesaInteractiva) return;
             Enlazar("TargetSelectionDialog","CancelButton",Cerrar);
             for (int i = 1; i <= 5; i++) Enlazar("TargetSelectionDialog","TargetPlayer"+i+"Button",Cerrar);
             foreach (var n in new[] {"PlayTileButton","DrawTileButton","PassTurnButton"})

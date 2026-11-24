@@ -243,3 +243,65 @@ player.6	Jugador 6	Player 6
 
 preview.common	Este es un aviso de muestra.	This is a sample message.
 preview.toast	Aviso breve	Short notice
+game.players	Tú + {0} bot(s)	You + {0} bot(s)
+game.rules	Vida {0} · Mano {1} · Turno {2} s\nReversa {3} · Pasar {4} · Intercambio {5}	Health {0} · Hand {1} · Turn {2} s\nReverse {3} · Pass {4} · Swap {5}
+game.limit	El set admite hasta ocho comodines en total. Reduce uno de los tres contadores.	A set can contain up to eight wild tiles in total. Reduce one of the three counts.
+game.cfg.reverse	Reversas por set	Reverse tiles per set
+game.cfg.pass	Pases por set	Pass tiles per set
+game.cfg.swap	Intercambios por set	Swap tiles per set
+game.guided	A tu ritmo	At your pace
+game.time	Tiempo {0} s	Time {0} s
+game.stats	Vida {0} · Fichas {1}	HP {0} · Tiles {1}
+game.stock	Reserva {0}	Stock {0}
+game.turn	Turno de {0}	{0}'s turn
+game.attack	Ataque · {0}	Attack · {0}
+game.open	Apertura libre	Opening move
+game.swap	+ Intercambio	+ Swap
+game.target	Cambiar con {0}	Swap with {0}
+game.keep	Conservar (−1 vida)	Keep (−1 HP)
+game.draw	Robar	Draw
+game.play	Colocar	Play tile
+game.choose	Confirmar selección	Confirm selection
+game.hand	Tus fichas	Your tiles
+game.visible	Elige qué conservar · Faltan {0}	Choose what to keep · {0} left
+game.blind	Elige dorsos · Faltan {0}	Pick face-down tiles · {0} left
+game.offer	Ficha robada · Colócala o consérvala	Drawn tile · Play it or keep it
+game.tile	Espada {0} · Escudo {1}	Sword {0} · Shield {1}
+game.illegal	No defiende este ataque	Cannot defend this attack
+game.trylesson	Sigue la indicación del ejercicio y vuelve a intentarlo.	Follow the exercise instructions and try again.
+game.wild.1	Reversa · Invierte el sentido del ataque	Reverse · Redirect the attack in the opposite direction
+game.wild.2	Pasar · Envía el ataque al siguiente jugador	Pass · Forward the attack to the next player
+game.wild.3	Intercambio · Selecciona una ficha ordinaria y elige con quién cambiar	Swap · Select an ordinary tile and choose a player
+game.element.0	Tierra	Earth
+game.element.1	Agua	Water
+game.element.2	Viento	Wind
+game.element.3	Fuego	Fire
+game.element.4	Planta	Plant
+game.beats	{0} vence a {1} y {2}	{0} beats {1} and {2}
+game.roll	Dado inicial	Starting roll
+game.direction	Dados de vecinos	Neighbors’ rolls
+game.first	Abre {0}. El primer ataque va hacia {1}.	{0} opens. The first attack goes toward {1}.
+game.dice	Sorteo de la mesa	Opening rolls
+game.win	¡Ganaste la partida!	You won!
+game.loss	Te quedaste sin vida	You ran out of health
+game.health	Vida {0}	HP {0}
+lesson.retry	Repetir	Retry
+lesson.done	Objetivo cumplido. Avanza al siguiente ejercicio o repite este.	Objective complete. Go to the next exercise or try this one again.
+lesson.title.0	Abrir la mesa	Open the table
+lesson.body.0	Toca una ficha y pulsa Colocar. La espada inicia el ataque y robas un reemplazo.	Tap a tile and press Play tile. Its sword starts the attack and you draw a replacement.
+lesson.title.1	Defender con el escudo	Defend with the shield
+lesson.body.1	Llega Fuego. Busca el escudo de Agua en la mitad inferior y coloca esa ficha.	Fire is incoming. Find the Water shield on the bottom half and play that tile.
+lesson.title.2	Jugar la ficha robada	Play a drawn tile
+lesson.body.2	Pulsa Robar. El escudo de la ficha nueva vence a Fuego. Colócala para evitar daño.	Press Draw. The new tile’s shield beats Fire. Play it to avoid damage.
+lesson.title.3	Conservar y perder vida	Keep a tile and lose health
+lesson.body.3	Roba y elige Conservar. Ganas espacio en la mano, pierdes una vida y sigues de turno.	Draw and choose Keep. Your hand grows, you lose one health and your turn continues.
+lesson.title.4	Invertir el sentido	Reverse direction
+lesson.body.4	Selecciona REV y colócala. El ataque de Fuego vuelve hacia el vecino anterior.	Select REV and play it. The Fire attack goes back toward the previous neighbor.
+lesson.title.5	Pasar el ataque	Pass the attack
+lesson.body.5	Coloca el comodín >> para pasar el mismo ataque al siguiente jugador.	Play the >> wild tile to send the same attack to the next player.
+lesson.title.6	Cambiar una mano mayor	Swap a larger hand
+lesson.body.6	Elige un escudo válido, pulsa + Intercambio hasta ver Bot 1 y coloca. Elige y confirma la ficha que conservas.	Choose a valid shield, tap + Swap until Bot 1 appears and play. Select and confirm the tile to keep.
+lesson.title.7	Cambiar una mano menor	Swap a smaller hand
+lesson.body.7	Combina un escudo válido con Intercambio y elige Bot 1. Coloca y confirma tres dorsos de su mano.	Combine a valid shield with Swap and choose Bot 1. Play and confirm three tiles from their hidden hand.
+lesson.title.8	Completar tu mano	Refill your hand
+lesson.body.8	Tras recibir un intercambio te faltan dos fichas. Toca y confirma dos dorsos antes de defender.	After a swap you are two tiles short. Tap and confirm two face-down tiles before defending.

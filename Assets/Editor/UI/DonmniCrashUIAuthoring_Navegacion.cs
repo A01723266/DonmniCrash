@@ -119,7 +119,7 @@ namespace DonmniCrash.EditorTools
                 b.transition = Selectable.Transition.None;
             }
             if (nombre=="OnlineRooms" || nombre=="OfflineSetting") PrepararSelectores(canvas);
-            CrearVistaPrevia(nombre,pantallas,overlays);
+            if (nombre != "OfflineMatch" && nombre != "Tutorial") CrearVistaPrevia(nombre,pantallas,overlays);
             foreach (var texto in canvas.GetComponentsInChildren<TextMeshProUGUI>(true))
             {
                 // Solo se traduce el placeholder de un campo editable.
@@ -157,7 +157,8 @@ namespace DonmniCrash.EditorTools
             }
             string[] Rango(int inicio,int cantidad) => Enumerable.Range(inicio,cantidad).Select(n => n.ToString()).ToArray();
             Opciones("RoomPrivacySelector",new[]{"Pública","Privada"});
-            Opciones("PlayerCountSelector",Rango(2,5));
+            Opciones("PlayerCountSelector",Rango(2,5),canvas.GetComponent<MenuPractica>() ? 2 : 0);
+            foreach (string nombre in new[] {"ReverseSelector","PassSelector","SwapSelector"}) Opciones(nombre,Rango(0,9),1);
             Opciones("StartingHealthSelector",Rango(1,10),2);
             Opciones("StartingHandSelector",Rango(2,7),3);
             Opciones("TurnTimeSelector",Rango(1,10),4);
