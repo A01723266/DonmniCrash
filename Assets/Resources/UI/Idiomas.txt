@@ -249,10 +249,10 @@ game.limit	El set admite hasta ocho comodines en total. Reduce uno de los tres c
 game.cfg.reverse	Reversas por set	Reverse tiles per set
 game.cfg.pass	Pases por set	Pass tiles per set
 game.cfg.swap	Intercambios por set	Swap tiles per set
-game.guided	A tu ritmo	At your pace
-game.time	Tiempo {0} s	Time {0} s
+game.guided	⏱ A tu ritmo	⏱ At your pace
+game.time	⏱ Tiempo {0} s	⏱ Time {0} s
 game.stats	Vida {0} · Fichas {1}	HP {0} · Tiles {1}
-game.stock	Reserva {0}	Stock {0}
+game.stock	📦 Reserva {0}	📦 Stock {0}
 game.turn	Turno de {0}	{0}'s turn
 game.attack	Ataque · {0}	Attack · {0}
 game.open	Apertura libre	Opening move
@@ -348,7 +348,7 @@ game.seat.you	Tú	You
 game.health.own	Tu vida {0}/{1}	Your HP {0}/{1}
 game.hand.lower	Bajar fichas	Lower tiles
 game.hand.raise	Subir fichas	Raise tiles
-game.time.wait	Tiempo —	Time —
+game.time.wait	⏱ Tiempo —	⏱ Time —
 game.dice.waiting	Esperando a que cargue la mesa	Waiting for the table to load
 game.dice.ready	Preparando el sorteo	Getting the dice ready
 game.dice.first	Quién empieza	Who goes first
@@ -357,3 +357,5 @@ game.dice.tie.first	Desempate de apertura	Opening tiebreak
 game.dice.tie.direction	Desempate de dirección	Direction tiebreak
 game.dice.result	Orden inicial	Opening order
 game.dice.next	Abre {0}.\nDespués juega {1}.	{0} goes first.\n{1} goes next.
+lesson.guide.hide	Ocultar instrucciones	Hide instructions
+lesson.guide.show	Mostrar instrucciones	Show instructions

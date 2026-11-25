@@ -3,14 +3,17 @@ using DonmniCrash.UI;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace DonmniCrash.EditorTools
 {
     public static partial class DonmniCrashUIAuthoring
     {
         const string DiceArt = "Assets/Kenney/UI/kenney_boardgame-pack/PNG/Dice/";
-        const string CounterArt = "Assets/Kenney/UI/kenney_board-game-info/PNG/Default (128px)/";
+        const string CounterEmojiAsset = "Assets/UI/Sprites/CounterEmoji.asset";
+        const string CounterEmojiImage = "Assets/UI/Sprites/CounterEmoji.png";
 
         [MenuItem("DonmniCrash/Apply opening roll and counters")]
         public static void ApplyOpeningPresentation()
@@ -38,8 +41,8 @@ namespace DonmniCrash.EditorTools
                 var layout = Horizontal(counters,12);
                 layout.childAlignment = TextAnchor.MiddleCenter;
 
-                Counter(counters,"ClockCounter",ChildComponent<TMP_Text>(controls.gameObject,"TurnTimerLabel"),"stopwatch.png");
-                Counter(counters,"ReserveCounter",ChildComponent<TMP_Text>(controls.gameObject,"ReserveCountLabel"),"tiles.png");
+                Counter(counters,"ClockCounter",ChildComponent<TMP_Text>(controls.gameObject,"TurnTimerLabel"));
+                Counter(counters,"ReserveCounter",ChildComponent<TMP_Text>(controls.gameObject,"ReserveCountLabel"));
 
                 var board = ChildComponent<RectTransform>(screen.gameObject,"HistoryScroll");
                 board.offsetMax = new Vector2(board.offsetMax.x,-188);
@@ -50,31 +53,70 @@ namespace DonmniCrash.EditorTools
                 }
             }
 
-            if (!tutorial)
+            var emoji = LoadCounterEmoji();
+            CenterCounter(ChildComponent<TMP_Text>(top.gameObject,"TurnTimerLabel"),emoji,"⏱");
+            CenterCounter(ChildComponent<TMP_Text>(top.gameObject,"ReserveCountLabel"),emoji,"📦");
+
+            if (tutorial) PolishTutorialGuide(screen);
+            else
             {
                 var overlays = screen.parent.parent.Find("Overlays");
                 if (!overlays.Find("OpeningRollOverlay")) AddOpeningRollOverlay(overlays);
             }
         }
 
-        static void Counter(Transform parent,string name,TMP_Text value,string icon)
+        static void Counter(Transform parent,string name,TMP_Text value)
         {
             var background = Panel(name,parent,UIThemeRole.Elevated);
             background.raycastTarget = false;
             Size(background,42,230);
-            var symbol = Icon("Icon",background.transform, Sprites(CounterArt+icon)
-                .OrderByDescending(sprite => sprite.rect.width * sprite.rect.height).First());
-            Place(symbol.rectTransform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(12,-15),new Vector2(42,15));
             value.rectTransform.SetParent(background.transform,false);
-            Stretch(value.rectTransform,53,2,10,2);
+        }
+
+        static void CenterCounter(TMP_Text value,TMP_SpriteAsset emoji,string prefix)
+        {
+            var oldIcon = value.transform.parent.Find("Icon");
+            if (oldIcon) Object.DestroyImmediate(oldIcon.gameObject);
+            Stretch(value.rectTransform,10,2,10,2);
             value.font = semibold;
             value.fontSize = 25;
             value.fontSizeMin = 19;
             value.fontSizeMax = 25;
             value.enableAutoSizing = true;
             value.textWrappingMode = TextWrappingModes.NoWrap;
-            value.alignment = TextAlignmentOptions.MidlineLeft;
+            value.alignment = TextAlignmentOptions.Center;
+            value.spriteAsset = emoji;
+            value.tintAllSprites = false;
+            if (!value.text.StartsWith(prefix)) value.text = prefix + " " + value.text;
             Bind(value,UIThemeRole.Text);
+        }
+
+        static TMP_SpriteAsset LoadCounterEmoji()
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<TMP_SpriteAsset>(CounterEmojiAsset);
+            if (asset) return asset;
+
+            asset = ScriptableObject.CreateInstance<TMP_SpriteAsset>();
+            asset.spriteSheet = AssetDatabase.LoadAssetAtPath<Texture2D>(CounterEmojiImage);
+            AssetDatabase.CreateAsset(asset,CounterEmojiAsset);
+            var serialized = new SerializedObject(asset);
+            serialized.FindProperty("m_Version").stringValue = "1.1.0";
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+            AddEmoji(0,0x23F1,"Stopwatch");
+            AddEmoji(1,0x1F4E6,"Package");
+            asset.material = new Material(Shader.Find("TextMeshPro/Sprite")) { name = "CounterEmoji Material", mainTexture = asset.spriteSheet };
+            AssetDatabase.AddObjectToAsset(asset.material,asset);
+            asset.UpdateLookupTables();
+            EditorUtility.SetDirty(asset);
+            return asset;
+
+            void AddEmoji(uint index,uint unicode,string name)
+            {
+                var glyph = new TMP_SpriteGlyph(index,new GlyphMetrics(64,64,0,53,66),
+                    new GlyphRect((int)index * 64,0,64,64),1,0);
+                asset.spriteGlyphTable.Add(glyph);
+                asset.spriteCharacterTable.Add(new TMP_SpriteCharacter(unicode,asset,glyph) { name = name, scale = .84f });
+            }
         }
 
         static void AddOpeningRollOverlay(Transform overlays)

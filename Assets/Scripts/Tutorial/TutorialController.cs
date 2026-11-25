@@ -14,6 +14,7 @@ namespace DonmniCrash.UI
         protected override void BindControls()
         {
             base.BindControls();
+            BindGuide();
             BindButton("TutorialWelcomeDialog","BeginTutorialButton",Close);
             BindButton("TutorialWelcomeDialog","SkipTutorialButton",LeaveTable);
             BindButton(InitialScreen,"SkipTutorialButton", () => Open("ExitTutorialDialog"));
@@ -50,7 +51,11 @@ namespace DonmniCrash.UI
             Begin(TutorialSteps.Prepare(stepIndex));
             RenderGuide();
         }
-        protected override void OnLanguageChanged() => RenderGuide();
+        protected override void OnLanguageChanged()
+        {
+            RefreshGuideToggle();
+            RenderGuide();
+        }
         void RenderGuide()
         {
             SetLabel("StepTitleLabel",(stepIndex+1)+" / "+TutorialSteps.Total+" · "+T("lesson.title."+stepIndex));
