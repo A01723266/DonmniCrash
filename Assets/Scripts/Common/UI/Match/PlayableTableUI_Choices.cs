@@ -13,7 +13,7 @@ namespace DonmniCrash.UI
         ScrollRect choiceScroll;
         RectTransform offerPreview;
         TMP_Text choiceTitle, choiceHint, choiceClock;
-        Button confirmChoices, placeOffer, keepOffer;
+        Button confirmChoices, placeOffer, keepOffer, randomChoice;
         int shownChoice = -1;
         TurnPhase shownPhase;
         readonly List<DominoTileView> choiceTiles = new();
@@ -32,6 +32,8 @@ namespace DonmniCrash.UI
             confirmChoices = ComponentOf<Button>("ChoiceContinue");
             placeOffer = ComponentOf<Button>("OfferPlay");
             keepOffer = ComponentOf<Button>("OfferKeep");
+            randomChoice = ComponentOf<Button>("RandomChoiceButton");
+            randomChoice.onClick.AddListener(PickRandomChoices);
             confirmChoices.onClick.AddListener(() => { confirmRequested = true; FlushMarks(); });
             placeOffer.onClick.AddListener(() =>
             {
@@ -52,6 +54,8 @@ namespace DonmniCrash.UI
             bool multi = phase == TurnPhase.SwapSelection || Display.RequiredChoices > 1;
             choiceScroll.gameObject.SetActive(!offering);
             offerPreview.gameObject.SetActive(offering);
+            randomChoice.gameObject.SetActive(!offering);
+            randomChoice.interactable = !confirmRequested && (multi ? desiredMarks.Count < Display.RequiredChoices : IsLocalTurn);
             confirmChoices.gameObject.SetActive(!offering && multi);
             placeOffer.gameObject.SetActive(offering);
             keepOffer.gameObject.SetActive(offering);
@@ -113,6 +117,27 @@ namespace DonmniCrash.UI
         {
             if (choicePanel && choicePanel.activeSelf)
                 WriteLabel(choiceClock,Guided ? T("choice.guided") : T("choice.clock",Mathf.CeilToInt(seconds)));
+        }
+
+        void PickRandomChoices()
+        {
+            if (!OwnTurn || InteractionBlocked || confirmRequested || !Display.Phase.IsSelection()) return;
+            var options = Enumerable.Range(0,Display.OptionCount)
+                .Where(i => Display.IsAvailable(i) && !desiredMarks.Contains(i)).ToList();
+            if (Display.Phase.UsesStock() && Display.RequiredChoices == 1)
+            {
+                if (IsLocalTurn && options.Count > 0)
+                    SubmitMove(new MoveCommand(MoveKind.Choose,options[Random.Range(0,options.Count)]));
+                return;
+            }
+            while (options.Count > 0 && desiredMarks.Count < Display.RequiredChoices)
+            {
+                int slot = Random.Range(0,options.Count);
+                desiredMarks.Add(options[slot]);
+                options.RemoveAt(slot);
+            }
+            PresentChoices();
+            FlushMarks();
         }
 
         void TapChoice(int index)

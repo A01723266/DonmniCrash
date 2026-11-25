@@ -18,6 +18,7 @@ namespace DonmniCrash.Game
         bool VisibleSelection { get; }
         IReadOnlyList<int> Order { get; }
         IReadOnlyList<GameTile> BoardTiles { get; }
+        int Rank(int seat);
         int Health(int seat);
         int HandCount(int seat);
         GameTile[] HandOf(int seat);

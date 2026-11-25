@@ -18,10 +18,7 @@ namespace DonmniCrash.Game
                 players[seat].Hand.Add(offer.Value);
                 offer = null;
             }
-            players[seat].Health = 0;
-            stock.ReturnTiles(players[seat].Hand);
-            if (players.Count(p=>p.Health > 0) <= 1) Phase = TurnPhase.Finished;
-            else if (seat == ActiveSeat) Advance();
+            Eliminate(seat);
             Revision++;
             return true;
         }
@@ -39,7 +36,7 @@ namespace DonmniCrash.Game
             foreach (int seat in orden) writer.Write(seat);
             foreach (var seat in players)
             {
-                writer.Write(seat.Health); writer.Write(seat.Capacity); WriteTiles(writer,seat.Hand);
+                writer.Write(seat.Rank); writer.Write(seat.Health); writer.Write(seat.Capacity); WriteTiles(writer,seat.Hand);
             }
             WriteTiles(writer,board); WriteTiles(writer,candidates);
             writer.Write(picks.Count);
@@ -59,7 +56,7 @@ namespace DonmniCrash.Game
             for (int i=0;i<orden.Count;i++) orden[i] = reader.ReadInt32();
             foreach (var seat in players)
             {
-                seat.Health = reader.ReadInt32(); seat.Capacity = reader.ReadInt32(); ReadTiles(reader,seat.Hand);
+                seat.Rank = reader.ReadInt32(); seat.Health = reader.ReadInt32(); seat.Capacity = reader.ReadInt32(); ReadTiles(reader,seat.Hand);
             }
             ReadTiles(reader,board); ReadTiles(reader,candidates);
             picks.Clear();

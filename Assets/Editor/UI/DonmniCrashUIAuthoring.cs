@@ -605,6 +605,7 @@ namespace DonmniCrash.EditorTools
             PolishOpeningPresentation(screen,tutorial);
             AddBoardNavigation(screen);
             AddSelectionTable(screen,tutorial);
+            AddMatchDetails(screen,tutorial);
             CommonOverlays(shell);Save(name);
         }
         static void MatchDialogs(Shell shell,bool offline)

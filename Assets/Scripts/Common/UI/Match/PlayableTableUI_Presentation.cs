@@ -68,7 +68,7 @@ namespace DonmniCrash.UI
                 labelText.alignment = TextAlignmentOptions.Center;
                 labelText.raycastTarget = false;
                 // Show a compact symbol on the slab and the full name on selection.
-                labelText.text = !tile.HasValue ? "?\n"+(value+1) :
+                labelText.text = !tile.HasValue ? "?" :
                     tile.Value.Kind == TileKind.Swap ? "A/B" : tile.Value.Kind == TileKind.Reverse ? "REV" : ">>";
             }
             if (!clickable) return view;
@@ -79,7 +79,7 @@ namespace DonmniCrash.UI
                 if (!IsLocalTurn || InteractionBlocked || Display.Phase != TurnPhase.Decision) return;
                 GameAudio.Current?.OnButtonGesture();
                 selectedId = value;
-                target = -1;
+                swapEnabled = false;
                 RenderActions();
             });
             return view;
@@ -104,7 +104,7 @@ namespace DonmniCrash.UI
             bool combo = IsLocalTurn && Display.Phase == TurnPhase.Decision && tile?.Kind == TileKind.Standard &&
                 TileRules.IsPlayable(tile.Value,Display.Attack) && ownTiles.Any(f=>f.Kind==TileKind.Swap) && Display.Order.Any(Display.CanTarget);
             swapButton.gameObject.SetActive(combo);
-            WriteLabel(swapButton.GetComponentInChildren<TMP_Text>(),target < 0 ? T("game.swap") : T("game.target",DisplayName(target)));
+            WriteLabel(swapButton.GetComponentInChildren<TMP_Text>(),T(swapEnabled ? "swap.on" : "swap.off"));
             drawButton.interactable = IsLocalTurn && Display.Phase == TurnPhase.Decision;
             WriteLabel(drawButton.GetComponentInChildren<TMP_Text>(),T("game.draw"));
             playButton.interactable = IsLocalTurn && selectedId >= 0 && tile.HasValue && TileRules.IsPlayable(tile.Value,Display.Attack);
@@ -122,6 +122,7 @@ namespace DonmniCrash.UI
             handContext.gameObject.SetActive(title.Length > 0);
             RefreshAssist();
             PresentChoices();
+            RefreshSwapTargets(combo);
         }
     }
 }

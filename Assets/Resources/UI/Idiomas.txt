@@ -300,9 +300,9 @@ lesson.body.4	Selecciona REV y colócala. El ataque de Fuego vuelve hacia el vec
 lesson.title.5	Pasar el ataque	Pass the attack
 lesson.body.5	Coloca el comodín >> para pasar el mismo ataque al siguiente jugador.	Play the >> wild tile to send the same attack to the next player.
 lesson.title.6	Cambiar una mano mayor	Swap a larger hand
-lesson.body.6	Elige un escudo de Agua. Pulsa + Intercambio hasta ver Bot 1 y luego Colocar. Marca lo que quieres conservar y pulsa Continuar.	Choose a Water shield. Press + Swap until Bot 1 appears, then Play tile. Mark what you want to keep and press Continue.
+lesson.body.6	Elige un escudo de Agua. Activa Usar intercambio, pulsa Colocar y elige Bot 1 en el panel de rivales. Marca lo que quieres conservar y pulsa Continuar.	Choose a Water shield. Enable Use swap, press Play tile and choose Bot 1 in the opponent panel. Mark what you want to keep and press Continue.
 lesson.title.7	Cambiar una mano menor	Swap a smaller hand
-lesson.body.7	Elige un escudo de Agua y combina la ficha con Intercambio contra Bot 1. Al colocarla, marca tres dorsos y pulsa Continuar una sola vez.	Choose a Water shield and combine the tile with Swap against Bot 1. Play it, mark three backs and press Continue once.
+lesson.body.7	Elige un escudo de Agua, activa Usar intercambio y pulsa Colocar. Elige Bot 1 o Rival al azar. Marca tres dorsos o usa Elegir al azar y pulsa Continuar.	Choose a Water shield, enable Use swap and press Play tile. Choose Bot 1 or Random opponent. Mark three backs or use Choose randomly, then press Continue.
 lesson.title.8	Completar tu mano	Refill your hand
 lesson.body.8	Te faltan dos fichas. Marca dos dorsos de la reserva y pulsa Continuar. Puedes cambiar tus marcas antes de confirmar.	You need two tiles. Mark two backs from the stock and press Continue. You can change your marks before confirming.
 credit.title	Créditos	Credits
@@ -389,3 +389,11 @@ lesson.zoom.both	Arrastra la mesa para explorar. Prueba Acercar y Alejar en el o
 lesson.zoom.in	Ahora pulsa Acercar.	Now press Zoom in.
 lesson.zoom.out	Ahora pulsa Alejar.	Now press Zoom out.
 lesson.follow	Pulsa Seguir jugada para volver a la última ficha.	Press Follow play to return to the latest tile.
+swap.on	Usar intercambio · Sí	Use swap · On
+swap.off	Usar intercambio · No	Use swap · Off
+swap.random	Rival al azar	Random opponent
+choice.random	Elegir al azar	Choose randomly
+results.rank	{0}.º	#{0}
+results.menu	Menú principal	Main menu
+results.restart	Reiniciar partida	Restart match
+audio.placement	Volumen de fichas	Tile volume

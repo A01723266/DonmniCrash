@@ -9,7 +9,7 @@ namespace DonmniCrash.UI
     {
         public enum Gesture { FreeView, Follow, ZoomIn, ZoomOut }
         public event System.Action<Gesture> Navigated;
-        public RectTransform tiles;
+        public RectTransform tiles, followArea;
         public RawImage wood;
         public Button followButton, zoomIn, zoomOut;
         public LocalizedText followLabel;
@@ -100,7 +100,8 @@ namespace DonmniCrash.UI
             focus = Constrain(focus);
             if (following)
             {
-                var target = Constrain(latest);
+                Vector2 clearCenter = viewport.InverseTransformPoint(followArea.TransformPoint(followArea.rect.center));
+                var target = Constrain(latest - (clearCenter - viewport.rect.center) / zoom);
                 focus = (target - focus).sqrMagnitude < .01f ? target :
                     Vector2.Lerp(focus,target,1 - Mathf.Exp(-10 * Time.unscaledDeltaTime));
             }

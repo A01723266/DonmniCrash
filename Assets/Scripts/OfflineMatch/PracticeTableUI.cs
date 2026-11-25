@@ -45,30 +45,15 @@ namespace DonmniCrash.UI
             RenderActions();
         }
 
-        protected override void Finish()
+        protected override void ExitResults() => GoTo("Start");
+
+        protected override void BindControls()
         {
-            bool victory = Match.Health(0) > 0;
-            SetLabel("WinnerLabel",T(victory ? "game.win" : "game.loss"),"ResultsDialog");
-            var row = FindNode("ResultRow1",FindNode("ResultsDialog"));
-            for (int i=0;i<6;i++)
-            {
-                string id = "ResultRow"+(i+1);
-                var currentRow = FindNode(id,FindNode("ResultsDialog"));
-                if (!currentRow && i < Match.Order.Count)
-                {
-                    currentRow = Instantiate(row,row.parent);
-                    currentRow.name = id;
-                    currentRow.SetSiblingIndex(row.GetSiblingIndex()+i);
-                }
-                if (!currentRow) continue;
-                currentRow.gameObject.SetActive(i < Match.Order.Count);
-                if (!currentRow.gameObject.activeSelf) continue;
-                int actor = Match.Order[i];
-                WriteLabel(FindNode("RankLabel",currentRow).GetComponent<TMP_Text>(),"");
-                WriteLabel(FindNode("PlayerLabel",currentRow).GetComponent<TMP_Text>(),DisplayName(actor));
-                WriteLabel(FindNode("ScoreLabel",currentRow).GetComponent<TMP_Text>(),T("game.health",Match.Health(actor)));
-            }
-            Open("ResultsDialog");
+            base.BindControls();
+            BindButton("SpectatorPanel","RestartPracticeButton",Replay);
+            BindButton("SpectatorPanel","PracticeMenuButton",ExitResults);
         }
+
+        protected override void Finish() => ShowStandings(T(Match.Rank(0) == 1 ? "game.win" : "game.loss"));
     }
 }

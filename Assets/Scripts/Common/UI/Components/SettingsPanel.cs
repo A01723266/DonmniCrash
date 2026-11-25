@@ -7,7 +7,7 @@ namespace DonmniCrash.UI
     /// <summary>Shared settings panel used by the start menu and pause dialogs.</summary>
     public sealed partial class SettingsPanel : MonoBehaviour
     {
-        public Slider general;
+        public Slider general, placement;
         public Button playAssist;
         [UnityEngine.Serialization.FormerlySerializedAs("musica")] public Slider music;
         [UnityEngine.Serialization.FormerlySerializedAs("efectos")] public Slider effects;
@@ -37,6 +37,7 @@ namespace DonmniCrash.UI
             general.onValueChanged.AddListener(Mix);
             music.onValueChanged.AddListener(Mix);
             effects.onValueChanged.AddListener(Mix);
+            placement.onValueChanged.AddListener(Mix);
             playAssist.onClick.AddListener(() => UserSettings.SavePlayAssist(!UserSettings.PlayAssist));
         }
 
@@ -53,7 +54,7 @@ namespace DonmniCrash.UI
             if (GameAudio.Current) GameAudio.Current.FlushChanges();
         }
         void SwitchLanguage() => SessionAppearance.Choose(SessionAppearance.Palette, SessionAppearance.Slab, !SessionAppearance.English);
-        void Mix(float value) => GameAudio.Current.Mix(general.value, music.value, effects.value);
+        void Mix(float value) => GameAudio.Current.Mix(general.value, music.value, effects.value, placement.value);
 
         void RefreshAssist()
         {
@@ -73,6 +74,7 @@ namespace DonmniCrash.UI
             general.SetValueWithoutNotify(audio.General);
             music.SetValueWithoutNotify(audio.Music);
             effects.SetValueWithoutNotify(audio.Effects);
+            placement.SetValueWithoutNotify(audio.Placement);
         }
     }
 }

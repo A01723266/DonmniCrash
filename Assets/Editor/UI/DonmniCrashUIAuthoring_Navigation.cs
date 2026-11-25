@@ -39,6 +39,7 @@ namespace DonmniCrash.EditorTools
             var service = obj.AddComponent<GameAudio>();
             service.music = Source(obj.transform,"Music",true);
             service.effects = Source(obj.transform,"Effects",false);
+            AddPlacementAudio(service);
             PrefabUtility.SaveAsPrefabAsset(obj,audioPath);
             Object.DestroyImmediate(obj);
         }
@@ -62,6 +63,7 @@ namespace DonmniCrash.EditorTools
             panel.general = ChildComponent<Transform>(obj,"MasterVolumeRow").GetComponentInChildren<Slider>(true);
             panel.music = ChildComponent<Transform>(obj,"MusicVolumeRow").GetComponentInChildren<Slider>(true);
             panel.effects = ChildComponent<Transform>(obj,"EffectsVolumeRow").GetComponentInChildren<Slider>(true);
+            AddPlacementSlider(panel);
             var language = ChildComponent<Transform>(obj,"LanguageSelector").gameObject;
             panel.previous = ChildComponent<Button>(language,"PreviousButton");
             panel.next = ChildComponent<Button>(language,"NextButton");

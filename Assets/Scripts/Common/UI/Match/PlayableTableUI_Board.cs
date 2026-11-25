@@ -7,12 +7,14 @@ namespace DonmniCrash.UI
     public abstract partial class PlayableTableUI
     {
         readonly List<(int id, DominoTileView view)> renderedBoard = new();
+        bool soundOnAppend;
         BoardPath boardPath = new();
         protected BoardNavigator boardNavigator { get; private set; }
         RectTransform boardArea;
 
         void ClearBoard(bool resetView)
         {
+            soundOnAppend = false;
             ClearChildren(boardNavigator.tiles);
             renderedBoard.Clear();
             boardPath = new BoardPath();
@@ -41,7 +43,9 @@ namespace DonmniCrash.UI
                 var view = CreateTile(boardNavigator.tiles,tile,-1,false);
                 PlaceBoardTile(view,center,direction);
                 renderedBoard.Add((tile.Id,view));
+                if (soundOnAppend) GameAudio.Current?.PlayPlacement();
             }
+            soundOnAppend = true;
             if (history.Count > 0)
                 MarkLatest(renderedBoard[^1].view,true,history[^1].Kind == TileKind.Standard ? null : Display.Attack);
         }

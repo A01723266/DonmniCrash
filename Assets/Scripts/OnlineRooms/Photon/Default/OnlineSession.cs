@@ -57,7 +57,7 @@ namespace DonmniCrash.UI
 #if UNITY_WEBGL && !UNITY_EDITOR
             settings.Protocol=ConnectionProtocol.WebSocketSecure;
 #endif
-            settings.AppVersion="donmnicrash-6";
+            settings.AppVersion="donmnicrash-7";
             if (PhotonNetwork.IsConnectedAndReady) Busy=PhotonNetwork.JoinLobby();
             else Busy=PhotonNetwork.ConnectUsingSettings(settings);
             if (!Busy) Fail("net.connection");

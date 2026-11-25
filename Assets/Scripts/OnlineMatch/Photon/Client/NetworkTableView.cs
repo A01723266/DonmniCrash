@@ -10,7 +10,7 @@ namespace DonmniCrash.UI
     public sealed class NetworkTableView : ITableView
     {
         readonly List<GameTile> history = new List<GameTile>(), hand = new List<GameTile>();
-        int[] order, health, sizes, capacity;
+        int[] order, health, sizes, capacity, ranks;
         int owner=-1;
         GameTile? offer;
         GameTile?[] choices = Array.Empty<GameTile?>();
@@ -26,6 +26,8 @@ namespace DonmniCrash.UI
         public int OptionCount => marked.Length;
         public IReadOnlyList<int> Order => order;
         public IReadOnlyList<GameTile> BoardTiles => history;
+        public bool FullFrame { get; private set; }
+        public int Rank(int seat) => ranks[seat];
         public int Health(int seat) => health[seat];
         public int HandCount(int seat) => sizes[seat];
         public GameTile[] HandOf(int seat) => seat==owner && owner>=0 ? hand.ToArray() : Array.Empty<GameTile>();
@@ -47,7 +49,7 @@ namespace DonmniCrash.UI
             w.Write((byte)game.Order.Count);
             foreach (int seat in game.Order)
             {
-                w.Write((byte)seat); w.Write((byte)game.Health(seat)); w.Write(game.HandCount(seat)); w.Write(game.Capacity(seat));
+                w.Write((byte)seat); w.Write((byte)game.Rank(seat)); w.Write((byte)game.Health(seat)); w.Write(game.HandCount(seat)); w.Write(game.Capacity(seat));
             }
             w.Write(start);
             MatchEngine.WriteTiles(w,game.BoardTiles.Skip(start).ToArray());
@@ -78,15 +80,15 @@ namespace DonmniCrash.UI
 
         internal void Apply(byte[] frame,byte[] privateData,bool full,int recipientSeat)
         {
-            owner=recipientSeat;
+            FullFrame=full; owner=recipientSeat;
             using var r = new BinaryReader(new MemoryStream(frame));
             Revision = r.ReadInt32(); ActiveSeat = r.ReadInt32(); Direction = r.ReadInt32(); Phase = (TurnPhase)r.ReadInt32();
             int attack = r.ReadInt32(); Attack = attack < 0 ? (Element?)null : (Element)attack;
             StockCount = r.ReadInt32();
-            int n=r.ReadByte(); order=new int[n]; health=new int[n]; sizes=new int[n]; capacity=new int[n];
+            int n=r.ReadByte(); order=new int[n]; ranks=new int[n]; health=new int[n]; sizes=new int[n]; capacity=new int[n];
             for (int i=0;i<n;i++)
             {
-                int seat=order[i]=r.ReadByte(); health[seat]=r.ReadByte(); sizes[seat]=r.ReadInt32(); capacity[seat]=r.ReadInt32();
+                int seat=order[i]=r.ReadByte(); ranks[seat]=r.ReadByte(); health[seat]=r.ReadByte(); sizes[seat]=r.ReadInt32(); capacity[seat]=r.ReadInt32();
             }
             int start = r.ReadInt32();
             if (full) history.Clear();

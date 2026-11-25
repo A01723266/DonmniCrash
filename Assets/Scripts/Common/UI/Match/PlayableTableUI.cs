@@ -30,7 +30,7 @@ namespace DonmniCrash.UI
         bool OwnTurn => Display != null && LocalSeat >= 0 && Display.ActiveSeat == LocalSeat && !IsFinished;
         bool IsLocalTurn => OwnTurn && !ActionsBlocked && !OpeningBlocksActions;
         float seconds, botDelay;
-        int displayedSecond, selectedId = -1, target = -1;
+        int displayedSecond, selectedId = -1;
         Button playButton, drawButton, swapButton;
         ScrollRect hand;
         TMP_Text clockLabel;
@@ -43,18 +43,19 @@ namespace DonmniCrash.UI
             handDrag = hand.content.gameObject.AddComponent<HandDrag>();
             handDrag.Bind(hand,RememberHandOrder);
             boardNavigator = ComponentOf<BoardNavigator>("BoardViewport");
-            boardArea = (RectTransform)boardNavigator.transform.parent;
+            boardArea = boardNavigator.followArea;
             clockLabel = ComponentOf<TMP_Text>("TurnTimerLabel");
             if (!Guided) OpeningView = ComponentOf<OpeningRollView>("OpeningRollOverlay");
             playButton = ComponentOf<Button>("PlayTileButton");
             drawButton = ComponentOf<Button>("DrawTileButton");
             swapButton = ComponentOf<Button>("PassTurnButton");
-            playButton.onClick.AddListener(() => SubmitMove(new MoveCommand(MoveKind.Play,selectedId,target)));
+            playButton.onClick.AddListener(PlaceSelected);
             drawButton.onClick.AddListener(() => SubmitMove(new MoveCommand(MoveKind.Draw)));
-            swapButton.onClick.AddListener(CycleTarget);
+            swapButton.onClick.AddListener(() => { swapEnabled = !swapEnabled; RenderActions(); });
             BindHud();
             BindArt();
             BindChoices();
+            BindSwapTargets();
             SessionAppearance.Changed += RefreshLanguage;
             UserSettings.PlayAssistChanged += RefreshAssist;
         }
@@ -66,6 +67,7 @@ namespace DonmniCrash.UI
         }
         void RefreshLanguage()
         {
+            if (standingsShown) return;
             if (Display == null) return;
             RefreshTurnToggle();
             RefreshHandToggle();
@@ -82,7 +84,7 @@ namespace DonmniCrash.UI
             Display = engine;
             lastTurn = -1;
             lastVisibleSeat = -1;
-            selectedId = target = -1;
+            ResetSelection();
             handOrder.Clear();
             shownChoice = -1;
             ClearBoard(true);
@@ -90,10 +92,11 @@ namespace DonmniCrash.UI
             PaintTransition();
         }
 
-        protected void PaintNetwork(ITableView view)
+        protected void PaintNetwork(ITableView view,bool fullFrame)
         {
             Display = view;
-            selectedId = target = -1;
+            if (!choosingTarget || !OwnTurn || Display.Phase != TurnPhase.Decision) ResetSelection();
+            if (fullFrame) soundOnAppend = false;
             PaintTransition();
         }
 
@@ -170,7 +173,7 @@ namespace DonmniCrash.UI
 
         void AfterMove(bool reset)
         {
-            selectedId = target = -1;
+            ResetSelection();
             if (reset) ResetClock();
             else botDelay = Mathf.Min(.28f,seconds * .3f);
             PaintTransition();
@@ -179,14 +182,6 @@ namespace DonmniCrash.UI
                 GameAudio.Current?.PlayCue(GameAudio.Current.resultClip);
                 Finish();
             }
-        }
-
-        // Show the selected swap recipient before the player commits.
-        void CycleTarget()
-        {
-            var targets = Display.Order.Where(Display.CanTarget).Prepend(-1).ToArray();
-            target = targets[(Array.IndexOf(targets,target) + 1) % targets.Length];
-            RenderActions();
         }
 
         protected static string T(string key,params object[] args) => string.Format(LocalizedText.Read(key),args);

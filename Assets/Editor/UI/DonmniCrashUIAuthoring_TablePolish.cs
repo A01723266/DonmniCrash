@@ -175,9 +175,7 @@ namespace DonmniCrash.EditorTools
             var badge = Panel("AssistBadge",marker,UIThemeRole.Background);
             Place(badge.rectTransform,Vector2.one,Vector2.one,new Vector2(-23,-23),new Vector2(-1,-1));
             badge.raycastTarget = false;
-            var tick = Label("Check",badge.transform,"✓",16,UIThemeRole.Accent,true);
-            Stretch(tick.rectTransform);
-            tick.alignment = TextAlignmentOptions.Center;
+            AddAssistCheck(badge.transform);
             marker.gameObject.SetActive(false);
             tile.assistMarker = marker.gameObject;
 

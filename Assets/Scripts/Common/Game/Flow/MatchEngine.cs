@@ -9,7 +9,7 @@ namespace DonmniCrash.Game
     {
         sealed class SeatState
         {
-            public int Health, Capacity;
+            public int Health, Capacity, Rank;
             public readonly List<GameTile> Hand = new List<GameTile>();
         }
         readonly Random random;
@@ -32,6 +32,7 @@ namespace DonmniCrash.Game
         // Rows contain seat/die pairs. NeighborRollStart separates the direction rolls.
         public IReadOnlyList<int[]> Rolls => rolls.AsReadOnly();
         public int NeighborRollStart { get; private set; }
+        public int Rank(int actor) => players[actor].Rank;
         public int Health(int actor) => players[actor].Health;
         public int Capacity(int actor) => players[actor].Capacity;
         public int HandCount(int actor) => players[actor].Hand.Count;
@@ -132,9 +133,21 @@ namespace DonmniCrash.Game
             playerState.Capacity++;
             Phase = TurnPhase.Decision;
             if (--playerState.Health > 0) return;
-            stock.ReturnTiles(playerState.Hand);
-            if (players.Count(j => j.Health > 0) == 1) Phase = TurnPhase.Finished;
-            else Advance();
+            Eliminate(ActiveSeat);
+        }
+
+        void Eliminate(int seat)
+        {
+            players[seat].Health = 0;
+            stock.ReturnTiles(players[seat].Hand);
+            int alive = players.Count(p => p.Health > 0);
+            players[seat].Rank = alive + 1;
+            if (alive == 1)
+            {
+                players.First(p => p.Health > 0).Rank = 1;
+                Phase = TurnPhase.Finished;
+            }
+            else if (seat == ActiveSeat) Advance();
         }
 
         bool Play(MoveCommand a)
