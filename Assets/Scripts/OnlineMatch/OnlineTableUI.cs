@@ -77,7 +77,6 @@ namespace DonmniCrash.UI
             {
                 shownResult=true; finishedRound=session.RoundId;
                 OpeningView.Hide();
-                GameAudio.Current?.PlayCue(GameAudio.Current.resultClip);
                 int winner=view.Order.FirstOrDefault(i=>view.Health(i)>0);
                 ShowStandings(T("net.winner",DisplayName(winner)));
             }
@@ -92,7 +91,6 @@ namespace DonmniCrash.UI
             if (hasView && actionsWereBlocked != blocked)
             {
                 actionsWereBlocked=blocked;
-                if (!OpeningBlocksActions) RefreshCurrentTurnCue();
                 RenderActions();
             }
             dialogs.Refresh(!InteractionBlocked && !OpeningBlocksActions);

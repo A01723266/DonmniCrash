@@ -41,7 +41,6 @@ namespace DonmniCrash.UI
 
             opening = null;
             ResetClock();
-            RefreshCurrentTurnCue();
             RenderActions();
         }
 

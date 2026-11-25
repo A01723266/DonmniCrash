@@ -19,6 +19,7 @@ namespace DonmniCrash.UI
         static string nextScreen;
         protected string ScreenName { get; private set; }
         protected abstract string InitialScreen { get; }
+        protected virtual void OnButtonGesture() => GameAudio.Current?.OnButtonGesture();
         protected abstract void BindControls();
         protected virtual void OnScreenShown(string name) { }
 
@@ -35,7 +36,7 @@ namespace DonmniCrash.UI
             if (UnityEngine.EventSystems.EventSystem.current)
                 UnityEngine.EventSystems.EventSystem.current.sendNavigationEvents = false;
             foreach (var button in GetComponentsInChildren<Button>(true))
-                button.onClick.AddListener(() => GameAudio.Current?.OnButtonGesture());
+                button.onClick.AddListener(OnButtonGesture);
             BindShared();
             BindControls();
             var initial = nextScreen ?? InitialScreen;

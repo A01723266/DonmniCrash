@@ -143,7 +143,7 @@ namespace DonmniCrash.UI
         void TapChoice(int index)
         {
             if (InteractionBlocked || !OwnTurn || confirmRequested) return;
-            GameAudio.Current?.OnButtonGesture();
+            OnButtonGesture();
             if (Display.Phase.UsesStock() && Display.RequiredChoices == 1)
             {
                 if (IsLocalTurn) SubmitMove(new MoveCommand(MoveKind.Choose,index));

@@ -21,12 +21,17 @@ namespace DonmniCrash.UI
 
         public void OnButtonGesture()
         {
+            UnlockMusic();
+            PlayCue(clickClip);
+        }
+
+        public void UnlockMusic()
+        {
             if (waitingForGesture)
             {
                 waitingForGesture = false;
                 if (playlist.Count > 0) PlayNext();
             }
-            PlayCue(clickClip);
         }
         public static GameAudio Current { get; private set; }
         public float General { get; private set; }

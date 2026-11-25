@@ -16,7 +16,7 @@ namespace DonmniCrash.UI
         protected virtual int LocalSeat => 0;
         protected virtual int StartingHealth => Match.Config.Health;
         protected virtual int Emblem(int seat) => seat == 0 ? Array.IndexOf(UserSettings.Emblems.ToArray(),UserSettings.Emblem) : seat % 5;
-        int lastTurn = -1;
+        protected override void OnButtonGesture() => GameAudio.Current?.UnlockMusic();
         protected virtual bool Guided => false;
         protected virtual bool ActionsBlocked => false;
         protected virtual bool OpeningBlocksActions => false;
@@ -82,14 +82,13 @@ namespace DonmniCrash.UI
         {
             Match = engine;
             Display = engine;
-            lastTurn = -1;
             lastVisibleSeat = -1;
             ResetSelection();
             handOrder.Clear();
             shownChoice = -1;
             ClearBoard(true);
             ResetClock();
-            PaintTransition();
+            Render();
         }
 
         protected void PaintNetwork(ITableView view,bool fullFrame)
@@ -97,21 +96,7 @@ namespace DonmniCrash.UI
             Display = view;
             if (!choosingTarget || !OwnTurn || Display.Phase != TurnPhase.Decision) ResetSelection();
             if (fullFrame) soundOnAppend = false;
-            PaintTransition();
-        }
-
-        void PaintTransition()
-        {
-            RefreshCurrentTurnCue();
             Render();
-        }
-
-        protected void RefreshCurrentTurnCue()
-        {
-            if (Display == null || OpeningBlocksActions || IsFinished) return;
-            if (lastTurn != Display.ActiveSeat && Display.ActiveSeat == LocalSeat)
-                GameAudio.Current?.PlayCue(GameAudio.Current.turnClip);
-            lastTurn = Display.ActiveSeat;
         }
 
         protected void NetworkClock(float remaining)
@@ -176,12 +161,8 @@ namespace DonmniCrash.UI
             ResetSelection();
             if (reset) ResetClock();
             else botDelay = Mathf.Min(.28f,seconds * .3f);
-            PaintTransition();
-            if (IsFinished)
-            {
-                GameAudio.Current?.PlayCue(GameAudio.Current.resultClip);
-                Finish();
-            }
+            Render();
+            if (IsFinished) Finish();
         }
 
         protected static string T(string key,params object[] args) => string.Format(LocalizedText.Read(key),args);

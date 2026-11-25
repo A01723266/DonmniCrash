@@ -77,7 +77,7 @@ namespace DonmniCrash.UI
             button.onClick.AddListener(() =>
             {
                 if (!IsLocalTurn || InteractionBlocked || Display.Phase != TurnPhase.Decision) return;
-                GameAudio.Current?.OnButtonGesture();
+                OnButtonGesture();
                 selectedId = value;
                 swapEnabled = false;
                 RenderActions();
