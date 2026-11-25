@@ -8,6 +8,7 @@ namespace DonmniCrash.UI
     public sealed partial class SettingsPanel : MonoBehaviour
     {
         public Slider general;
+        public Button playAssist;
         [UnityEngine.Serialization.FormerlySerializedAs("musica")] public Slider music;
         [UnityEngine.Serialization.FormerlySerializedAs("efectos")] public Slider effects;
         [UnityEngine.Serialization.FormerlySerializedAs("anterior")] public Button previous;
@@ -36,21 +37,35 @@ namespace DonmniCrash.UI
             general.onValueChanged.AddListener(Mix);
             music.onValueChanged.AddListener(Mix);
             effects.onValueChanged.AddListener(Mix);
+            playAssist.onClick.AddListener(() => UserSettings.SavePlayAssist(!UserSettings.PlayAssist));
         }
 
-        void OnEnable() { SessionAppearance.Changed += Refresh; Refresh(); }
+        void OnEnable()
+        {
+            SessionAppearance.Changed += Refresh;
+            UserSettings.PlayAssistChanged += RefreshAssist;
+            Refresh();
+        }
         void OnDisable()
         {
             SessionAppearance.Changed -= Refresh;
+            UserSettings.PlayAssistChanged -= RefreshAssist;
             if (GameAudio.Current) GameAudio.Current.FlushChanges();
         }
         void SwitchLanguage() => SessionAppearance.Choose(SessionAppearance.Palette, SessionAppearance.Slab, !SessionAppearance.English);
         void Mix(float value) => GameAudio.Current.Mix(general.value, music.value, effects.value);
 
+        void RefreshAssist()
+        {
+            var label = playAssist.GetComponentInChildren<LocalizedText>();
+            label.Localize(UserSettings.PlayAssist ? "settings.assist.on" : "settings.assist.off");
+        }
+
         // Restore the saved mix before displaying the sliders.
         void Refresh()
         {
             language.text = SessionAppearance.English ? "English" : "Español";
+            RefreshAssist();
             for (int i = 0; i < paletteMarkers.Length; i++) paletteMarkers[i].SetActive(i == SessionAppearance.Palette);
             for (int i = 0; i < slabMarkers.Length; i++) slabMarkers[i].SetActive(i == SessionAppearance.Slab);
             var audio = GameAudio.Current;

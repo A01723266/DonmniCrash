@@ -17,6 +17,19 @@ namespace DonmniCrash.UI
         public static string DisplayName => NormalizeName(PlayerPrefs.GetString(KeyPrefix + "perfil.nombre", ""));
         public static string Emblem => ValidateEmblem(PlayerPrefs.GetString(KeyPrefix + "perfil.emblema", emblems[0]));
         public static bool English => PlayerPrefs.GetString(KeyPrefix + "idioma", "es") == "en";
+        public static bool PlayAssist => PlayerPrefs.GetInt(KeyPrefix + "playAssist", 1) != 0;
+        public static event Action PlayAssistChanged;
+
+        internal static void SavePlayAssist(bool enabled)
+        {
+            if (enabled == PlayAssist) return;
+            PlayerPrefs.SetInt(KeyPrefix + "playAssist", enabled ? 1 : 0);
+            PlayerPrefs.Save();
+            PlayAssistChanged?.Invoke();
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetEvents() => PlayAssistChanged = null;
 
         // An empty name uses the current translation of Player.
         static string NormalizeName(string name)
@@ -42,6 +55,8 @@ namespace DonmniCrash.UI
         static int SavedIndex<T>(string key, string initial, T[] options) where T : UnityEngine.Object
         {
             string id = PlayerPrefs.GetString(KeyPrefix + key, initial);
+            if (key == "losa" && (id == "runeBlue_slabOutline_036_0" || id == "runeBlack_slabOutline_036_0"))
+                id = id.Replace("_036_0", "_035_0");
             int index = Array.FindIndex(options, option => option != null && option.name == id);
             if (index >= 0) return index;
             return Mathf.Max(0, Array.FindIndex(options, option => option != null && option.name == initial));

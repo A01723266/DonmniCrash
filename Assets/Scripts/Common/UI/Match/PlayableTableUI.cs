@@ -15,17 +15,21 @@ namespace DonmniCrash.UI
         protected ITableView Display { get; private set; }
         protected virtual int LocalSeat => 0;
         protected virtual bool NetworkTable => false;
+        protected virtual int StartingHealth => Match.Config.Health;
         protected virtual int Emblem(int seat) => seat == 0 ? Array.IndexOf(UserSettings.Emblems.ToArray(),UserSettings.Emblem) : seat % 5;
         int lastTurn = -1;
         protected virtual bool Guided => false;
         protected virtual bool ActionsBlocked => false;
+        protected virtual bool OpeningBlocksActions => false;
+        protected OpeningRollView OpeningView { get; private set; }
         protected virtual bool AllowMove(MoveCommand a) => true;
         protected virtual void OnAccepted(MoveCommand a) { }
         protected virtual void OnLanguageChanged() { }
         protected virtual void RunBot() { }
         protected virtual void Finish() { }
         protected bool IsFinished => Display.Phase == TurnPhase.Finished || (!NetworkTable && Display.Health(0) == 0);
-        bool IsLocalTurn => Display != null && LocalSeat >= 0 && Display.ActiveSeat == LocalSeat && !IsFinished && !ActionsBlocked;
+        bool OwnTurn => Display != null && LocalSeat >= 0 && Display.ActiveSeat == LocalSeat && !IsFinished;
+        bool IsLocalTurn => OwnTurn && !ActionsBlocked && !OpeningBlocksActions;
         bool Selecting => Display.Phase == TurnPhase.SwapSelection || Display.Phase == TurnPhase.Refill;
         float seconds, botDelay;
         int displayedSecond, selectedId = -1, target = -1;
@@ -40,25 +44,33 @@ namespace DonmniCrash.UI
             hand = ComponentOf<ScrollRect>("HandScrollView");
             historyScroll = ComponentOf<ScrollRect>("HistoryScroll");
             clockLabel = ComponentOf<TMP_Text>("TurnTimerLabel");
+            if (!Guided) OpeningView = ComponentOf<OpeningRollView>("OpeningRollOverlay");
             playButton = ComponentOf<Button>("PlayTileButton");
             drawButton = ComponentOf<Button>("DrawTileButton");
             swapButton = ComponentOf<Button>("PassTurnButton");
             playButton.onClick.AddListener(() => SubmitMove(new MoveCommand(Selecting ? MoveKind.Choose : MoveKind.Play,selectedId,target)));
             drawButton.onClick.AddListener(() => SubmitMove(new MoveCommand(Display.Phase == TurnPhase.Offer ? MoveKind.Keep : MoveKind.Draw)));
             swapButton.onClick.AddListener(CycleTarget);
+            BindHud();
             BindArt();
-            RenderHelp();
             SessionAppearance.Changed += RefreshLanguage;
+            UserSettings.PlayAssistChanged += RefreshAssist;
         }
 
-        protected virtual void OnDestroy() => SessionAppearance.Changed -= RefreshLanguage;
+        protected virtual void OnDestroy()
+        {
+            SessionAppearance.Changed -= RefreshLanguage;
+            UserSettings.PlayAssistChanged -= RefreshAssist;
+        }
         void RefreshLanguage()
         {
             if (Display == null) return;
-            RenderHelp();
+            RefreshTurnToggle();
+            RefreshHandToggle();
             Render();
             displayedSecond = -1;
-            RenderClock();
+            if (OpeningBlocksActions) ShowWaitingClock();
+            else RenderClock();
             OnLanguageChanged();
         }
 
@@ -67,9 +79,9 @@ namespace DonmniCrash.UI
             Match = engine;
             Display = engine;
             lastTurn = -1;
+            lastVisibleSeat = -1;
             selectedId = target = -1;
-            ClearChildren(historyScroll.content);
-            boardSize = 0;
+            ClearBoard();
             ResetClock();
             PaintTransition();
         }
@@ -83,10 +95,16 @@ namespace DonmniCrash.UI
 
         void PaintTransition()
         {
-            if (!IsFinished && lastTurn != Display.ActiveSeat && Display.ActiveSeat == LocalSeat)
+            RefreshCurrentTurnCue();
+            Render();
+        }
+
+        protected void RefreshCurrentTurnCue()
+        {
+            if (Display == null || OpeningBlocksActions || IsFinished) return;
+            if (lastTurn != Display.ActiveSeat && Display.ActiveSeat == LocalSeat)
                 GameAudio.Current?.PlayCue(GameAudio.Current.turnClip);
             lastTurn = Display.ActiveSeat;
-            Render();
         }
 
         protected void NetworkClock(float remaining)
@@ -95,12 +113,18 @@ namespace DonmniCrash.UI
             RenderClock();
         }
 
-        void ResetClock()
+        protected void ResetClock()
         {
             seconds = Match.Config.Seconds;
             botDelay = Mathf.Min(.65f,seconds * .45f);
             displayedSecond = -1;
             RenderClock();
+        }
+
+        protected void ShowWaitingClock()
+        {
+            displayedSecond = -1;
+            WriteLabel(clockLabel,T("game.time.wait"));
         }
 
         void RenderClock()
@@ -114,7 +138,7 @@ namespace DonmniCrash.UI
         // Pause the local clock while a nested help or settings dialog is open.
         protected void Update()
         {
-            if (Match == null || Guided || InteractionBlocked || IsFinished) return;
+            if (Match == null || Guided || InteractionBlocked || OpeningBlocksActions || IsFinished) return;
             seconds = Mathf.Max(0,seconds - Time.unscaledDeltaTime);
             botDelay -= Time.unscaledDeltaTime;
             RenderClock();
@@ -128,7 +152,7 @@ namespace DonmniCrash.UI
 
         protected virtual void SubmitMove(MoveCommand a)
         {
-            if (InteractionBlocked || IsFinished || ActionsBlocked) return;
+            if (InteractionBlocked || IsFinished || ActionsBlocked || OpeningBlocksActions) return;
             if (!AllowMove(a)) { NotifyUser("game.trylesson"); return; }
             int actor = Match.ActiveSeat;
             var phase = Match.Phase;

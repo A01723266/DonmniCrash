@@ -30,7 +30,7 @@ namespace DonmniCrash.EditorTools
             if (!catalog) { catalog = ScriptableObject.CreateInstance<SessionAppearance>(); AssetDatabase.CreateAsset(catalog,path); }
             catalog.palettes = themes.ToArray();
             catalog.slabs = new[]{"Grey","Blue","Black"}.Select(c => Sprites(
-                $"Assets/Kenney/UI/kenney_rune-pack/PNG/{c}/Slab (outline)/rune{c}_slabOutline_036.png").First()).ToArray();
+                $"Assets/Kenney/UI/kenney_rune-pack/PNG/{c}/Slab (outline)/rune{c}_slabOutline_{(c == "Grey" ? "036" : "035")}.png").First()).ToArray();
             EditorUtility.SetDirty(catalog);
             // Reauthoring must preserve clips assigned to the existing audio prefab.
             string audioPath = audioDir + "/AudioJuego.prefab";
@@ -58,6 +58,7 @@ namespace DonmniCrash.EditorTools
         {
             var panel = root.gameObject.AddComponent<SettingsPanel>();
             var obj = root.gameObject;
+            AddPlayAssist(panel);
             panel.general = ChildComponent<Transform>(obj,"MasterVolumeRow").GetComponentInChildren<Slider>(true);
             panel.music = ChildComponent<Transform>(obj,"MusicVolumeRow").GetComponentInChildren<Slider>(true);
             panel.effects = ChildComponent<Transform>(obj,"EffectsVolumeRow").GetComponentInChildren<Slider>(true);
@@ -142,7 +143,7 @@ namespace DonmniCrash.EditorTools
             }
         }
 
-        static LocalizedText TextBinding(TextMeshProUGUI t) => t.GetComponent<LocalizedText>() ?? t.gameObject.AddComponent<LocalizedText>();
+        static LocalizedText TextBinding(TMP_Text t) => t.GetComponent<LocalizedText>() ?? t.gameObject.AddComponent<LocalizedText>();
 
         static void PrepareSelectors(GameObject canvas)
         {

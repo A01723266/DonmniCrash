@@ -20,5 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c8f34c54a6c4623f9a062bb63fe7bb4, type: 2}
   slabs:
   - {fileID: -3145391585552779930, guid: d1b5adeca557e8f8a9c2f2ff5c96d076, type: 3}
-  - {fileID: -8790535780569379228, guid: 7ae9dbea1b058abfa9c3cc2ac204068b, type: 3}
-  - {fileID: -1535588160412969163, guid: d5f3c8d33199ea6aeb98efc2158fb153, type: 3}
+  - {fileID: -2939757625669666834, guid: e6887723a5b4a17809ecd47313657002, type: 3}
+  - {fileID: 3541415472581928603, guid: 4269a6ab7e02eba66aeeda5e8b849b3d, type: 3}

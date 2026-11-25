@@ -87,8 +87,8 @@ wait	Un momento…	One moment…
 preparing	Preparando la siguiente pantalla.	Preparing the next screen.
 loading.screen	Cargando…	Loading…
 changes	Cambios preparados	Changes ready
-elements.title	Los cinco elementos	The five elements
-elements.hint	Cada ficha tiene un ataque y una defensa.	Each tile has an attack and a defense.
+elements.title	Guía de elementos	Element guide
+elements.hint	Para detener una espada, juega una ficha con uno de los escudos de su fila.	To stop a sword, play a tile with one of the shields in its row.
 earth	Tierra	Earth
 water	Agua	Water
 wind	Viento	Wind
@@ -266,7 +266,7 @@ game.hand	Tus fichas	Your tiles
 game.visible	Elige qué conservar · Faltan {0}	Choose what to keep · {0} left
 game.blind	Elige dorsos · Faltan {0}	Pick face-down tiles · {0} left
 game.offer	Ficha robada · Colócala o consérvala	Drawn tile · Play it or keep it
-game.tile	Espada {0} · Escudo {1}	Sword {0} · Shield {1}
+game.tile	Escudo {1} · Espada {0}	Shield {1} · Sword {0}
 game.illegal	No defiende este ataque	Cannot defend this attack
 game.trylesson	Sigue la indicación del ejercicio y vuelve a intentarlo.	Follow the exercise instructions and try again.
 game.wild.1	Reversa · Invierte el sentido del ataque	Reverse · Redirect the attack in the opposite direction
@@ -290,7 +290,7 @@ lesson.done	Objetivo cumplido. Avanza al siguiente ejercicio o repite este.	Obje
 lesson.title.0	Abrir la mesa	Open the table
 lesson.body.0	Toca una ficha y pulsa Colocar. La espada inicia el ataque y robas un reemplazo.	Tap a tile and press Play tile. Its sword starts the attack and you draw a replacement.
 lesson.title.1	Defender con el escudo	Defend with the shield
-lesson.body.1	Llega Fuego. Busca el escudo de Agua en la mitad inferior y coloca esa ficha.	Fire is incoming. Find the Water shield on the bottom half and play that tile.
+lesson.body.1	Llega Fuego. Busca el escudo de Agua en la mitad superior y coloca esa ficha.	Fire is incoming. Find the Water shield on the top half and play that tile.
 lesson.title.2	Jugar la ficha robada	Play a drawn tile
 lesson.body.2	Pulsa Robar. El escudo de la ficha nueva vence a Fuego. Colócala para evitar daño.	Press Draw. The new tile’s shield beats Fire. Play it to avoid damage.
 lesson.title.3	Conservar y perder vida	Keep a tile and lose health
@@ -336,3 +336,24 @@ net.close	Cerrar sala	Close room
 net.closehint	Todos volverán al navegador de salas.	Everyone will return to the room browser.
 net.winner	Gana {0}	{0} wins
 net.loading	Preparando mesa…	Preparing table…
+settings.gameplay	Jugabilidad	Gameplay
+settings.assist.on	Asistencia al jugar: activada	Gameplay assistance: On
+settings.assist.off	Asistencia al jugar: desactivada	Gameplay assistance: Off
+game.bar.stats	Vida {0}/{1} · Fichas {2}	HP {0}/{1} · Tiles {2}
+game.turns.collapse	Reducir turnos	Compact turns
+game.turns.expand	Ampliar turnos	Expand turns
+element.guide.attack	Ataque	Attack
+element.guide.defense	Defensa	Defense
+game.seat.you	Tú	You
+game.health.own	Tu vida {0}/{1}	Your HP {0}/{1}
+game.hand.lower	Bajar fichas	Lower tiles
+game.hand.raise	Subir fichas	Raise tiles
+game.time.wait	Tiempo —	Time —
+game.dice.waiting	Esperando a que cargue la mesa	Waiting for the table to load
+game.dice.ready	Preparando el sorteo	Getting the dice ready
+game.dice.first	Quién empieza	Who goes first
+game.dice.direction	Dirección del turno	Turn direction
+game.dice.tie.first	Desempate de apertura	Opening tiebreak
+game.dice.tie.direction	Desempate de dirección	Direction tiebreak
+game.dice.result	Orden inicial	Opening order
+game.dice.next	Abre {0}.\nDespués juega {1}.	{0} goes first.\n{1} goes next.

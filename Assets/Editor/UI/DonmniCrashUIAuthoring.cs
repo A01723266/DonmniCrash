@@ -24,7 +24,6 @@ namespace DonmniCrash.EditorTools
         static readonly List<UITheme> themes = new List<UITheme>();
         static Sprite rounded, slab;
         static readonly string[] elements = { "Earth", "Water", "Wind", "Fire", "Plant" };
-        static readonly string[] elementNames = { "Earth", "Water", "Wind", "Fire", "Plant" };
         static readonly Dictionary<string, Sprite[]> elemental = new Dictionary<string, Sprite[]>();
         static readonly Dictionary<string, Sprite> symbols = new Dictionary<string, Sprite>();
         static bool library;
@@ -51,11 +50,7 @@ namespace DonmniCrash.EditorTools
             else { CreateThemes(); CreateRoundedSprite(); }
             regular = Font("Regular"); medium = Font("Medium"); semibold = Font("SemiBold");
             slab = Sprites("Assets/Kenney/UI/kenney_rune-pack/PNG/Grey/Slab (outline)/runeGrey_slabOutline_036.png").First();
-            foreach (var element in elements)
-            {
-                elemental[element] = Sprites("Assets/Sprites/" + element + "Domino.png").OrderByDescending(x => x.rect.width * x.rect.height).Take(2).OrderBy(x => x.rect.x).ToArray();
-                symbols[element] = Sprites("Assets/Sprites/" + element + ".png").OrderByDescending(x => x.rect.width * x.rect.height).FirstOrDefault();
-            }
+            LoadElementArt();
             if (onlineOnly)
             {
                 StartScene(); RoomsScene(); MatchScene("OnlineMatch",false,false);
@@ -345,12 +340,7 @@ namespace DonmniCrash.EditorTools
             var toast=Panel("ToastPanel",shell.overlays,UIThemeRole.Elevated);Place(toast.rectTransform,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(-220,28),new Vector2(220,86));
             var toastLabel=Label("MessageLabel",toast.transform,"Changes ready",19);Stretch(toastLabel.rectTransform,16,8,16,8);toastLabel.alignment=TextAlignmentOptions.Center;toast.gameObject.SetActive(false);
             var help=Dialog(shell.overlays,"ElementHelpDialog","The five elements","Each tile has an attack and a defense.",false,680);
-            for(int i=0;i<elements.Length;i++)
-            {
-                var r=Row(elements[i]+"HelpRow",help,58);Icon("ElementIcon",r,symbols[elements[i]],44);var label=Label("ElementLabel",r,elementNames[i],21);Size(label,-1,-1,1);
-                Icon("AttackIcon",r,elemental[elements[i]][0],40);Icon("DefenseIcon",r,elemental[elements[i]][1],40);
-            }
-            Button("CloseButton",help,"Got it",true);
+            BuildElementGuide(help);
             var orientation=Node("OrientationOverlay",shell.overlays);Stretch(orientation);var hint=orientation.gameObject.AddComponent<UIOrientationHint>();
             var portrait=Panel("PortraitPanel",orientation,UIThemeRole.Background);Stretch(portrait.rectTransform);
             var t=Label("OrientationLabel",portrait.transform,"Gira tu dispositivo\npara jugar en horizontal",28,UIThemeRole.Text,true);Stretch(t.rectTransform,32,64,32,64);t.alignment=TextAlignmentOptions.Center;
@@ -538,6 +528,7 @@ namespace DonmniCrash.EditorTools
             var attackIcon=Icon("AttackIcon",root,elemental[elements[attack]][0]);Place(attackIcon.rectTransform,new Vector2(0,.53f),Vector2.one,new Vector2(13,7),new Vector2(-13,-12));view.attackIcon=attackIcon;
             var defenseIcon=Icon("DefenseIcon",root,elemental[elements[defense]][1]);Place(defenseIcon.rectTransform,Vector2.zero,new Vector2(1,.47f),new Vector2(13,13),new Vector2(-13,-7));view.defenseIcon=defenseIcon;
             var divider=Panel("Separator",root,UIThemeRole.Background);Place(divider.rectTransform,new Vector2(0,.5f),new Vector2(1,.5f),new Vector2(13,-1),new Vector2(-13,1));divider.sprite=null;divider.raycastTarget=false;
+            PolishTile(view);
             return view;
         }
         static RectTransform Player(Transform parent,string name,string displayName,bool activeTurn)
@@ -546,7 +537,7 @@ namespace DonmniCrash.EditorTools
             {
                 var card=PrefabInstance("Gameplay/PlayerCard",parent);card.name=name;
                 ChildComponent<TextMeshProUGUI>(card,"PlayerNameLabel").text=displayName;
-                card.transform.Find("TurnIndicator").gameObject.SetActive(activeTurn);
+                card.GetComponent<PlayerHudCard>().turnIndicator.enabled = activeTurn;
                 Bind(card.GetComponent<Image>(),activeTurn?UIThemeRole.Elevated:UIThemeRole.Panel);
                 return (RectTransform)card.transform;
             }
@@ -555,6 +546,7 @@ namespace DonmniCrash.EditorTools
             Label("PlayerNameLabel",p.transform,displayName,20,UIThemeRole.Text,true);
             Label("PlayerStatsLabel",p.transform,"Health —  ·  Tiles —",15,UIThemeRole.SecondaryText);
             var indicator=Panel("TurnIndicator",p.transform,UIThemeRole.Accent);Size(indicator,3);indicator.gameObject.SetActive(activeTurn);
+            PolishPlayerCard(p.rectTransform);
             return p.rectTransform;
         }
         static void Board()
@@ -579,13 +571,7 @@ namespace DonmniCrash.EditorTools
             Button("ElementHelpButton",bar,"Elements",false,130);Button("PauseButton",bar,"Pause",false,90);
             var players=Scroll("PlayersScrollView",top.transform,true);Stretch((RectTransform)players.parent.parent,12,10,12,58);
             for(int i=0;i<6;i++)
-            {
-                var card=Player(players,"Player"+(i+1)+"Card",i==0?"You":(offline?"Bot ": "Player ")+(i+1),i==0);
-
-                var icon = Icon("SeatEmblem",card,symbols["Earth"],22);
-                icon.GetComponent<LayoutElement>().ignoreLayout = true;
-                Place(icon.rectTransform,Vector2.one,Vector2.one,new Vector2(-30,-30),new Vector2(-6,-6));
-            }
+                Player(players,"Player"+(i+1)+"Card",i==0?"You":(offline?"Bot ": "Player ")+(i+1),i==0);
             var status=Panel("BoardStatusPanel",screen);Place(status.rectTransform,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(-280,-216),new Vector2(280,-176));
             var line=Horizontal(status.transform,18);line.padding=new RectOffset(16,16,2,2);
             var attack=Label("CurrentAttackLabel",status.transform,"Current attack",17);Size(attack,-1,-1,1);Icon("CurrentAttackIcon",status.transform,elemental["Fire"][0],30);
@@ -615,6 +601,8 @@ namespace DonmniCrash.EditorTools
                         new Vector2(8,282),new Vector2(-8,-224));
             }
             if(tutorial)TutorialPanels(shell,screen);
+            PolishMatchHud(screen,tutorial);
+            PolishOpeningPresentation(screen,tutorial);
             CommonOverlays(shell);Save(name);
         }
         static void MatchDialogs(Shell shell,bool offline)

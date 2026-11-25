@@ -18,5 +18,8 @@ namespace DonmniCrash.UI
         public Image attackIcon;
         public Image defenseIcon;
         public GameObject selectionOutline;
+        public GameObject assistMarker;
+        public GameObject latestOutline;
+        public Image carriedAttack;
     }
 }

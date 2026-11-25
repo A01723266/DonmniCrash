@@ -30,31 +30,33 @@ namespace DonmniCrash.UI
             publicCursor[id]=publicData;
             sentDeadlines[id]=Deadline;
             object[] frame={RoundId,full,publicData,dirty?privateData:Array.Empty<byte>(),
-                Deadline, full?Seats:Array.Empty<int>(), full?SeatNames:Array.Empty<string>(),full?Emblems:Array.Empty<int>(),
-                full?OpeningRolls:Array.Empty<int>(),revisionCursor.TryGetValue(id,out int baseline)?baseline:-1};
+                new[]{Deadline,OpeningStartsAt}, full?Seats:Array.Empty<int>(), full?SeatNames:Array.Empty<string>(),full?Emblems:Array.Empty<int>(),
+                full?Opening.Encode():Array.Empty<int>(),revisionCursor.TryGetValue(id,out int baseline)?baseline:-1};
             revisionCursor[id]=engine.Revision; privateCursor[id]=privateData; boardCursor[id]=engine.BoardTiles.Count;
             if (id==LocalId) ReceiveFrame(frame); else Send(Message.Frame,frame,id);
         }
         void ReceiveFrame(object body)
         {
             if (!(body is object[] f) || f.Length!=10 || !(f[0] is int round) || round!=RoundId) return;
+            if (!(f[4] is int[] timing) || timing.Length!=2) return;
             bool full=(bool)f[1];
             if (!full && View==null) { RequestFrame(); return; }
             var payload=(byte[])f[2];
             int revision=BitConverter.ToInt32(payload,0);
             if (View!=null && (revision<View.Revision || (!full && revision==View.Revision))) return;
             if (!full && (int)f[9]!=View.Revision) { RequestFrame(); return; }
-            if (full)
-            {
-                Seats=(int[])f[5]; SeatNames=(string[])f[6]; Emblems=(int[])f[7]; OpeningRolls=(int[])f[8];
-            }
             try
             {
+                if (full)
+                {
+                    Seats=(int[])f[5]; SeatNames=(string[])f[6]; Emblems=(int[])f[7];
+                    Opening=OpeningRollSequence.Decode((int[])f[8],Seats.Length);
+                }
                 View ??= new NetworkTableView();
                 View.Apply(payload,(byte[])f[3],full,MySeat);
             }
             catch (System.IO.InvalidDataException) { View=null; RequestFrame(); return; }
-            Deadline=(int)f[4]; AwaitingAction=false;
+            Deadline=timing[0]; OpeningStartsAt=timing[1]; AwaitingAction=false;
             TableChanged?.Invoke(); Changed?.Invoke();
         }
     }

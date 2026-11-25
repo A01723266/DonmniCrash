@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -16,12 +14,13 @@ namespace DonmniCrash.UI
         RoomDialogs dialogs;
         bool initialized, shownResult, hasView;
         CanvasGroup handInput;
-        TMP_Text timerText;
-        bool showedWaiting;
+        bool actionsWereBlocked;
         int renderedRevision=-1;
         protected override bool NetworkTable=>true;
+        protected override int StartingHealth=>session.Rules.Health;
         protected override int LocalSeat=>session.MySeat;
         protected override bool ActionsBlocked=>session.AwaitingAction;
+        protected override bool OpeningBlocksActions=>session.OpeningBlocksPlay;
         protected override string DisplayName(int seat)=>session.SeatNames[seat];
         protected override int Emblem(int seat)=>session.Emblems[seat];
         protected override void LeaveTable() { session.Leave(); }
@@ -34,14 +33,19 @@ namespace DonmniCrash.UI
             base.BindControls();
             handInput=FindNode("HandHUDPanel").gameObject.AddComponent<CanvasGroup>();
             handInput.interactable=false;
-            timerText=ComponentOf<TMP_Text>("TurnTimerLabel");
             BindButton("PauseDialog","CloseRoomButton",()=>Open("CloseRoomDialog"));
             dialogs=new RoomDialogs(session,FindNode("AdmissionRequestDialog"),FindNode("CloseRoomDialog"),Open,Close);
             session.Changed+=Refresh;
             session.TableChanged+=DrawTable;
             BindButton("ConnectionLostDialog","ReturnToRoomsButton",()=>GoTo("OnlineRooms"));
         }
-        protected override void Start() { base.Start(); initialized=true; Refresh(); if (session.Admitted && session.RoundId!=0) session.SignalTableLoaded(); }
+        protected override void Start()
+        {
+            base.Start();
+            initialized=true;
+            Refresh();
+            if (session.Admitted && session.RoundId!=0) UpdateOpening();
+        }
         protected override void OnDestroy()
         {
             if (session) { session.Changed-=Refresh; session.TableChanged-=DrawTable; }
@@ -49,7 +53,7 @@ namespace DonmniCrash.UI
         }
         protected override void SubmitMove(MoveCommand action)
         {
-            if (!InteractionBlocked && session.View!=null && !session.AwaitingAction)
+            if (!InteractionBlocked && !OpeningBlocksActions && session.View!=null && !session.AwaitingAction)
                 session.Submit(action);
         }
         void Refresh()
@@ -62,42 +66,21 @@ namespace DonmniCrash.UI
             FindNode("CloseRoomButton",FindNode("PauseDialog")).gameObject.SetActive(session.Host);
             if (session.View!=null && (!hasView || renderedRevision!=session.View.Revision)) DrawTable();
         }
-        protected override void OnLanguageChanged()
-        {
-            if (session && hasView) WriteRolls();
-        }
-        void WriteRolls()
-        {
-            var lines=new List<string>();
-            var rolls=session.OpeningRolls;
-            if (rolls.Length<3) return;
-            lines.Add(T("game.first",DisplayName(rolls[0]),DisplayName(rolls[1])));
-            int rollNumber=0;
-            for(int i=3;i<rolls.Length;)
-            {
-                int end=i+1+rolls[i]; i++;
-                var row=new List<string>();
-                while(i<end) { row.Add(DisplayName(rolls[i])+" "+rolls[i+1]); i+=2; }
-                lines.Add(T(rollNumber++<rolls[2]?"game.roll":"game.direction")+" · "+string.Join(" / ",row));
-            }
-            var details=ComponentOf<TMP_Text>("DescriptionLabel","PauseDialog");
-            WriteLabel(details,string.Join("\n",lines));
-            details.GetComponent<LayoutElement>().preferredHeight=details.GetPreferredValues(details.text,400,0).y+12;
-        }
         void DrawTable()
         {
             if (!initialized || session.View==null) return;
             var view=session.View;
-            bool first=!hasView;
             renderedRevision=view.Revision; hasView=true;
-            PaintNetwork(view); NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
-            if (first) WriteRolls();
+            PaintNetwork(view);
+            UpdateOpening();
+            if (!OpeningBlocksActions) NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
             bool watching=LocalSeat<0 || view.Health(LocalSeat)==0;
             FindNode("SpectatorPanel").gameObject.SetActive(watching);
             FindNode("HandHUDPanel").gameObject.SetActive(!watching);
             if (!shownResult && view.Phase==TurnPhase.Finished)
             {
                 shownResult=true;
+                OpeningView.Hide();
                 GameAudio.Current?.PlayCue(GameAudio.Current.resultClip);
                 int winner=view.Order.FirstOrDefault(i=>view.Health(i)>0);
                 SetLabel("WinnerLabel",T("net.winner",DisplayName(winner)),"ResultsDialog");
@@ -122,16 +105,23 @@ namespace DonmniCrash.UI
         // Shared deadlines continue while help or settings are visible.
         void LateUpdate()
         {
-            if (!initialized || !session.Admitted) return;
+            if (!initialized || !session.Admitted || session.RoundId==0) return;
             session.CheckPendingAction();
-            dialogs.Refresh(!InteractionBlocked);
-            handInput.interactable=hasView && !session.AwaitingAction && !session.WaitingForTables;
-            if (hasView && session.WaitingForTables)
+            UpdateOpening();
+            bool blocked = OpeningBlocksActions || ActionsBlocked;
+            if (hasView && actionsWereBlocked != blocked)
             {
-                if (!showedWaiting) WriteLabel(timerText,T("net.loading"));
-                showedWaiting=true;
+                actionsWereBlocked=blocked;
+                if (!OpeningBlocksActions) RefreshCurrentTurnCue();
+                RenderActions();
             }
-            else if (hasView) NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
+            dialogs.Refresh(!InteractionBlocked && !OpeningBlocksActions);
+            handInput.interactable=hasView && !blocked;
+            if (hasView && !OpeningBlocksActions)
+            {
+                showedWaitingClock=false;
+                NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
+            }
         }
     }
 }

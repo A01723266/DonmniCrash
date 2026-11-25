@@ -6,6 +6,7 @@ namespace DonmniCrash.Game
     public interface ITableView
     {
         int ActiveSeat { get; }
+        int Direction { get; }
         TurnPhase Phase { get; }
         Element? Attack { get; }
         int StockCount { get; }

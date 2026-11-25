@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
-using System.Text;
 using DonmniCrash.Game;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace DonmniCrash.UI
 {
@@ -11,34 +9,40 @@ namespace DonmniCrash.UI
     public sealed partial class PracticeTableUI : PlayableTableUI
     {
         DominoBot bot;
+        OpeningRollSequence opening;
+        double openingStarted;
+        protected override bool OpeningBlocksActions => opening != null;
         protected override void LeaveTable() => GoTo("OfflineSetting","BotConfigurationScreen");
         protected override void OnScreenShown(string name)
         {
             if (Match != null) return;
             int seed = Guid.NewGuid().GetHashCode();
             bot = new DominoBot(~seed);
-            Begin(new MatchEngine(PracticeSettings.Current,seed));
-            ShowDice();
+            var match = new MatchEngine(PracticeSettings.Current,seed);
+            opening = OpeningRollSequence.Capture(match);
+            Begin(match);
+            openingStarted = Time.unscaledTimeAsDouble;
+            ShowWaitingClock();
+            UpdateOpening();
         }
 
         protected override void RunBot() => SubmitMove(bot.Decide(Match.GetActorView(),Match.Config.Level));
 
-        // Include all tie-break rolls in their original order.
-        void ShowDice()
+        void LateUpdate()
         {
-            var labelText = new StringBuilder();
-            for (int i=0;i<Match.Rolls.Count;i++)
-            {
-                var row = Match.Rolls[i];
-                labelText.AppendLine(T(i < Match.NeighborRollStart ? "game.roll" : "game.direction") + " · " +
-                    string.Join(" / ",Enumerable.Range(0,row.Length/2).Select(n=>DisplayName(row[n*2])+" "+row[n*2+1])));
-            }
-            labelText.Append(T("game.first",DisplayName(Match.ActiveSeat),DisplayName(Match.Neighbor(Match.Direction))));
-            var label = ComponentOf<TMP_Text>("DescriptionLabel","MessageDialog");
-            WriteLabel(label,labelText.ToString());
-            label.GetComponent<LayoutElement>().preferredHeight = label.GetPreferredValues(label.text,400,0).y + 12;
-            SetLabel("TitleLabel",T("game.dice"),"MessageDialog");
-            Open("MessageDialog");
+            if (opening != null) UpdateOpening();
+        }
+
+        void UpdateOpening()
+        {
+            int elapsed = (int)((Time.unscaledTimeAsDouble - openingStarted) * 1000);
+            OpeningView.Show(opening,elapsed,LocalSeat,opening.FirstSeat,opening.NextSeat,DisplayName);
+            if (elapsed < opening.DurationMilliseconds) return;
+
+            opening = null;
+            ResetClock();
+            RefreshCurrentTurnCue();
+            RenderActions();
         }
 
         protected override void Finish()
