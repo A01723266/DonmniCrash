@@ -10,6 +10,9 @@ namespace DonmniCrash.Game
         TurnPhase Phase { get; }
         Element? Attack { get; }
         int StockCount { get; }
+        int SelectionId { get; }
+        int RequiredChoices { get; }
+        bool IsMarked(int index);
         int RemainingChoices { get; }
         int OptionCount { get; }
         bool VisibleSelection { get; }

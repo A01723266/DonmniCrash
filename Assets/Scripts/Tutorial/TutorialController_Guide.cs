@@ -15,7 +15,7 @@ namespace DonmniCrash.UI
         void BindGuide()
         {
             guideBody = FindNode("TutorialGuideBody").gameObject;
-            tutorialBoard = ComponentOf<RectTransform>("HistoryScroll");
+            tutorialBoard = ComponentOf<RectTransform>("BoardArea");
             guideBoardRightAnchor = tutorialBoard.anchorMax.x;
             guideBoardRightInset = tutorialBoard.offsetMax.x;
             var toggle = ComponentOf<Button>("ToggleTutorialGuideButton");

@@ -16,7 +16,6 @@ namespace DonmniCrash.UI
         CanvasGroup handInput;
         bool actionsWereBlocked;
         int renderedRevision=-1;
-        protected override bool NetworkTable=>true;
         protected override int StartingHealth=>session.Rules.Health;
         protected override int LocalSeat=>session.MySeat;
         protected override bool ActionsBlocked=>session.AwaitingAction;
@@ -74,9 +73,6 @@ namespace DonmniCrash.UI
             PaintNetwork(view);
             UpdateOpening();
             if (!OpeningBlocksActions) NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
-            bool watching=LocalSeat<0 || view.Health(LocalSeat)==0;
-            FindNode("SpectatorPanel").gameObject.SetActive(watching);
-            FindNode("HandHUDPanel").gameObject.SetActive(!watching);
             if (!shownResult && view.Phase==TurnPhase.Finished)
             {
                 shownResult=true;

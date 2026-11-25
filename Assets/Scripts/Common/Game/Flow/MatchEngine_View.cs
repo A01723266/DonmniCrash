@@ -27,15 +27,16 @@ namespace DonmniCrash.Game
                 options.Add(new MoveCommand(MoveKind.Play,offer.Value.Id));
                 options.Add(new MoveCommand(MoveKind.Keep));
             }
-            else if (Phase == TurnPhase.Refill || Phase == TurnPhase.SwapSelection)
+            else if (Phase.IsSelection())
             {
                 selection = new GameTile?[OptionCount];
                 for (int i = 0; i < selection.Length; i++)
-                    if (IsAvailable(i))
+                    if (!IsMarked(i) && RemainingChoices > 0)
                     {
                         selection[i] = InspectOption(ActiveSeat,i);
                         options.Add(new MoveCommand(MoveKind.Choose,i));
                     }
+                if (RemainingChoices == 0) options.Add(new MoveCommand(MoveKind.Confirm));
             }
             return new ActorView {
                 Actor=ActiveSeat, NextSeat=Neighbor(Direction), PreviousSeat=Neighbor(-Direction), Attack=Attack,

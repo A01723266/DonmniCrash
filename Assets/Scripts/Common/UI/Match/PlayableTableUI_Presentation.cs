@@ -36,24 +36,9 @@ namespace DonmniCrash.UI
             RenderHand();
             RenderPersonalHealth();
             RenderActions();
-        }
-
-        void RenderHand()
-        {
-            tileButtons.Clear();
-            ClearChildren(hand.content);
-            bool choosing = OwnTurn && Selecting;
-            if (choosing)
-            {
-                for (int i=0;i<Display.OptionCount;i++)
-                    if (Display.IsAvailable(i)) CreateTile(hand.content,Display.InspectOption(LocalSeat,i),i,true);
-            }
-            else if (Display.OfferFor(LocalSeat) is GameTile offer)
-            {
-                selectedId = offer.Id;
-                CreateTile(hand.content,offer,offer.Id,OwnTurn);
-            }
-            else foreach (var f in Display.HandOf(LocalSeat)) CreateTile(hand.content,f,f.Id,OwnTurn);
+            bool watching = !Guided && (LocalSeat < 0 || Display.Health(LocalSeat) == 0);
+            spectatorPanel.SetActive(watching);
+            handPanel.SetActive(!watching);
         }
 
         DominoTileView CreateTile(Transform parent,GameTile? tile,int value,bool clickable)
@@ -88,14 +73,10 @@ namespace DonmniCrash.UI
             }
             if (!clickable) return view;
             tileButtons[value] = view;
-            var hitSurface = view.gameObject.AddComponent<Image>();
-            hitSurface.color = Color.clear;
-            var button = view.gameObject.AddComponent<Button>();
-            button.targetGraphic = hitSurface;
-            button.navigation = new Navigation { mode = Navigation.Mode.None };
+            var button = AddHitButton(view);
             button.onClick.AddListener(() =>
             {
-                if (!IsLocalTurn || InteractionBlocked) return;
+                if (!IsLocalTurn || InteractionBlocked || Display.Phase != TurnPhase.Decision) return;
                 GameAudio.Current?.OnButtonGesture();
                 selectedId = value;
                 target = -1;
@@ -104,26 +85,33 @@ namespace DonmniCrash.UI
             return view;
         }
 
+        static Button AddHitButton(DominoTileView view)
+        {
+            var surface = view.gameObject.AddComponent<Image>();
+            surface.color = Color.clear;
+            var button = view.gameObject.AddComponent<Button>();
+            button.targetGraphic = surface;
+            button.navigation = new Navigation { mode = Navigation.Mode.None };
+            return button;
+        }
+
         protected void RenderActions()
         {
             if (Display == null) return;
-            ShowOwnTurnActions(OwnTurn && !OpeningBlocksActions && (!Guided || !ActionsBlocked));
-            var offer = Display.OfferFor(LocalSeat);
+            ShowOwnTurnActions(OwnTurn && Display.Phase == TurnPhase.Decision && !OpeningBlocksActions && (!Guided || !ActionsBlocked));
             var ownTiles = Display.HandOf(LocalSeat);
-            GameTile? tile = offer ?? ownTiles.Where(f => f.Id == selectedId).Select(f => (GameTile?)f).FirstOrDefault();
+            GameTile? tile = ownTiles.Where(f => f.Id == selectedId).Select(f => (GameTile?)f).FirstOrDefault();
             bool combo = IsLocalTurn && Display.Phase == TurnPhase.Decision && tile?.Kind == TileKind.Standard &&
                 TileRules.IsPlayable(tile.Value,Display.Attack) && ownTiles.Any(f=>f.Kind==TileKind.Swap) && Display.Order.Any(Display.CanTarget);
             swapButton.gameObject.SetActive(combo);
             WriteLabel(swapButton.GetComponentInChildren<TMP_Text>(),target < 0 ? T("game.swap") : T("game.target",DisplayName(target)));
-            drawButton.interactable = IsLocalTurn && !Selecting;
-            WriteLabel(drawButton.GetComponentInChildren<TMP_Text>(),offer.HasValue ? T("game.keep") : T("game.draw"));
-            playButton.interactable = IsLocalTurn && selectedId >= 0 && (Selecting || tile.HasValue && TileRules.IsPlayable(tile.Value,Display.Attack));
-            WriteLabel(playButton.GetComponentInChildren<TMP_Text>(),Selecting ? T("game.choose") : T("game.play"));
+            drawButton.interactable = IsLocalTurn && Display.Phase == TurnPhase.Decision;
+            WriteLabel(drawButton.GetComponentInChildren<TMP_Text>(),T("game.draw"));
+            playButton.interactable = IsLocalTurn && selectedId >= 0 && tile.HasValue && TileRules.IsPlayable(tile.Value,Display.Attack);
+            WriteLabel(playButton.GetComponentInChildren<TMP_Text>(),T("game.play"));
             foreach (var pair in tileButtons) pair.Value.selectionOutline.SetActive(pair.Key == selectedId);
             string title = "";
-            if (IsLocalTurn && Selecting) title = T(Display.VisibleSelection ? "game.visible" : "game.blind",Display.RemainingChoices);
-            else if (offer.HasValue) title = T("game.offer");
-            else if (IsLocalTurn && tile.HasValue)
+            if (IsLocalTurn && tile.HasValue)
             {
                 var f = tile.Value;
                 if (f.Kind == TileKind.Standard) title = T("game.tile",ElementName(f.Sword),ElementName(f.Shield));
@@ -133,6 +121,7 @@ namespace DonmniCrash.UI
             WriteLabel(handContext,title);
             handContext.gameObject.SetActive(title.Length > 0);
             RefreshAssist();
+            PresentChoices();
         }
     }
 }

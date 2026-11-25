@@ -24,6 +24,7 @@ namespace DonmniCrash.Game
         public Element? Attack { get; private set; }
         public TurnPhase Phase { get; private set; }
         public int Revision { get; private set; }
+        public int PhaseSeconds => Phase.UsesStock() ? 5 : Config.Seconds;
         public int StockCount => stock.Count;
         public int MissingCount => players[ActiveSeat].Capacity - players[ActiveSeat].Hand.Count;
         public IReadOnlyList<GameTile> BoardTiles => board.AsReadOnly();
@@ -94,7 +95,7 @@ namespace DonmniCrash.Game
             switch (Phase)
             {
                 case TurnPhase.Decision:
-                    if (a.Kind == MoveKind.Draw) { Draw(); accepted = true; }
+                    if (a.Kind == MoveKind.Draw) { BeginStock(TurnPhase.DrawSelection,1); accepted = true; }
                     else accepted = a.Kind == MoveKind.Play && Play(a);
                     break;
                 case TurnPhase.Offer:
@@ -102,7 +103,7 @@ namespace DonmniCrash.Game
                     else accepted = a.Kind == MoveKind.Play && Play(a);
                     break;
                 default:
-                    accepted = a.Kind == MoveKind.Choose && Choose(a.Value);
+                    accepted = ApplySelection(a);
                     break;
             }
             if (accepted) Revision++;
@@ -112,12 +113,13 @@ namespace DonmniCrash.Game
         void Advance()
         {
             ActiveSeat = Neighbor(Direction);
-            Phase = MissingCount > 0 ? TurnPhase.Refill : TurnPhase.Decision;
+            Phase = TurnPhase.Decision;
+            if (MissingCount > 0) BeginStock(TurnPhase.Refill,MissingCount);
         }
 
-        void Draw()
+        void RevealDraw(GameTile drawn)
         {
-            offer = stock.TakeTile();
+            offer = drawn;
             if (TileRules.IsPlayable(offer.Value, Attack)) Phase = TurnPhase.Offer;
             else Keep();
         }
@@ -161,8 +163,8 @@ namespace DonmniCrash.Game
             else
             {
                 // Playing the offered tile leaves hand capacity unchanged.
-                if (!fromOffer) hand.Add(stock.TakeTile());
-                Advance();
+                if (fromOffer) Advance();
+                else BeginStock(TurnPhase.Replacement,1);
             }
             return true;
         }

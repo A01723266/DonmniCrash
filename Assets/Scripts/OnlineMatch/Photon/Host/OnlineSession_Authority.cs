@@ -143,7 +143,7 @@ namespace DonmniCrash.UI
             UpdateDeadlineAfterDeparture(actor,phase);
             Stage();
         }
-        void ResetDeadline() => Deadline=unchecked(Now+(engine.Phase==TurnPhase.Finished?12000:Rules.Seconds*1000));
+        void ResetDeadline() => Deadline=unchecked(Now+(engine.Phase==TurnPhase.Finished?12000:engine.PhaseSeconds*1000));
         void TickRound()
         {
             if (engine==null) return;
@@ -172,16 +172,20 @@ namespace DonmniCrash.UI
         }
         void ReceiveAction(int sender,object body)
         {
-            if (!(body is int[] a) || a.Length!=6 || engine==null) return;
+            if (!(body is int[] a) || a.Length<6 || engine==null) return;
             int seat=Array.IndexOf(Seats,sender);
             if (OpeningBlocksPlay || awaitingBackup || a[0]!=RoundId || seat<0 || seat!=engine.ActiveSeat || a[2]<=lastRequests[seat] ||
                 a[1]!=engine.Revision || SecondsLeft(Deadline)<=0)
             { Reject(sender); return; }
-            var command=new MoveCommand((MoveKind)a[3],a[4],a[5]);
+            var kind=(MoveKind)a[3];
+            bool carriesMarks=kind==MoveKind.Confirm || kind==MoveKind.Mark;
+            if (carriesMarks ? !engine.Phase.IsSelection() || a.Length-6>engine.RequiredChoices : a.Length!=6)
+            { Reject(sender); return; }
+            var command=new MoveCommand(kind,a[4],a[5],carriesMarks ? a.Skip(6).ToArray() : null);
             var phase=engine.Phase;
             if (!engine.TryApply(seat,a[1],command)) { Reject(sender); return; }
             lastRequests[seat]=a[2];
-            if (command.Kind!=MoveKind.Choose || phase!=engine.Phase || seat!=engine.ActiveSeat) ResetDeadline();
+            if ((command.Kind!=MoveKind.Choose && command.Kind!=MoveKind.Mark) || phase!=engine.Phase || seat!=engine.ActiveSeat) ResetDeadline();
             Stage();
         }
         void Reject(int sender)
@@ -193,7 +197,8 @@ namespace DonmniCrash.UI
         {
             if (OpeningBlocksPlay || AwaitingAction || View==null || MySeat<0 || MySeat!=View.ActiveSeat) return;
             AwaitingAction=true; requestDeadline=unchecked(Now+3000);
-            SendMaster(Message.Action,new[]{RoundId,View.Revision,++sequence,(int)command.Kind,command.Value,command.Target});
+            var header=new[]{RoundId,View.Revision,++sequence,(int)command.Kind,command.Value,command.Target};
+            SendMaster(Message.Action,command.Marks==null ? header : header.Concat(command.Marks).ToArray());
         }
         public void CheckPendingAction()
         {

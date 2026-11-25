@@ -42,6 +42,21 @@ namespace DonmniCrash.Game
                 (tiles[i], tiles[j]) = (tiles[j], tiles[i]);
             }
         }
+        public GameTile[] OpenSelection(int required)
+        {
+            while (Count < required) AddSet();
+            Mix();
+            return tiles.ToArray();
+        }
+
+        // Los dorsos conservan su identidad incluso si otro asiento abandona y devuelve fichas.
+        public GameTile TakeSelected(GameTile tile)
+        {
+            int index = tiles.FindIndex(item => item.Id == tile.Id);
+            if (index < 0) throw new InvalidOperationException("Selected tile is missing from the stock.");
+            return TakeTile(index);
+        }
+
         public GameTile TakeTile(int index = -1)
         {
             if (index < 0) index = tiles.Count - 1;
@@ -65,6 +80,10 @@ namespace DonmniCrash.Game
         }
 
         // Tutorial fixtures can fix the next draw without changing the rules.
-        internal void SetNextDraw(GameTile tile) => tiles.Add(tile);
+        internal void SetScenarioStock(IEnumerable<GameTile> prepared)
+        {
+            tiles.Clear();
+            tiles.AddRange(prepared);
+        }
     }
 }

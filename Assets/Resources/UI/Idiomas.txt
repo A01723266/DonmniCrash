@@ -288,23 +288,23 @@ game.health	Vida {0}	HP {0}
 lesson.retry	Repetir	Retry
 lesson.done	Objetivo cumplido. Avanza al siguiente ejercicio o repite este.	Objective complete. Go to the next exercise or try this one again.
 lesson.title.0	Abrir la mesa	Open the table
-lesson.body.0	Toca una ficha y pulsa Colocar. La espada inicia el ataque y robas un reemplazo.	Tap a tile and press Play tile. Its sword starts the attack and you draw a replacement.
+lesson.body.0	Elige una ficha y pulsa Colocar. Después toca un dorso para reponerla y terminar el turno.	Choose a tile and press Play tile. Then tap a back to replace it and end your turn.
 lesson.title.1	Defender con el escudo	Defend with the shield
 lesson.body.1	Llega Fuego. Busca el escudo de Agua en la mitad superior y coloca esa ficha.	Fire is incoming. Find the Water shield on the top half and play that tile.
 lesson.title.2	Jugar la ficha robada	Play a drawn tile
-lesson.body.2	Pulsa Robar. El escudo de la ficha nueva vence a Fuego. Colócala para evitar daño.	Press Draw. The new tile’s shield beats Fire. Play it to avoid damage.
+lesson.body.2	Pulsa Robar y toca un dorso. Cuando veas la ficha, elige Colocar.	Press Draw and tap a back. When the tile is revealed, choose Play tile.
 lesson.title.3	Conservar y perder vida	Keep a tile and lose health
-lesson.body.3	Roba y elige Conservar. Ganas espacio en la mano, pierdes una vida y sigues de turno.	Draw and choose Keep. Your hand grows, you lose one health and your turn continues.
+lesson.body.3	Pulsa Robar y toca un dorso. Esta vez, conserva la ficha para ver cómo cambian tu mano y tu vida.	Press Draw and tap a back. This time, keep it to see how your hand and HP change.
 lesson.title.4	Invertir el sentido	Reverse direction
 lesson.body.4	Selecciona REV y colócala. El ataque de Fuego vuelve hacia el vecino anterior.	Select REV and play it. The Fire attack goes back toward the previous neighbor.
 lesson.title.5	Pasar el ataque	Pass the attack
 lesson.body.5	Coloca el comodín >> para pasar el mismo ataque al siguiente jugador.	Play the >> wild tile to send the same attack to the next player.
 lesson.title.6	Cambiar una mano mayor	Swap a larger hand
-lesson.body.6	Elige un escudo válido, pulsa + Intercambio hasta ver Bot 1 y coloca. Elige y confirma la ficha que conservas.	Choose a valid shield, tap + Swap until Bot 1 appears and play. Select and confirm the tile to keep.
+lesson.body.6	Elige un escudo de Agua. Pulsa + Intercambio hasta ver Bot 1 y luego Colocar. Marca lo que quieres conservar y pulsa Continuar.	Choose a Water shield. Press + Swap until Bot 1 appears, then Play tile. Mark what you want to keep and press Continue.
 lesson.title.7	Cambiar una mano menor	Swap a smaller hand
-lesson.body.7	Combina un escudo válido con Intercambio y elige Bot 1. Coloca y confirma tres dorsos de su mano.	Combine a valid shield with Swap and choose Bot 1. Play and confirm three tiles from their hidden hand.
+lesson.body.7	Elige un escudo de Agua y combina la ficha con Intercambio contra Bot 1. Al colocarla, marca tres dorsos y pulsa Continuar una sola vez.	Choose a Water shield and combine the tile with Swap against Bot 1. Play it, mark three backs and press Continue once.
 lesson.title.8	Completar tu mano	Refill your hand
-lesson.body.8	Tras recibir un intercambio te faltan dos fichas. Toca y confirma dos dorsos antes de defender.	After a swap you are two tiles short. Tap and confirm two face-down tiles before defending.
+lesson.body.8	Te faltan dos fichas. Marca dos dorsos de la reserva y pulsa Continuar. Puedes cambiar tus marcas antes de confirmar.	You need two tiles. Mark two backs from the stock and press Continue. You can change your marks before confirming.
 credit.title	Créditos	Credits
 credit.design	Diseño del juego	Game design
 credit.technology	Tecnología	Technology
@@ -359,3 +359,33 @@ game.dice.result	Orden inicial	Opening order
 game.dice.next	Abre {0}.\nDespués juega {1}.	{0} goes first.\n{1} goes next.
 lesson.guide.hide	Ocultar instrucciones	Hide instructions
 lesson.guide.show	Mostrar instrucciones	Show instructions
+board.free	Vista libre	Free view
+board.follow	Seguir jugada	Follow play
+board.zoom.in	+ Acercar	+ Zoom in
+board.zoom.out	− Alejar	− Zoom out
+choice.continue	Continuar	Continue
+choice.keep	Conservar · −1 vida	Keep · −1 HP
+choice.draw	Roba una ficha	Draw a tile
+choice.replacement	Elige tu reemplazo	Choose your replacement
+choice.refill	Completa tu mano	Refill your hand
+choice.swap	Intercambia las manos	Swap hands
+choice.offer	Ficha robada	Drawn tile
+choice.draw.hint	Toca un dorso para descubrir tu ficha.	Tap a back to reveal your tile.
+choice.replacement.hint	Toca un dorso. La ficha irá a tu mano y pasará el turno.	Tap a back. The tile goes into your hand and the turn passes.
+choice.refill.hint	Elige los dorsos que añadirás a tu mano.	Choose the backs to add to your hand.
+choice.visible.hint	Elige las fichas de tu mano que quieres conservar.	Choose the tiles from your hand that you want to keep.
+choice.blind.hint	Elige los dorsos que recibirás de la mano rival.	Choose the backs you will receive from the other hand.
+choice.progress	{0} · {1} de {2}. Toca de nuevo para desmarcar.	{0} · {1} of {2}. Tap again to deselect.
+choice.offer.hint	Puedes colocar esta ficha para evitar daño o conservarla y perder una vida.	Play this tile to avoid damage or keep it and lose one HP.
+choice.clock	{0} s	{0} s
+choice.guided	A tu ritmo	At your own pace
+lesson.offer.play	Coloca la ficha robada para defenderte sin perder vida.	Play the drawn tile to defend without losing HP.
+lesson.offer.keep	Elige Conservar para añadir la ficha a tu mano y perder una vida.	Choose Keep to add the tile to your hand and lose one HP.
+lesson.title.9	Ordenar tu mano	Arrange your hand
+lesson.body.9	Arrastra una ficha hasta otro espacio y suéltala. En pantalla táctil, mantenla pulsada antes de arrastrar.	Drag a tile to a different slot and drop it. On touchscreens, hold the tile before dragging.
+lesson.title.10	Explorar la mesa	Explore the table
+lesson.body.10	Pulsa Vista libre para explorar esta cadena.	Press Free view to explore this chain.
+lesson.zoom.both	Arrastra la mesa para explorar. Prueba Acercar y Alejar en el orden que prefieras.	Drag the table to explore. Try Zoom in and Zoom out in either order.
+lesson.zoom.in	Ahora pulsa Acercar.	Now press Zoom in.
+lesson.zoom.out	Ahora pulsa Alejar.	Now press Zoom out.
+lesson.follow	Pulsa Seguir jugada para volver a la última ficha.	Press Follow play to return to the latest tile.

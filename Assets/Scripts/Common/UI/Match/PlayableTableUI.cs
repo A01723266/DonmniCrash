@@ -14,7 +14,6 @@ namespace DonmniCrash.UI
         protected MatchEngine Match { get; private set; }
         protected ITableView Display { get; private set; }
         protected virtual int LocalSeat => 0;
-        protected virtual bool NetworkTable => false;
         protected virtual int StartingHealth => Match.Config.Health;
         protected virtual int Emblem(int seat) => seat == 0 ? Array.IndexOf(UserSettings.Emblems.ToArray(),UserSettings.Emblem) : seat % 5;
         int lastTurn = -1;
@@ -27,14 +26,13 @@ namespace DonmniCrash.UI
         protected virtual void OnLanguageChanged() { }
         protected virtual void RunBot() { }
         protected virtual void Finish() { }
-        protected bool IsFinished => Display.Phase == TurnPhase.Finished || (!NetworkTable && Display.Health(0) == 0);
+        protected bool IsFinished => Display.Phase == TurnPhase.Finished || (Guided && Display.Health(0) == 0);
         bool OwnTurn => Display != null && LocalSeat >= 0 && Display.ActiveSeat == LocalSeat && !IsFinished;
         bool IsLocalTurn => OwnTurn && !ActionsBlocked && !OpeningBlocksActions;
-        bool Selecting => Display.Phase == TurnPhase.SwapSelection || Display.Phase == TurnPhase.Refill;
         float seconds, botDelay;
         int displayedSecond, selectedId = -1, target = -1;
         Button playButton, drawButton, swapButton;
-        ScrollRect hand, historyScroll;
+        ScrollRect hand;
         TMP_Text clockLabel;
         readonly Dictionary<int,DominoTileView> tileButtons = new Dictionary<int,DominoTileView>();
 
@@ -42,17 +40,21 @@ namespace DonmniCrash.UI
         {
             base.BindControls();
             hand = ComponentOf<ScrollRect>("HandScrollView");
-            historyScroll = ComponentOf<ScrollRect>("HistoryScroll");
+            handDrag = hand.content.gameObject.AddComponent<HandDrag>();
+            handDrag.Bind(hand,RememberHandOrder);
+            boardNavigator = ComponentOf<BoardNavigator>("BoardViewport");
+            boardArea = (RectTransform)boardNavigator.transform.parent;
             clockLabel = ComponentOf<TMP_Text>("TurnTimerLabel");
             if (!Guided) OpeningView = ComponentOf<OpeningRollView>("OpeningRollOverlay");
             playButton = ComponentOf<Button>("PlayTileButton");
             drawButton = ComponentOf<Button>("DrawTileButton");
             swapButton = ComponentOf<Button>("PassTurnButton");
-            playButton.onClick.AddListener(() => SubmitMove(new MoveCommand(Selecting ? MoveKind.Choose : MoveKind.Play,selectedId,target)));
-            drawButton.onClick.AddListener(() => SubmitMove(new MoveCommand(Display.Phase == TurnPhase.Offer ? MoveKind.Keep : MoveKind.Draw)));
+            playButton.onClick.AddListener(() => SubmitMove(new MoveCommand(MoveKind.Play,selectedId,target)));
+            drawButton.onClick.AddListener(() => SubmitMove(new MoveCommand(MoveKind.Draw)));
             swapButton.onClick.AddListener(CycleTarget);
             BindHud();
             BindArt();
+            BindChoices();
             SessionAppearance.Changed += RefreshLanguage;
             UserSettings.PlayAssistChanged += RefreshAssist;
         }
@@ -81,7 +83,9 @@ namespace DonmniCrash.UI
             lastTurn = -1;
             lastVisibleSeat = -1;
             selectedId = target = -1;
-            ClearBoard();
+            handOrder.Clear();
+            shownChoice = -1;
+            ClearBoard(true);
             ResetClock();
             PaintTransition();
         }
@@ -115,7 +119,7 @@ namespace DonmniCrash.UI
 
         protected void ResetClock()
         {
-            seconds = Match.Config.Seconds;
+            seconds = Match.PhaseSeconds;
             botDelay = Mathf.Min(.65f,seconds * .45f);
             displayedSecond = -1;
             RenderClock();
@@ -132,12 +136,14 @@ namespace DonmniCrash.UI
             int wholeSeconds = Mathf.CeilToInt(seconds);
             if (wholeSeconds == displayedSecond) return;
             displayedSecond = wholeSeconds;
+            UpdateChoiceClock();
             WriteLabel(clockLabel,Guided ? T("game.guided") : T("game.time",wholeSeconds));
         }
 
         // Pause the local clock while a nested help or settings dialog is open.
         protected void Update()
         {
+            if (Display != null) FlushMarks();
             if (Match == null || Guided || InteractionBlocked || OpeningBlocksActions || IsFinished) return;
             seconds = Mathf.Max(0,seconds - Time.unscaledDeltaTime);
             botDelay -= Time.unscaledDeltaTime;
@@ -158,7 +164,7 @@ namespace DonmniCrash.UI
             var phase = Match.Phase;
             if (!Match.TryApply(actor,Match.Revision,a)) { NotifyUser("game.illegal"); return; }
             OnAccepted(a);
-            bool sameSelection = a.Kind == MoveKind.Choose && Match.ActiveSeat == actor && Match.Phase == phase;
+            bool sameSelection = (a.Kind == MoveKind.Choose || a.Kind == MoveKind.Mark) && Match.ActiveSeat == actor && Match.Phase == phase;
             AfterMove(!sameSelection);
         }
 

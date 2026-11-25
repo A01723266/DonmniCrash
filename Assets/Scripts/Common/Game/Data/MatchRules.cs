@@ -5,8 +5,15 @@ namespace DonmniCrash.Game
     public enum BotLevel { Easy, Normal, Hard }
     public enum Element { Earth, Water, Wind, Fire, Plant }
     public enum TileKind { Standard, Reverse, Pass, Swap }
-    public enum TurnPhase { Decision, Offer, SwapSelection, Refill, Finished }
-    public enum MoveKind { Play, Draw, Keep, Choose }
+    public enum TurnPhase { Decision, Offer, SwapSelection, Refill, Finished, DrawSelection, Replacement }
+    public enum MoveKind { Play, Draw, Keep, Choose, Confirm, Mark }
+
+    public static class SelectionPhases
+    {
+        public static bool UsesStock(this TurnPhase phase) => phase == TurnPhase.DrawSelection ||
+            phase == TurnPhase.Replacement || phase == TurnPhase.Refill;
+        public static bool IsSelection(this TurnPhase phase) => phase.UsesStock() || phase == TurnPhase.SwapSelection;
+    }
 
     /// <summary>Immutable round settings shared by the local and network engines.</summary>
     public sealed partial class MatchRules
@@ -40,7 +47,8 @@ namespace DonmniCrash.Game
     {
         public readonly MoveKind Kind;
         public readonly int Value, Target;
-        public MoveCommand(MoveKind kind, int value = -1, int target = -1)
-        { Kind = kind; Value = value; Target = target; }
+        public readonly int[] Marks;
+        public MoveCommand(MoveKind kind, int value = -1, int target = -1, int[] marks = null)
+        { Kind = kind; Value = value; Target = target; Marks = marks; }
     }
 }

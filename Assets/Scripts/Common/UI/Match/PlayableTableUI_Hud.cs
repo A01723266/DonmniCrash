@@ -11,7 +11,6 @@ namespace DonmniCrash.UI
     {
         const float ExpandedHudHeight = 180;
         const float CompactHudHeight = 134;
-        readonly List<(int id, DominoTileView view)> renderedBoard = new List<(int, DominoTileView)>();
         PlayerHudCard[] playerCards;
         ScrollRect playerScroll;
         RectTransform topHud, tutorialPanel;
@@ -45,7 +44,7 @@ namespace DonmniCrash.UI
         {
             float top = compactTurns ? CompactHudHeight : ExpandedHudHeight;
             topHud.offsetMin = new Vector2(topHud.offsetMin.x,-top);
-            var board = (RectTransform)historyScroll.transform;
+            var board = boardArea;
             board.offsetMax = new Vector2(board.offsetMax.x,-top - 8);
             if (tutorialPanel)
                 tutorialPanel.offsetMax = new Vector2(tutorialPanel.offsetMax.x,-top - 8);
@@ -90,41 +89,6 @@ namespace DonmniCrash.UI
             if (Mathf.Approximately(offset,0)) return;
             playerScroll.StopMovement();
             playerScroll.horizontalNormalizedPosition = Mathf.Clamp01(playerScroll.horizontalNormalizedPosition + offset / scrollWidth);
-        }
-
-        void ClearBoard()
-        {
-            ClearChildren(historyScroll.content);
-            renderedBoard.Clear();
-        }
-
-        void RenderBoard()
-        {
-            var tiles = Display.BoardTiles;
-            // Una resincronización puede reemplazar el historial, incluso con el mismo número de fichas.
-            if (renderedBoard.Count > tiles.Count ||
-                renderedBoard.Where((item,index) => item.id != tiles[index].Id).Any())
-                ClearBoard();
-
-            bool appended = renderedBoard.Count < tiles.Count;
-            if (appended && renderedBoard.Count > 0)
-                MarkLatest(renderedBoard[^1].view,false,null);
-            for (int i = renderedBoard.Count; i < tiles.Count; i++)
-                renderedBoard.Add((tiles[i].Id,CreateTile(historyScroll.content,tiles[i],-1,false)));
-
-            if (renderedBoard.Count > 0)
-                MarkLatest(renderedBoard[^1].view,true,tiles[^1].Kind == TileKind.Standard ? null : Display.Attack);
-            if (!appended) return;
-            Canvas.ForceUpdateCanvases();
-            historyScroll.StopMovement();
-            historyScroll.horizontalNormalizedPosition = 1;
-        }
-
-        void MarkLatest(DominoTileView tile,bool latest,Element? carriedAttack)
-        {
-            tile.latestOutline.SetActive(latest);
-            tile.carriedAttack.transform.parent.gameObject.SetActive(carriedAttack.HasValue);
-            if (carriedAttack.HasValue) tile.carriedAttack.sprite = swords[(int)carriedAttack.Value];
         }
 
         void RefreshAssist()

@@ -33,7 +33,7 @@ namespace DonmniCrash.Game
             using var writer = new BinaryWriter(stream);
             writer.Write(Revision); writer.Write(ActiveSeat); writer.Write(Direction); writer.Write((int)Phase);
             writer.Write(Attack.HasValue ? (int)Attack.Value : -1);
-            writer.Write(recipient); writer.Write(selectionCount);
+            writer.Write(SelectionId); writer.Write(recipient); writer.Write(selectionCount);
             writer.Write(offer.HasValue);
             if (offer.HasValue) WriteTile(writer,offer.Value);
             foreach (int seat in orden) writer.Write(seat);
@@ -54,7 +54,7 @@ namespace DonmniCrash.Game
             Revision = reader.ReadInt32(); ActiveSeat = reader.ReadInt32(); Direction = reader.ReadInt32();
             Phase = (TurnPhase)reader.ReadInt32();
             int attack = reader.ReadInt32(); Attack = attack < 0 ? (Element?)null : (Element)attack;
-            recipient = reader.ReadInt32(); selectionCount = reader.ReadInt32();
+            SelectionId = reader.ReadInt32(); recipient = reader.ReadInt32(); selectionCount = reader.ReadInt32();
             offer = reader.ReadBoolean() ? ReadTile(reader) : (GameTile?)null;
             for (int i=0;i<orden.Count;i++) orden[i] = reader.ReadInt32();
             foreach (var seat in players)

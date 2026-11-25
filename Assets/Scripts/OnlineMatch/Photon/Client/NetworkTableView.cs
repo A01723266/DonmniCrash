@@ -14,7 +14,7 @@ namespace DonmniCrash.UI
         int owner=-1;
         GameTile? offer;
         GameTile?[] choices = Array.Empty<GameTile?>();
-        bool[] available = Array.Empty<bool>();
+        bool[] marked = Array.Empty<bool>();
         public int ActiveSeat { get; private set; }
         public TurnPhase Phase { get; private set; }
         public Element? Attack { get; private set; }
@@ -23,14 +23,17 @@ namespace DonmniCrash.UI
         public bool VisibleSelection { get; private set; }
         public int Revision { get; private set; } = -1;
         public int Direction { get; private set; }
-        public int OptionCount => available.Length;
+        public int OptionCount => marked.Length;
         public IReadOnlyList<int> Order => order;
         public IReadOnlyList<GameTile> BoardTiles => history;
         public int Health(int seat) => health[seat];
         public int HandCount(int seat) => sizes[seat];
         public GameTile[] HandOf(int seat) => seat==owner && owner>=0 ? hand.ToArray() : Array.Empty<GameTile>();
         public GameTile? OfferFor(int seat) => seat==owner ? offer : null;
-        public bool IsAvailable(int index) => available[index];
+        public bool IsAvailable(int index) => index >= 0 && index < marked.Length;
+        public bool IsMarked(int index) => marked[index];
+        public int SelectionId { get; private set; }
+        public int RequiredChoices { get; private set; }
         public GameTile? InspectOption(int seat,int index) => seat==owner && index>=0 && index<choices.Length ? choices[index] : null;
         public bool CanTarget(int seat) => seat != ActiveSeat && health[seat]>0 && sizes[seat]==capacity[seat];
 
@@ -59,16 +62,15 @@ namespace DonmniCrash.UI
             var drawn = game.OfferFor(seat);
             w.Write(drawn.HasValue);
             if (drawn.HasValue) MatchEngine.WriteTile(w,drawn.Value);
-            bool selecting = game.ActiveSeat == seat && (game.Phase == TurnPhase.Refill || game.Phase == TurnPhase.SwapSelection);
+            bool selecting = game.ActiveSeat == seat && game.Phase.IsSelection();
             w.Write(selecting ? game.OptionCount : 0);
             if (selecting)
             {
-                w.Write(game.RemainingChoices); w.Write(game.VisibleSelection);
+                w.Write(game.SelectionId); w.Write(game.RequiredChoices); w.Write(game.RemainingChoices); w.Write(game.VisibleSelection);
                 for (int i=0;i<game.OptionCount;i++)
                 {
-                    bool enabled = game.IsAvailable(i);
-                    w.Write(enabled);
-                    if (enabled && game.VisibleSelection) MatchEngine.WriteTile(w,game.InspectOption(seat,i).Value);
+                    w.Write(game.IsMarked(i));
+                    if (game.VisibleSelection) MatchEngine.WriteTile(w,game.InspectOption(seat,i).Value);
                 }
             }
             return stream.ToArray();
@@ -94,12 +96,15 @@ namespace DonmniCrash.UI
             using var p = new BinaryReader(new MemoryStream(privateData));
             MatchEngine.ReadTiles(p,hand);
             offer = p.ReadBoolean() ? MatchEngine.ReadTile(p) : (GameTile?)null;
-            n=p.ReadInt32(); choices=new GameTile?[n]; available=new bool[n];
+            n=p.ReadInt32(); choices=new GameTile?[n]; marked=new bool[n];
             RemainingChoices=0; VisibleSelection=false;
             if (n==0) return;
-            RemainingChoices=p.ReadInt32(); VisibleSelection=p.ReadBoolean();
+            SelectionId=p.ReadInt32(); RequiredChoices=p.ReadInt32(); RemainingChoices=p.ReadInt32(); VisibleSelection=p.ReadBoolean();
             for(int i=0;i<n;i++)
-                if ((available[i]=p.ReadBoolean()) && VisibleSelection) choices[i]=MatchEngine.ReadTile(p);
+                {
+                marked[i]=p.ReadBoolean();
+                if (VisibleSelection) choices[i]=MatchEngine.ReadTile(p);
+            }
         }
     }
 }

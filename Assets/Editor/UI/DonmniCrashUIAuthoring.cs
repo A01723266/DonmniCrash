@@ -603,6 +603,8 @@ namespace DonmniCrash.EditorTools
             if(tutorial)TutorialPanels(shell,screen);
             PolishMatchHud(screen,tutorial);
             PolishOpeningPresentation(screen,tutorial);
+            AddBoardNavigation(screen);
+            AddSelectionTable(screen,tutorial);
             CommonOverlays(shell);Save(name);
         }
         static void MatchDialogs(Shell shell,bool offline)

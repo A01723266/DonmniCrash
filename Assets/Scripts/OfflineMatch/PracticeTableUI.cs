@@ -63,7 +63,6 @@ namespace DonmniCrash.UI
                 if (!currentRow) continue;
                 currentRow.gameObject.SetActive(i < Match.Order.Count);
                 if (!currentRow.gameObject.activeSelf) continue;
-                // Several bots can survive when the human loses. Report health instead of assigning an imaginary ranking.
                 int actor = Match.Order[i];
                 WriteLabel(FindNode("RankLabel",currentRow).GetComponent<TMP_Text>(),"");
                 WriteLabel(FindNode("PlayerLabel",currentRow).GetComponent<TMP_Text>(),DisplayName(actor));

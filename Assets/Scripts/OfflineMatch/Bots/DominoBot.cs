@@ -11,6 +11,7 @@ namespace DonmniCrash.UI
         public DominoBot(int seed) { random = new Random(seed); }
         public MoveCommand Decide(ActorView v, BotLevel level)
         {
+            if (v.Options.Length == 1) return v.Options[0];
             if (level == BotLevel.Easy) return v.Options[random.Next(v.Options.Length)];
             // Break ties between equivalent moves and indistinguishable hidden tiles.
             return v.Options.OrderByDescending(a => Score(v,a,level) + random.NextDouble() * .8).First();

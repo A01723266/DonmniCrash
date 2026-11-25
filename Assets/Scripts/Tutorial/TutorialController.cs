@@ -9,12 +9,15 @@ namespace DonmniCrash.UI
         int stepIndex;
         bool complete;
         protected override bool Guided => true;
-        protected override bool ActionsBlocked => complete;
+        protected override bool ActionsBlocked => complete || stepIndex >= TutorialSteps.OrderHand;
+        protected override string OfferHintKey => stepIndex == 2 ? "lesson.offer.play" :
+            stepIndex == 3 ? "lesson.offer.keep" : base.OfferHintKey;
         protected override void LeaveTable() => GoTo("OfflineSetting");
         protected override void BindControls()
         {
             base.BindControls();
             BindGuide();
+            boardNavigator.Navigated += OnNavigation;
             BindButton("TutorialWelcomeDialog","BeginTutorialButton",Close);
             BindButton("TutorialWelcomeDialog","SkipTutorialButton",LeaveTable);
             BindButton(InitialScreen,"SkipTutorialButton", () => Open("ExitTutorialDialog"));
@@ -47,6 +50,7 @@ namespace DonmniCrash.UI
         void Step(int index)
         {
             stepIndex = index;
+            freeView = zoomedIn = zoomedOut = false;
             complete = false;
             Begin(TutorialSteps.Prepare(stepIndex));
             RenderGuide();
@@ -59,7 +63,7 @@ namespace DonmniCrash.UI
         void RenderGuide()
         {
             SetLabel("StepTitleLabel",(stepIndex+1)+" / "+TutorialSteps.Total+" · "+T("lesson.title."+stepIndex));
-            SetLabel("StepDescriptionLabel",T(complete ? "lesson.done" : "lesson.body."+stepIndex));
+            SetLabel("StepDescriptionLabel",T(InstructionKey()));
             ComponentOf<Button>("PreviousStepButton").interactable = stepIndex > 0;
             ComponentOf<Button>("NextStepButton").interactable = complete;
             for (int i=0;i<TutorialSteps.Total;i++)

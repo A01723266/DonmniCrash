@@ -9,7 +9,7 @@ namespace DonmniCrash.UI
         // Con fichas de 142 unidades, el escudo queda a la vista al bajar la mano.
         const float HandDrop = 86;
         RectTransform handTray;
-        GameObject handActions, personalHealth;
+        GameObject handActions, personalHealth, handPanel, spectatorPanel;
         Image personalHealthFill;
         TMP_Text personalHealthLabel, handToggleLabel;
         Vector2 raisedHandPosition;
@@ -18,6 +18,8 @@ namespace DonmniCrash.UI
 
         void BindHandHud()
         {
+            handPanel = FindNode("HandHUDPanel").gameObject;
+            spectatorPanel = FindNode("SpectatorPanel").gameObject;
             handTray = ComponentOf<RectTransform>("HandTray");
             handActions = FindNode("ActionControlsPanel").gameObject;
             personalHealth = FindNode("PersonalHealth").gameObject;
@@ -26,7 +28,7 @@ namespace DonmniCrash.UI
             var toggle = ComponentOf<Button>("HandToggleButton");
             handToggleLabel = toggle.GetComponentInChildren<TMP_Text>(true);
             raisedHandPosition = handTray.anchoredPosition;
-            raisedBoardBottom = ((RectTransform)historyScroll.transform).offsetMin.y;
+            raisedBoardBottom = boardArea.offsetMin.y;
             toggle.onClick.AddListener(ToggleHand);
             ShowOwnTurnActions(false);
             RefreshHandToggle();
@@ -36,11 +38,7 @@ namespace DonmniCrash.UI
         {
             handLowered = !handLowered;
             handTray.anchoredPosition = raisedHandPosition - Vector2.up * (handLowered ? HandDrop : 0);
-            if (!Guided)
-            {
-                var board = (RectTransform)historyScroll.transform;
-                board.offsetMin = new Vector2(board.offsetMin.x,raisedBoardBottom - (handLowered ? HandDrop : 0));
-            }
+            boardArea.offsetMin = new Vector2(boardArea.offsetMin.x,raisedBoardBottom - (handLowered ? HandDrop : 0));
             RefreshHandToggle();
         }
 
