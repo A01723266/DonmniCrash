@@ -16,7 +16,7 @@ namespace DonmniCrash.UI
 
         public static string DisplayName => NormalizeName(PlayerPrefs.GetString(KeyPrefix + "perfil.nombre", ""));
         public static string Emblem => ValidateEmblem(PlayerPrefs.GetString(KeyPrefix + "perfil.emblema", emblems[0]));
-        public static bool English => PlayerPrefs.GetString(KeyPrefix + "idioma", "es") == "en";
+        public static bool English => PlayerPrefs.GetString(KeyPrefix + "idioma", "en") == "en";
         public static bool PlayAssist => PlayerPrefs.GetInt(KeyPrefix + "playAssist", 1) != 0;
         public static event Action PlayAssistChanged;
 

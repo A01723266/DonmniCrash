@@ -12,7 +12,7 @@ namespace DonmniCrash.UI
         static SessionAppearance catalog;
         public static int Palette { get; private set; }
         public static int Slab { get; private set; }
-        public static bool English { get; private set; }
+        public static bool English { get; private set; } = true;
         public static event Action Changed;
 
         // Also reset static state when entering a scene directly from the editor.
@@ -21,7 +21,7 @@ namespace DonmniCrash.UI
         {
             catalog = null;
             Palette = Slab = 0;
-            English = false;
+            English = true;
             Changed = null;
         }
 
