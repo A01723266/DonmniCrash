@@ -19,7 +19,6 @@ namespace DonmniCrash.UI
             BindButton("PauseDialog","SettingsButton", () => Open("SettingsDialog"));
             BindButton("PauseDialog","ElementHelpButton", () => Open("ElementHelpDialog"));
             BindButton("PauseDialog","LeaveMatchButton", () => Open("LeaveMatchDialog"));
-            BindButton("PauseDialog","PreviewButton", () => Open("PreviewDialog"));
             BindButton("SettingsDialog","CloseSettingsButton",Close);
             BindButton("LeaveMatchDialog","StayButton",Close);
             BindButton("LeaveMatchDialog","LeaveButton",LeaveTable);

@@ -114,26 +114,9 @@ namespace DonmniCrash.UI
         void BindShared()
         {
             foreach (var button in new[] { "CloseButton", "AcceptButton", "CancelButton", "ConfirmButton" })
-                foreach (var panel in new[] { "MessageDialog", "ElementHelpDialog", "ConfirmationDialog", "PreviewDialog" })
+                foreach (var panel in new[] { "MessageDialog", "ElementHelpDialog", "ConfirmationDialog" })
                     BindButton(panel, button, Close);
-            PreviewOption("PreviewNotice", () => NotifyUser("preview.common"));
-            PreviewOption("PreviewConfirm", () => Open("ConfirmationDialog"));
-            PreviewOption("PreviewLoading", () => StartCoroutine(ShowTemporary("LoadingOverlay")));
-            PreviewOption("PreviewToast", () => StartCoroutine(ShowTemporary("ToastPanel")));
-            PreviewOption("ElementGuide", () => Open("ElementHelpDialog"));
-            BindButton("Screens", "PreviewButton", () => Open("PreviewDialog"));
         }
-
-        // Use real time so transient overlays can close while gameplay is paused.
-        IEnumerator ShowTemporary(string name)
-        {
-            Open(name);
-            yield return new WaitForSecondsRealtime(1.2f);
-            if (dialogsStack.Count > 0 && dialogsStack.Peek().name == name) Close();
-        }
-
-        protected void PreviewOption(string name, Action show) =>
-            BindButton("PreviewDialog", name, () => { Close(); show(); });
 
         protected void NotifyUser(string key)
         {

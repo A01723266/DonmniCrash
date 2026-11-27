@@ -411,14 +411,14 @@ namespace DonmniCrash.EditorTools
             var title=Label("GameTitleLabel",layout,"DonmniCrash",48,UIThemeRole.Text,true);title.alignment=TextAlignmentOptions.Center;Size(title,72);
             var sub=Label("SubtitleLabel",layout,"Choose how to play",21,UIThemeRole.SecondaryText);sub.alignment=TextAlignmentOptions.Center;Size(sub,38);
             Button("OnlineButton",layout,"Play online",true);Button("OfflineButton",layout,"Play offline");
-            var options=Row("OptionsPanel",layout);
-            var optionsGroup=options.GetComponent<HorizontalLayoutGroup>();
-            optionsGroup.childAlignment=TextAnchor.MiddleCenter;
-            optionsGroup.childForceExpandHeight=false;
-            foreach(var label in new[]{("CustomizationButton","Customize"),("SettingsButton","Settings")})
+            var options = Row("OptionsPanel",layout);
+            options.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight = false;
+            foreach (var item in new[]{("CustomizationButton","Customize"),("SettingsButton","Settings")})
             {
-                var button=Button(label.Item1,options,label.Item2,false,180);
-                button.GetComponent<LayoutElement>().minWidth=120;
+                var button = Button(item.Item1,options,item.Item2);
+                var size = button.GetComponent<LayoutElement>();
+                size.minWidth = size.preferredWidth = 0;
+                size.flexibleWidth = 1;
             }
             Button("CreditsButton",layout,"Credits");
             CreateCredits(shell);
@@ -427,6 +427,7 @@ namespace DonmniCrash.EditorTools
             var preview=Card("PreviewPanel",customize,"Preview");Player(preview,"PlayerPreviewCard","Player",true);
             var style=Card("AppearancePanel",customize,"Emblem");var emblemRow=Row("EmblemOptionsPanel",style,68);
             for(int i=0;i<5;i++){var b=Button(elements[i]+"EmblemButton",emblemRow,"");var icon=Icon("ElementIcon",b.transform,symbols[elements[i]],40);Stretch(icon.rectTransform,14,6,14,6);}
+            AddPhotoButton(style);
             Button("SaveProfileButton",customize,"Apply profile",true);
             var settings=Screen(shell,"SettingsScreen","Settings","Adjust sound, language and appearance.",false);Settings(settings);Button("SaveSettingsButton",settings,"Ready",true);
             CommonOverlays(shell);Save("Start");
@@ -501,11 +502,7 @@ namespace DonmniCrash.EditorTools
         static void OfflineSettingsScene()
         {
             var shell=Scene("OfflineSetting");var activity=Screen(shell,"ActivitySelectionScreen","Play offline","Practice at your own pace and learn the elements.");
-            var grid=Grid("ActivityCardsPanel",activity,250);
-            var tutorial=Card("TutorialCard",grid,"Learn to play");Object.DestroyImmediate(tutorial.GetComponent<ContentSizeFitter>());
-            Size(Label("DescriptionLabel",tutorial,"Explore the table, attacks and defenses step by step.",21,UIThemeRole.SecondaryText),90);Button("TutorialButton",tutorial,"Open tutorial",true);
-            var bots=Card("BotsCard",grid,"Game against bots");Object.DestroyImmediate(bots.GetComponent<ContentSizeFitter>());
-            Size(Label("DescriptionLabel",bots,"Set up a table and practice your moves offline.",21,UIThemeRole.SecondaryText),90);Button("BotConfigurationButton",bots,"Set up match");
+            ActivityRows(activity);
             var config=Screen(shell,"BotConfigurationScreen","Against bots","Choose how to practice.",false);MatchConfiguration(config,true);Button("ContinueButton",config,"Continue",true);
             var summary=Screen(shell,"ConfigurationSummaryScreen","All set","Review your settings before you start.",false);
             var details=Card("SummaryPanel",summary,"Your match");Label("PlayersLabel",details,"You + 1 bot",24);Label("DifficultyLabel",details,"Difficulty: Normal",22);Size(Label("RulesLabel",details,"Health, tiles and time: as configured",19,UIThemeRole.SecondaryText),64);
@@ -646,7 +643,6 @@ namespace DonmniCrash.EditorTools
             var row=Horizontal(controls.transform,10);row.padding=new RectOffset(4,4,2,2);Button("PreviousStepButton",controls.transform,"Previous");Button("RetryStepButton",controls.transform,"Retry");Button("NextStepButton",controls.transform,"Next",true);Button("SkipTutorialButton",controls.transform,"Leave");
             var highlight=Panel("TutorialHighlightOverlay",shell.overlays,UIThemeRole.Focus);Place(highlight.rectTransform,Vector2.zero,new Vector2(1,0),new Vector2(20,20),new Vector2(-230,205));
             highlight.color=new Color(theme.accent.r,theme.accent.g,theme.accent.b,.18f);highlight.raycastTarget=false;highlight.GetComponent<UIThemeBinding>().opacity=.18f;highlight.gameObject.SetActive(false);
-            var welcome=Dialog(shell.overlays,"TutorialWelcomeDialog","Welcome to DonmniCrash","Learn to recognize your tiles and read the table.");Button("BeginTutorialButton",welcome,"Start",true);Button("SkipTutorialButton",welcome,"Later");
             var help=Dialog(shell.overlays,"TutorialHelpDialog","Attack and defense","Each tile has two symbols: a sword for attack and a shield for defense.");var sample=Tile(help,3,1);Button("CloseButton",help,"Got it",true);
             var finish=Dialog(shell.overlays,"TutorialCompleteDialog","Tutorial complete!","You have explored the table. Continue practicing against bots.");Button("PracticeButton",finish,"Play against bots",true);Button("RepeatTutorialButton",finish,"Repeat tutorial");Button("BackButton",finish,"Back");
             var exit=Dialog(shell.overlays,"ExitTutorialDialog","Leave the tutorial?","You can start again from the offline menu.");Button("ContinueButton",exit,"Continue tutorial",true);Button("ExitButton",exit,"Leave");

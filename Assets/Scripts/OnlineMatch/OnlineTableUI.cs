@@ -23,6 +23,13 @@ namespace DonmniCrash.UI
         protected override bool OpeningBlocksActions=>session.OpeningBlocksPlay;
         protected override string DisplayName(int seat)=>session.SeatNames[seat];
         protected override int Emblem(int seat)=>session.Emblems[seat];
+        protected override Sprite Portrait(int seat) => session.PlayerPortrait(session.Seats[seat],base.Portrait(seat));
+        void RefreshPortraits()
+        {
+            if (session.View == null || Display != session.View || shownResult) return;
+            RenderPlayers();
+            RenderActions();
+        }
         protected override void LeaveTable() { session.Leave(); }
         protected override void Replay() { session.Dismissed=session.RoundId==finishedRound; GoTo("OnlineRooms","LobbyScreen"); }
         protected override void ExitResults() { PhotonNetwork.Disconnect(); GoTo("Start"); }
@@ -37,6 +44,7 @@ namespace DonmniCrash.UI
             dialogs=new RoomDialogs(session,FindNode("AdmissionRequestDialog"),FindNode("CloseRoomDialog"),Open,Close);
             session.Changed+=Refresh;
             session.TableChanged+=DrawTable;
+            session.PortraitsChanged+=RefreshPortraits;
             BindButton("ConnectionLostDialog","ReturnToRoomsButton",()=>GoTo("OnlineRooms"));
         }
         protected override void Start()
@@ -48,7 +56,7 @@ namespace DonmniCrash.UI
         }
         protected override void OnDestroy()
         {
-            if (session) { session.Changed-=Refresh; session.TableChanged-=DrawTable; }
+            if (session) { session.Changed-=Refresh; session.TableChanged-=DrawTable; session.PortraitsChanged-=RefreshPortraits; }
             base.OnDestroy();
         }
         protected override void SubmitMove(MoveCommand action)

@@ -22,8 +22,6 @@ namespace DonmniCrash.UI
             BindButton(InitialScreen,"ElementHelpButton",OnElementGuideOpened);
             BindButton("PauseDialog","ElementHelpButton",OnElementGuideOpened);
             boardNavigator.Navigated += OnNavigation;
-            BindButton("TutorialWelcomeDialog","BeginTutorialButton",Close);
-            BindButton("TutorialWelcomeDialog","SkipTutorialButton",LeaveTable);
             BindButton(InitialScreen,"SkipTutorialButton", () => Open("ExitTutorialDialog"));
             BindButton(InitialScreen,"PreviousStepButton", () => Step(stepIndex - 1));
             BindButton(InitialScreen,"RetryStepButton", () => Step(stepIndex));
@@ -42,7 +40,6 @@ namespace DonmniCrash.UI
         {
             if (Match != null) return;
             Step(0);
-            Open("TutorialWelcomeDialog");
         }
         protected override bool AllowMove(MoveCommand a) => TutorialSteps.Allows(stepIndex,Match,a);
         protected override void OnAccepted(MoveCommand a)

@@ -16,6 +16,7 @@ namespace DonmniCrash.UI
         protected virtual int LocalSeat => 0;
         protected virtual int StartingHealth => Match.Config.Health;
         protected virtual int Emblem(int seat) => seat == 0 ? Array.IndexOf(UserSettings.Emblems.ToArray(),UserSettings.Emblem) : seat % 5;
+        protected virtual Sprite Portrait(int seat) => symbols[Emblem(seat)];
         protected override void OnButtonGesture() => GameAudio.Current?.UnlockMusic();
         protected virtual bool Guided => false;
         protected virtual bool ActionsBlocked => false;

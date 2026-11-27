@@ -288,7 +288,7 @@ game.health	Vida {0}	HP {0}
 lesson.retry	Repetir	Retry
 lesson.done	Objetivo cumplido. Avanza al siguiente ejercicio o repite este.	Objective complete. Go to the next exercise or try this one again.
 lesson.elements.title	Conoce los elementos	Learn the elements
-lesson.elements.body	Defiéndete mientras atacas a los demás. Primero pulsa Elementos para conocer qué elementos vencen a otros. Tu escudo bloquea el ataque recibido y tu espada ataca al siguiente jugador.	Defend yourself while attacking the other players. First, press Elements to learn which elements beat others. Your shield blocks the incoming attack and your sword attacks the next player.
+lesson.elements.body	Abre Elementos para ver qué escudos bloquean cada ataque. Usa tu escudo para defenderte y tu espada para atacar al siguiente jugador.	Open Elements to see which shields block each attack. Defend yourself with your shield and attack the next player with your sword.
 lesson.title.0	Abrir la mesa	Open the table
 lesson.body.0	Elige una ficha y pulsa Colocar. Después toca un dorso para reponerla y terminar el turno.	Choose a tile and press Play tile. Then tap a back to replace it and end your turn.
 lesson.title.1	Defender con el escudo	Defend with the shield
@@ -399,3 +399,6 @@ results.rank	{0}.º	#{0}
 results.menu	Menú principal	Main menu
 results.restart	Reiniciar partida	Restart match
 audio.placement	Volumen de fichas	Tile volume
+profile.photo	Elegir foto	Choose photo
+profile.online	Escribe tu nombre para jugar en línea.	Enter your name to play online.
+profile.photo.error	No se pudo leer la foto. Elige otra imagen JPG o PNG.	Could not read the photo. Choose another JPG or PNG image.

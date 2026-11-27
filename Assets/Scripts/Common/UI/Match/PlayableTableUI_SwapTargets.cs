@@ -71,7 +71,7 @@ namespace DonmniCrash.UI
                 card.transform.parent.gameObject.SetActive(i < targetCount);
                 if (i >= targetCount) continue;
                 int seat = targetSeats[i];
-                card.Show(DisplayName(seat),symbols[Emblem(seat)],Display.Health(seat),StartingHealth,
+                card.Show(DisplayName(seat),Portrait(seat),Display.Health(seat),StartingHealth,
                     Display.HandCount(seat),false,false,false);
             }
         }

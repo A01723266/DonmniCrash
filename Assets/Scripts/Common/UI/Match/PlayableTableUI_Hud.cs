@@ -55,7 +55,7 @@ namespace DonmniCrash.UI
         void RefreshTurnToggle() => WriteLabel(turnToggleLabel,
             T(compactTurns ? "game.turns.expand" : "game.turns.collapse"));
 
-        void RenderPlayers()
+        protected void RenderPlayers()
         {
             var order = Display.Order;
             RectTransform activeCard = null;
@@ -69,7 +69,7 @@ namespace DonmniCrash.UI
                 cardBySeat[seat] = (RectTransform)card.transform;
                 int health = Display.Health(seat);
                 bool active = Display.ActiveSeat == seat && !IsFinished;
-                card.Show(DisplayName(seat),symbols[Emblem(seat)],health,StartingHealth,Display.HandCount(seat),active,compactTurns,seat == LocalSeat);
+                card.Show(DisplayName(seat),Portrait(seat),health,StartingHealth,Display.HandCount(seat),active,compactTurns,seat == LocalSeat);
                 if (active) activeCard = (RectTransform)card.transform;
             }
             if (activeCard && lastVisibleSeat != Display.ActiveSeat) RevealActivePlayer(activeCard);

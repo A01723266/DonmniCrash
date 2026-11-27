@@ -21,7 +21,7 @@ namespace DonmniCrash.UI
             return Instance;
         }
         void Awake() { Instance=this; DontDestroyOnLoad(gameObject); }
-        void OnDestroy() { if (Instance==this) Instance=null; }
+        void OnDestroy() { ClearPortraits(); if (Instance==this) Instance=null; }
 
         public event Action Changed;
         public event Action TableChanged;
@@ -79,7 +79,7 @@ namespace DonmniCrash.UI
         public override void OnJoinedRoom()
         {
             Busy=leaving=closing=false;
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable {{"emblem",UserSettings.Emblem}});
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable {{"emblem",UserSettings.Emblem},{"photo",ProfilePhoto.Saved ?? Array.Empty<byte>()}});
             var props=PhotonNetwork.CurrentRoom.CustomProperties;
             closing=props["closed"] is bool closed && closed;
             RoomTitle=props["title"] as string;
@@ -122,6 +122,7 @@ namespace DonmniCrash.UI
         }
         void ResetRoom()
         {
+            ClearPortraits();
             Members.Clear(); Applicants.Clear(); ReadyMembers.Clear();
             Countdown=RoundId=0; Busy=leaving=closing=creating=false;
             ClearRound();
@@ -147,7 +148,15 @@ namespace DonmniCrash.UI
         int lobbyGeneration;
         // Room properties are discovery metadata and have no authenticated writer in PUN.
         // Members act on the explicit close event from the current master.
-        public override void OnPlayerPropertiesUpdate(Player actor,Hashtable changed) => Changed?.Invoke();
+        public override void OnPlayerPropertiesUpdate(Player actor,Hashtable changed)
+        {
+            if (changed.ContainsKey("photo"))
+            {
+                ForgetPortrait(actor.ActorNumber);
+                PortraitsChanged?.Invoke();
+            }
+            Changed?.Invoke();
+        }
         public void Edit(string title,bool hidden,MatchRules rules)
         {
             if (!Host || RoundId!=0 || rules.Players<Members.Count) { Fail("net.capacity"); return; }
@@ -157,6 +166,7 @@ namespace DonmniCrash.UI
         }
         public override void OnPlayerLeftRoom(Player other)
         {
+            ForgetPortrait(other.ActorNumber);
             if (Host)
             {
                 int id=other.ActorNumber;

@@ -18,12 +18,27 @@ namespace DonmniCrash.UI
         OnlineSession session;
         RoomDialogs dialogs;
         TMP_InputField filter;
+        readonly Image[] seatPortraits = new Image[6];
+        Sprite[] emblemSprites;
         int displayedSecond=-1;
         bool editing, initialized;
         string previousScreen;
         protected override void BindControls()
         {
             session=OnlineSession.Get();
+            emblemSprites = ComponentOf<ElementHelpView>("ElementHelpDialog").symbols;
+            for (int i=0;i<seatPortraits.Length;i++)
+            {
+                var row=FindNode("SeatRow"+i);
+                var portrait=new GameObject("Portrait",typeof(RectTransform),typeof(Image),typeof(LayoutElement));
+                portrait.transform.SetParent(row,false);
+                portrait.transform.SetAsFirstSibling();
+                var size=portrait.GetComponent<LayoutElement>();
+                size.minWidth=size.preferredWidth=42;
+                seatPortraits[i]=portrait.GetComponent<Image>();
+                seatPortraits[i].preserveAspect=true;
+                seatPortraits[i].raycastTarget=false;
+            }
             filter=ComponentOf<TMP_InputField>("RoomSearchInputField");
             filter.onValueChanged.AddListener(_=>RenderRooms());
             BindButton(Browser,"CreateRoomButton",()=>{ editing=false; Show(Form); });
@@ -143,6 +158,10 @@ namespace DonmniCrash.UI
                 row.gameObject.SetActive(i<session.Members.Count);
                 if (i>=session.Members.Count) continue;
                 int id=session.Members[i];
+                var player=PhotonNetwork.CurrentRoom?.GetPlayer(id);
+                string emblem=player?.CustomProperties["emblem"] as string;
+                int index=Array.IndexOf(UserSettings.Emblems.ToArray(),emblem);
+                seatPortraits[i].sprite=session.PlayerPortrait(id,emblemSprites[Math.Max(0,index)]);
                 SetText(row,"NameLabel",OnlineSession.PlayerName(id));
                 SetText(row,"StatusLabel",(i==0?L("net.host")+" · ":"")+L(session.ReadyMembers.Contains(id)?"net.ready":"net.waiting"));
             }
