@@ -55,6 +55,9 @@ namespace DonmniCrash.UI
             else
             {
                 view.transform.Find("Separator").gameObject.SetActive(false);
+            }
+            if (tile.HasValue && !ordinaria)
+            {
                 var labelText = new GameObject("TileSymbol",typeof(RectTransform)).AddComponent<TextMeshProUGUI>();
                 labelText.transform.SetParent(view.transform,false);
                 labelText.rectTransform.anchorMin = Vector2.zero;
@@ -68,8 +71,7 @@ namespace DonmniCrash.UI
                 labelText.alignment = TextAlignmentOptions.Center;
                 labelText.raycastTarget = false;
                 // Show a compact symbol on the slab and the full name on selection.
-                labelText.text = !tile.HasValue ? "?" :
-                    tile.Value.Kind == TileKind.Swap ? "A/B" : tile.Value.Kind == TileKind.Reverse ? "REV" : ">>";
+                labelText.text = tile.Value.Kind == TileKind.Swap ? "A/B" : tile.Value.Kind == TileKind.Reverse ? "REV" : ">>";
             }
             if (!clickable) return view;
             tileButtons[value] = view;

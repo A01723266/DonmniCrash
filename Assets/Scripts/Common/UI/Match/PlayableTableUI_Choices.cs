@@ -47,7 +47,7 @@ namespace DonmniCrash.UI
             var phase = Display.Phase;
             var offer = Display.OfferFor(LocalSeat);
             bool offering = phase == TurnPhase.Offer && offer.HasValue;
-            bool visible = OwnTurn && !OpeningBlocksActions && (phase.IsSelection() || offering);
+            bool visible = OwnTurn && (!MovingTiles || offering) && !OpeningBlocksActions && (phase.IsSelection() || offering);
             choicePanel.SetActive(visible);
             if (!visible) { shownChoice = -1; confirmRequested = false; return; }
 
@@ -121,7 +121,7 @@ namespace DonmniCrash.UI
 
         void PickRandomChoices()
         {
-            if (!OwnTurn || InteractionBlocked || confirmRequested || !Display.Phase.IsSelection()) return;
+            if (MovingTiles || !OwnTurn || InteractionBlocked || confirmRequested || !Display.Phase.IsSelection()) return;
             var options = Enumerable.Range(0,Display.OptionCount)
                 .Where(i => Display.IsAvailable(i) && !desiredMarks.Contains(i)).ToList();
             if (Display.Phase.UsesStock() && Display.RequiredChoices == 1)
@@ -142,7 +142,7 @@ namespace DonmniCrash.UI
 
         void TapChoice(int index)
         {
-            if (InteractionBlocked || !OwnTurn || confirmRequested) return;
+            if (MovingTiles || InteractionBlocked || !OwnTurn || confirmRequested) return;
             OnButtonGesture();
             if (Display.Phase.UsesStock() && Display.RequiredChoices == 1)
             {

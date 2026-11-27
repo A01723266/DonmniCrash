@@ -28,7 +28,7 @@ namespace DonmniCrash.UI
         protected virtual void Finish() { }
         protected bool IsFinished => Display.Phase == TurnPhase.Finished || (Guided && Display.Health(0) == 0);
         bool OwnTurn => Display != null && LocalSeat >= 0 && Display.ActiveSeat == LocalSeat && !IsFinished;
-        bool IsLocalTurn => OwnTurn && !ActionsBlocked && !OpeningBlocksActions;
+        bool IsLocalTurn => OwnTurn && !MovingTiles && !ActionsBlocked && !OpeningBlocksActions;
         float seconds, botDelay;
         int displayedSecond, selectedId = -1;
         Button playButton, drawButton, swapButton;
@@ -56,6 +56,7 @@ namespace DonmniCrash.UI
             BindArt();
             BindChoices();
             BindSwapTargets();
+            BindMotions();
             SessionAppearance.Changed += RefreshLanguage;
             UserSettings.PlayAssistChanged += RefreshAssist;
         }
@@ -80,6 +81,7 @@ namespace DonmniCrash.UI
 
         protected void Begin(MatchEngine engine)
         {
+            CancelFlights();
             Match = engine;
             Display = engine;
             lastVisibleSeat = -1;
@@ -131,6 +133,7 @@ namespace DonmniCrash.UI
         // Pause the local clock while a nested help or settings dialog is open.
         protected void Update()
         {
+            if (MovingTiles) { AdvanceFlights(); return; }
             if (Display != null) FlushMarks();
             if (Match == null || Guided || InteractionBlocked || OpeningBlocksActions || IsFinished) return;
             seconds = Mathf.Max(0,seconds - Time.unscaledDeltaTime);
@@ -146,23 +149,30 @@ namespace DonmniCrash.UI
 
         protected virtual void SubmitMove(MoveCommand a)
         {
-            if (InteractionBlocked || IsFinished || ActionsBlocked || OpeningBlocksActions) return;
+            if (MovingTiles || InteractionBlocked || IsFinished || ActionsBlocked || OpeningBlocksActions) return;
             if (!AllowMove(a)) { NotifyUser("game.trylesson"); return; }
             int actor = Match.ActiveSeat;
             var phase = Match.Phase;
             if (!Match.TryApply(actor,Match.Revision,a)) { NotifyUser("game.illegal"); return; }
-            OnAccepted(a);
             bool sameSelection = (a.Kind == MoveKind.Choose || a.Kind == MoveKind.Mark) && Match.ActiveSeat == actor && Match.Phase == phase;
-            AfterMove(!sameSelection);
+            AfterMove(!sameSelection, () => OnAccepted(a));
         }
 
-        void AfterMove(bool reset)
+        void AfterMove(bool reset, Action accepted = null)
         {
+            var moves = Match.Motions;
+            if (moves.Count > 0)
+                CaptureFlights(moves, (moves[moves.Count - 1].Stage + 1) * TileMotion.StageMilliseconds);
             ResetSelection();
             if (reset) ResetClock();
             else botDelay = Mathf.Min(.28f,seconds * .3f);
             Render();
-            if (IsFinished) Finish();
+            LandFlights(() =>
+            {
+                accepted?.Invoke();
+                if (Guided) RenderActions();
+                if (IsFinished) Finish();
+            });
         }
 
         protected static string T(string key,params object[] args) => string.Format(LocalizedText.Read(key),args);

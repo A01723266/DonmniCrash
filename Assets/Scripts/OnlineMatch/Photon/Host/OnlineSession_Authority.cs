@@ -33,8 +33,10 @@ namespace DonmniCrash.UI
         void ClearRound()
         {
             engine=null; View=null; Dismissed=AwaitingAction=awaitingBackup=departuresPending=false;
-            previousImage=Array.Empty<byte>(); image=null; backupOpening=null; imageRevision=previousRevision=-1; backupRound=successor=0;
+            previousImage=Array.Empty<byte>(); image=null; backupOpening=null;
+            imageRevision=previousRevision=-1; backupRound=successor=0;
             Seats=Array.Empty<int>(); SeatNames=Array.Empty<string>(); Emblems=Array.Empty<int>();
+            motionRevision=-1; motionEnd=0; FrameMotions=Array.Empty<TileMotion>();
             Opening=null; OpeningStartsAt=Deadline=loadBy=0;
             boardCursor.Clear(); privateCursor.Clear(); publicCursor.Clear(); sentDeadlines.Clear(); revisionCursor.Clear(); loadedTables.Clear();
         }
@@ -68,7 +70,7 @@ namespace DonmniCrash.UI
             retryAt=Time.unscaledTime+2;
             bool full=previousRevision<0;
             Send(Message.Backup,new object[]{RoundId,imageRevision,previousRevision,
-                CheckpointDelta.Encode(previousImage,image),new[]{Deadline,OpeningStartsAt,loadBy},lastRequests,
+                CheckpointDelta.Encode(previousImage,image),new[]{Deadline,OpeningStartsAt,loadBy,motionEnd},lastRequests,
                 full?Seats:Array.Empty<int>(),full?SeatNames:Array.Empty<string>(),full?Emblems:Array.Empty<int>(),
                 full?Opening.Encode():Array.Empty<int>()},successor);
         }
@@ -81,7 +83,7 @@ namespace DonmniCrash.UI
             if (!(body is object[] b) || b.Length!=10 || !(b[0] is int round) || round!=RoundId ||
                 Members.Skip(1).FirstOrDefault()!=LocalId) return;
             int revision=(int)b[1],baseline=(int)b[2];
-            if (!(b[4] is int[] timing) || timing.Length!=3) return;
+            if (!(b[4] is int[] timing) || timing.Length!=4) return;
             if (imageRevision!=revision || baseline<0)
             {
                 if (baseline>=0 && baseline!=imageRevision)
@@ -89,7 +91,7 @@ namespace DonmniCrash.UI
                 image=CheckpointDelta.Apply(baseline<0?Array.Empty<byte>():image,(byte[])b[3]);
                 imageRevision=revision; backupRound=round;
             }
-            backupDeadline=timing[0]; backupOpeningStartsAt=timing[1]; backupLoadBy=timing[2];
+            backupDeadline=timing[0]; backupOpeningStartsAt=timing[1]; backupLoadBy=timing[2]; backupMotionEnd=timing[3];
             lastRequests=(int[])b[5];
             if (baseline<0)
             {
@@ -98,7 +100,7 @@ namespace DonmniCrash.UI
             }
             SendMaster(Message.Received,new[]{round,revision,backupDeadline,backupOpeningStartsAt});
         }
-        int backupDeadline, backupOpeningStartsAt, backupLoadBy;
+        int backupMotionEnd, backupDeadline, backupOpeningStartsAt, backupLoadBy;
         OpeningRollSequence backupOpening;
         void ReceivedBackup(int sender,object body)
         {
@@ -123,7 +125,7 @@ namespace DonmniCrash.UI
             }
             engine=new MatchEngine(UnpackRules(PackRules(Rules),Seats.Length),Guid.NewGuid().GetHashCode());
             engine.LoadAuthority(image);
-            Opening=backupOpening; OpeningStartsAt=backupOpeningStartsAt; loadBy=backupLoadBy; Deadline=backupDeadline;
+            Opening=backupOpening; OpeningStartsAt=backupOpeningStartsAt; loadBy=backupLoadBy; Deadline=backupDeadline; motionEnd=backupMotionEnd; motionRevision=-1;
             int formerActor=engine.ActiveSeat;
             var formerPhase=engine.Phase;
             successor=0; previousRevision=-1; previousImage=Array.Empty<byte>(); awaitingBackup=false;
@@ -143,7 +145,7 @@ namespace DonmniCrash.UI
             UpdateDeadlineAfterDeparture(actor,phase);
             Stage();
         }
-        void ResetDeadline() => Deadline=unchecked(Now+(engine.Phase==TurnPhase.Finished?12000:engine.PhaseSeconds*1000));
+        void ResetDeadline() => Deadline=unchecked((MotionRemaining>0 ? motionEnd : Now)+(engine.Phase==TurnPhase.Finished?12000:engine.PhaseSeconds*1000));
         void TickRound()
         {
             if (engine==null) return;
@@ -161,10 +163,10 @@ namespace DonmniCrash.UI
                 Stage();
                 return;
             }
-            if (OpeningBlocksPlay) return;
+            if (OpeningBlocksPlay || MotionRemaining>0) return;
             if (SecondsLeft(Deadline)>0) return;
             if (engine.Phase==TurnPhase.Finished) { EndRound(); return; }
-            engine.Expire(); ResetDeadline(); Stage();
+            engine.Expire(); ScheduleMotions(); ResetDeadline(); Stage();
         }
         void EndRound()
         {
@@ -174,7 +176,7 @@ namespace DonmniCrash.UI
         {
             if (!(body is int[] a) || a.Length<6 || engine==null) return;
             int seat=Array.IndexOf(Seats,sender);
-            if (OpeningBlocksPlay || awaitingBackup || a[0]!=RoundId || seat<0 || seat!=engine.ActiveSeat || a[2]<=lastRequests[seat] ||
+            if (OpeningBlocksPlay || MotionRemaining>0 || awaitingBackup || a[0]!=RoundId || seat<0 || seat!=engine.ActiveSeat || a[2]<=lastRequests[seat] ||
                 a[1]!=engine.Revision || SecondsLeft(Deadline)<=0)
             { Reject(sender); return; }
             var kind=(MoveKind)a[3];
@@ -184,6 +186,7 @@ namespace DonmniCrash.UI
             var command=new MoveCommand(kind,a[4],a[5],carriesMarks ? a.Skip(6).ToArray() : null);
             var phase=engine.Phase;
             if (!engine.TryApply(seat,a[1],command)) { Reject(sender); return; }
+            ScheduleMotions();
             lastRequests[seat]=a[2];
             if ((command.Kind!=MoveKind.Choose && command.Kind!=MoveKind.Mark) || phase!=engine.Phase || seat!=engine.ActiveSeat) ResetDeadline();
             Stage();
@@ -195,7 +198,7 @@ namespace DonmniCrash.UI
         }
         public void Submit(MoveCommand command)
         {
-            if (OpeningBlocksPlay || AwaitingAction || View==null || MySeat<0 || MySeat!=View.ActiveSeat) return;
+            if (OpeningBlocksPlay || MotionRemaining>0 || AwaitingAction || View==null || MySeat<0 || MySeat!=View.ActiveSeat) return;
             AwaitingAction=true; requestDeadline=unchecked(Now+3000);
             var header=new[]{RoundId,View.Revision,++sequence,(int)command.Kind,command.Value,command.Target};
             SendMaster(Message.Action,command.Marks==null ? header : header.Concat(command.Marks).ToArray());

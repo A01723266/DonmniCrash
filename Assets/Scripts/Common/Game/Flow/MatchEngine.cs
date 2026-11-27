@@ -65,6 +65,9 @@ namespace DonmniCrash.Game
             }
         }
 
+        readonly List<TileMotion> motions = new();
+        public IReadOnlyList<TileMotion> Motions => motions;
+
         int RollOff(IEnumerable<int> contenders)
         {
             var ids = contenders.ToList();
@@ -92,6 +95,7 @@ namespace DonmniCrash.Game
         public bool TryApply(int actor, int revision, MoveCommand a)
         {
             if (actor != ActiveSeat || revision != Revision || Phase == TurnPhase.Finished) return false;
+            motions.Clear();
             bool accepted;
             switch (Phase)
             {
@@ -122,11 +126,12 @@ namespace DonmniCrash.Game
         {
             offer = drawn;
             if (TileRules.IsPlayable(offer.Value, Attack)) Phase = TurnPhase.Offer;
-            else Keep();
+            else Keep(false);
         }
 
-        void Keep()
+        void Keep(bool fromOffer = true)
         {
+            if (fromOffer) motions.Add(new TileMotion(TileZone.Offer, TileZone.Hand, ActiveSeat, ActiveSeat, offer));
             var playerState = players[ActiveSeat];
             playerState.Hand.Add(offer.Value);
             offer = null;
@@ -162,6 +167,7 @@ namespace DonmniCrash.Game
             bool combo = a.Target != -1;
             if (combo && (fromOffer || tile.Kind != TileKind.Standard || wildIndex < 0 || !CanTarget(a.Target))) return false;
 
+            motions.Add(new TileMotion(fromOffer ? TileZone.Offer : TileZone.Hand, TileZone.Board, ActiveSeat, ActiveSeat, tile));
             board.Add(tile);
             if (tile.Kind == TileKind.Standard) Attack = tile.Sword;
             if (tile.Kind == TileKind.Reverse) Direction *= -1;
@@ -170,6 +176,7 @@ namespace DonmniCrash.Game
             if (combo)
             {
                 int pos = hand.FindIndex(f => f.Kind == TileKind.Swap);
+                motions.Add(new TileMotion(TileZone.Hand, TileZone.Board, ActiveSeat, ActiveSeat, hand[pos]));
                 board.Add(hand[pos]); hand.RemoveAt(pos);
                 BeginSwap(a.Target);
             }

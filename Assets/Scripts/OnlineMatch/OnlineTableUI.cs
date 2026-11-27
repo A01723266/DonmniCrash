@@ -16,9 +16,10 @@ namespace DonmniCrash.UI
         CanvasGroup handInput;
         bool actionsWereBlocked;
         int renderedRevision=-1, finishedRound;
+        protected override double MotionElapsedMilliseconds(int duration) => duration - session.MotionRemaining;
         protected override int StartingHealth=>session.Rules.Health;
         protected override int LocalSeat=>session.MySeat;
-        protected override bool ActionsBlocked=>session.AwaitingAction;
+        protected override bool ActionsBlocked=>session.AwaitingAction || session.MotionRemaining > 0;
         protected override bool OpeningBlocksActions=>session.OpeningBlocksPlay;
         protected override string DisplayName(int seat)=>session.SeatNames[seat];
         protected override int Emblem(int seat)=>session.Emblems[seat];
@@ -52,7 +53,7 @@ namespace DonmniCrash.UI
         }
         protected override void SubmitMove(MoveCommand action)
         {
-            if (!InteractionBlocked && !OpeningBlocksActions && session.View!=null && !session.AwaitingAction)
+            if (!MovingTiles && !InteractionBlocked && !OpeningBlocksActions && session.View!=null && !session.AwaitingAction)
                 session.Submit(action);
         }
         void Refresh()
@@ -69,11 +70,20 @@ namespace DonmniCrash.UI
         {
             if (!initialized || shownResult || session.View==null) return;
             var view=session.View;
+            bool changed = !hasView || renderedRevision != view.Revision;
+            if (hasView && changed) CaptureFlights(session.FrameMotions, session.MotionRemaining);
             renderedRevision=view.Revision; hasView=true;
             PaintNetwork(view,view.FullFrame);
+            if (changed) LandFlights();
             UpdateOpening();
-            if (!OpeningBlocksActions) NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
-            if (!shownResult && view.Phase==TurnPhase.Finished)
+            if (!OpeningBlocksActions) NetworkClock(session.TurnSecondsLeft);
+            ShowFinishedRound();
+        }
+
+        void ShowFinishedRound()
+        {
+            var view = session.View;
+            if (!MovingTiles && session.MotionRemaining == 0 && !shownResult && view?.Phase==TurnPhase.Finished)
             {
                 shownResult=true; finishedRound=session.RoundId;
                 OpeningView.Hide();
@@ -85,9 +95,11 @@ namespace DonmniCrash.UI
         void LateUpdate()
         {
             if (!initialized || shownResult || !session.Admitted || session.RoundId==0) return;
+            ShowFinishedRound();
+            if (shownResult) return;
             session.CheckPendingAction();
             UpdateOpening();
-            bool blocked = OpeningBlocksActions || ActionsBlocked;
+            bool blocked = OpeningBlocksActions || ActionsBlocked || MovingTiles;
             if (hasView && actionsWereBlocked != blocked)
             {
                 actionsWereBlocked=blocked;
@@ -98,7 +110,7 @@ namespace DonmniCrash.UI
             if (hasView && !OpeningBlocksActions)
             {
                 showedWaitingClock=false;
-                NetworkClock(OnlineSession.SecondsLeft(session.Deadline));
+                NetworkClock(session.TurnSecondsLeft);
             }
         }
     }

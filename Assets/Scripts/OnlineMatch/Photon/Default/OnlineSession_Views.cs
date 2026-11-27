@@ -30,15 +30,16 @@ namespace DonmniCrash.UI
             publicCursor[id]=publicData;
             sentDeadlines[id]=Deadline;
             object[] frame={RoundId,full,publicData,dirty?privateData:Array.Empty<byte>(),
-                new[]{Deadline,OpeningStartsAt}, full?Seats:Array.Empty<int>(), full?SeatNames:Array.Empty<string>(),full?Emblems:Array.Empty<int>(),
-                full?Opening.Encode():Array.Empty<int>(),revisionCursor.TryGetValue(id,out int baseline)?baseline:-1};
+                new[]{Deadline,OpeningStartsAt,motionEnd}, full?Seats:Array.Empty<int>(), full?SeatNames:Array.Empty<string>(),full?Emblems:Array.Empty<int>(),
+                full?Opening.Encode():Array.Empty<int>(),revisionCursor.TryGetValue(id,out int baseline)?baseline:-1,
+                full ? Array.Empty<byte>() : EncodeMotions(seat)};
             revisionCursor[id]=engine.Revision; privateCursor[id]=privateData; boardCursor[id]=engine.BoardTiles.Count;
             if (id==LocalId) ReceiveFrame(frame); else Send(Message.Frame,frame,id);
         }
         void ReceiveFrame(object body)
         {
-            if (!(body is object[] f) || f.Length!=10 || !(f[0] is int round) || round!=RoundId) return;
-            if (!(f[4] is int[] timing) || timing.Length!=2) return;
+            if (!(body is object[] f) || f.Length!=11 || !(f[0] is int round) || round!=RoundId) return;
+            if (!(f[4] is int[] timing) || timing.Length!=3) return;
             bool full=(bool)f[1];
             if (!full && View==null) { RequestFrame(); return; }
             var payload=(byte[])f[2];
@@ -56,6 +57,8 @@ namespace DonmniCrash.UI
                 View.Apply(payload,(byte[])f[3],full,MySeat);
             }
             catch (System.IO.InvalidDataException) { View=null; RequestFrame(); return; }
+            FrameMotions=DecodeMotions((byte[])f[10]);
+            motionEnd=timing[2];
             Deadline=timing[0]; OpeningStartsAt=timing[1]; AwaitingAction=false;
             TableChanged?.Invoke(); Changed?.Invoke();
         }

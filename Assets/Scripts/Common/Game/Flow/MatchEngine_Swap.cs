@@ -82,7 +82,14 @@ namespace DonmniCrash.Game
             if (Phase == TurnPhase.SwapSelection) FinishSwap();
             else
             {
-                var chosen = picks.OrderBy(i => i).Select(i => stock.TakeSelected(candidates[i])).ToArray();
+                var indices = picks.OrderBy(i => i).ToArray();
+                var chosen = indices.Select(i => stock.TakeSelected(candidates[i])).ToArray();
+                for (int i = 0; i < chosen.Length; i++)
+                {
+                    bool offered = Phase == TurnPhase.DrawSelection && TileRules.IsPlayable(chosen[i], Attack);
+                    motions.Add(new TileMotion(TileZone.Stock, offered ? TileZone.Offer : TileZone.Hand,
+                        ActiveSeat, ActiveSeat, chosen[i], choice: indices[i]));
+                }
                 picks.Clear();
                 candidates.Clear();
                 if (Phase == TurnPhase.DrawSelection) RevealDraw(chosen[0]);
@@ -101,14 +108,24 @@ namespace DonmniCrash.Game
             var a = players[ActiveSeat].Hand;
             var b = players[recipient].Hand;
             var taken = picks.Select(i => candidates[i]).ToList();
+            int stage = motions.Count > 0 ? 1 : 0;
+            void Transfer(IEnumerable<GameTile> tiles, int from, int to)
+            {
+                foreach (var tile in tiles)
+                    motions.Add(new TileMotion(TileZone.Hand, TileZone.Hand, from, to, tile, stage));
+            }
             if (Capacity(ActiveSeat) >= Capacity(recipient))
             {
                 var givenTiles = a.Except(taken).ToArray();
+                Transfer(givenTiles, ActiveSeat, recipient);
+                Transfer(b, recipient, ActiveSeat);
                 a.Clear(); a.AddRange(taken); a.AddRange(b);
                 b.Clear(); b.AddRange(givenTiles);
             }
             else
             {
+                Transfer(a, ActiveSeat, recipient);
+                Transfer(taken, recipient, ActiveSeat);
                 b.RemoveAll(f => taken.Contains(f));
                 b.AddRange(a); a.Clear(); a.AddRange(taken);
             }
@@ -119,6 +136,7 @@ namespace DonmniCrash.Game
         /// <summary>Keep the offer on expiry. For selections, fill only the outstanding choices.</summary>
         public void Expire()
         {
+            motions.Clear();
             if (Phase == TurnPhase.Finished) return;
             if (Phase == TurnPhase.Decision) BeginStock(TurnPhase.DrawSelection,1);
             else if (Phase == TurnPhase.Offer) Keep();

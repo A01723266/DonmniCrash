@@ -11,6 +11,7 @@ namespace DonmniCrash.UI
     {
         const float ExpandedHudHeight = 180;
         const float CompactHudHeight = 134;
+        readonly Dictionary<int, RectTransform> cardBySeat = new();
         PlayerHudCard[] playerCards;
         ScrollRect playerScroll;
         RectTransform topHud, tutorialPanel;
@@ -65,6 +66,7 @@ namespace DonmniCrash.UI
                 if (i >= order.Count) continue;
                 int index = compactTurns && Display.Direction < 0 && i > 0 ? order.Count - i : i;
                 int seat = order[index];
+                cardBySeat[seat] = (RectTransform)card.transform;
                 int health = Display.Health(seat);
                 bool active = Display.ActiveSeat == seat && !IsFinished;
                 card.Show(DisplayName(seat),symbols[Emblem(seat)],health,StartingHealth,Display.HandCount(seat),active,compactTurns,seat == LocalSeat);

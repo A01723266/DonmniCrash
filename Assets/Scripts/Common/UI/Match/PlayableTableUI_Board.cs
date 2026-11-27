@@ -43,7 +43,7 @@ namespace DonmniCrash.UI
                 var view = CreateTile(boardNavigator.tiles,tile,-1,false);
                 PlaceBoardTile(view,center,direction);
                 renderedBoard.Add((tile.Id,view));
-                if (soundOnAppend) GameAudio.Current?.PlayPlacement();
+                if (soundOnAppend && !MovingTiles) GameAudio.Current?.PlayPlacement();
             }
             soundOnAppend = true;
             if (history.Count > 0)
