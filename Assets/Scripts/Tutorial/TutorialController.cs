@@ -8,8 +8,10 @@ namespace DonmniCrash.UI
     {
         int stepIndex;
         bool complete;
+        bool elementsOpened;
+        bool NeedsElementGuide => stepIndex == 0 && !elementsOpened;
         protected override bool Guided => true;
-        protected override bool ActionsBlocked => complete || stepIndex >= TutorialSteps.OrderHand;
+        protected override bool ActionsBlocked => NeedsElementGuide || complete || stepIndex >= TutorialSteps.OrderHand;
         protected override string OfferHintKey => stepIndex == 2 ? "lesson.offer.play" :
             stepIndex == 3 ? "lesson.offer.keep" : base.OfferHintKey;
         protected override void LeaveTable() => GoTo("OfflineSetting");
@@ -17,6 +19,8 @@ namespace DonmniCrash.UI
         {
             base.BindControls();
             BindGuide();
+            BindButton(InitialScreen,"ElementHelpButton",OnElementGuideOpened);
+            BindButton("PauseDialog","ElementHelpButton",OnElementGuideOpened);
             boardNavigator.Navigated += OnNavigation;
             BindButton("TutorialWelcomeDialog","BeginTutorialButton",Close);
             BindButton("TutorialWelcomeDialog","SkipTutorialButton",LeaveTable);
@@ -50,9 +54,17 @@ namespace DonmniCrash.UI
         void Step(int index)
         {
             stepIndex = index;
+            elementsOpened = false;
             freeView = zoomedIn = zoomedOut = false;
             complete = false;
             Begin(TutorialSteps.Prepare(stepIndex));
+            RenderGuide();
+        }
+        void OnElementGuideOpened()
+        {
+            if (!NeedsElementGuide) return;
+            elementsOpened = true;
+            RenderActions();
             RenderGuide();
         }
         protected override void OnLanguageChanged()
@@ -62,7 +74,7 @@ namespace DonmniCrash.UI
         }
         void RenderGuide()
         {
-            SetLabel("StepTitleLabel",(stepIndex+1)+" / "+TutorialSteps.Total+" · "+T("lesson.title."+stepIndex));
+            SetLabel("StepTitleLabel",(stepIndex+1)+" / "+TutorialSteps.Total+" · "+T(NeedsElementGuide ? "lesson.elements.title" : "lesson.title."+stepIndex));
             SetLabel("StepDescriptionLabel",T(InstructionKey()));
             ComponentOf<Button>("PreviousStepButton").interactable = stepIndex > 0;
             ComponentOf<Button>("NextStepButton").interactable = complete;

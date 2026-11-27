@@ -35,6 +35,7 @@ namespace DonmniCrash.UI
 
         string InstructionKey()
         {
+            if (NeedsElementGuide) return "lesson.elements.body";
             if (complete) return "lesson.done";
             if (stepIndex != TutorialSteps.Explore || !freeView) return "lesson.body."+stepIndex;
             if (!zoomedIn && !zoomedOut) return "lesson.zoom.both";

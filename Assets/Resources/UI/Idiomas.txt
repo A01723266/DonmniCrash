@@ -218,7 +218,7 @@ host.wait	Espera mientras se actualiza la sala.	Please wait while the room updat
 previous	Anterior	Previous
 next	Siguiente	Next
 welcome	Bienvenido a DonmniCrash	Welcome to DonmniCrash
-welcome.hint	Aprende a reconocer tus fichas y a leer la mesa.	Learn to recognize your tiles and read the table.
+welcome.hint	Tu objetivo es defenderte mientras atacas a los demás. Usa el escudo para bloquear y la espada para atacar. Primero abrirás el menú de Elementos.	Your goal is to defend yourself while attacking the other players. Use the shield to block and the sword to attack. First, you will open the Elements menu.
 later	Más tarde	Later
 attack.defense	Ataque y defensa	Attack and defense
 help.tile	Cada ficha tiene dos símbolos: una espada para atacar y un escudo para defender.	Each tile has two symbols: a sword for attack and a shield for defense.
@@ -287,6 +287,8 @@ game.loss	Te quedaste sin vida	You ran out of health
 game.health	Vida {0}	HP {0}
 lesson.retry	Repetir	Retry
 lesson.done	Objetivo cumplido. Avanza al siguiente ejercicio o repite este.	Objective complete. Go to the next exercise or try this one again.
+lesson.elements.title	Conoce los elementos	Learn the elements
+lesson.elements.body	Defiéndete mientras atacas a los demás. Primero pulsa Elementos para conocer qué elementos vencen a otros. Tu escudo bloquea el ataque recibido y tu espada ataca al siguiente jugador.	Defend yourself while attacking the other players. First, press Elements to learn which elements beat others. Your shield blocks the incoming attack and your sword attacks the next player.
 lesson.title.0	Abrir la mesa	Open the table
 lesson.body.0	Elige una ficha y pulsa Colocar. Después toca un dorso para reponerla y terminar el turno.	Choose a tile and press Play tile. Then tap a back to replace it and end your turn.
 lesson.title.1	Defender con el escudo	Defend with the shield
