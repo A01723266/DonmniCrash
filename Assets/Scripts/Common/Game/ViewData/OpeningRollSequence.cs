@@ -8,7 +8,7 @@ namespace DonmniCrash.Game
     /// <summary>Resultados públicos del sorteo, en el orden en que se presentan.</summary>
     public sealed class OpeningRollSequence
     {
-        public const int StageMilliseconds = 1000;
+        public const int StageMilliseconds = 1500;
         public int FirstSeat { get; }
         public int NextSeat { get; }
         public int DirectionRollStart { get; }

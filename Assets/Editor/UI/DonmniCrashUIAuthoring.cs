@@ -422,7 +422,6 @@ namespace DonmniCrash.EditorTools
             }
             Button("CreditsButton",layout,"Credits");
             CreateCredits(shell);
-            var status=Label("ConnectionStatusLabel",layout,"Offline",16,UIThemeRole.SecondaryText);status.alignment=TextAlignmentOptions.Center;
             var customize=Screen(shell,"CustomizationScreen","Your profile","Choose how other players will see you.",false);
             var profile=Card("ProfilePanel",customize,"Player name");Input("PlayerNameInputField",profile,"Your name","Player");
             var preview=Card("PreviewPanel",customize,"Preview");Player(preview,"PlayerPreviewCard","Player",true);
